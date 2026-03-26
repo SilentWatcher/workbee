@@ -1,0 +1,283 @@
+@use './styles/variables.scss' as *;
+
+// Global Reset & Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: $surface;
+  color: $on-surface;
+  line-height: $leading-normal;
+  overflow-x: hidden;
+}
+
+// Typography Classes
+.display-lg {
+  font-family: $font-headline;
+  font-size: $display-lg;
+  font-weight: 800;
+  line-height: $leading-tight;
+  letter-spacing: $tracking-tightest;
+}
+
+.headline-md {
+  font-family: $font-headline;
+  font-size: $headline-md;
+  font-weight: 700;
+  line-height: $leading-tight;
+}
+
+.headline-sm {
+  font-family: $font-headline;
+  font-size: $headline-sm;
+  font-weight: 700;
+  line-height: $leading-tight;
+}
+
+.title-lg {
+  font-family: $font-headline;
+  font-size: $title-lg;
+  font-weight: 600;
+  line-height: $leading-normal;
+}
+
+.title-md {
+  font-family: $font-body;
+  font-size: $title-md;
+  font-weight: 600;
+  line-height: $leading-normal;
+}
+
+.title-sm {
+  font-family: $font-label;
+  font-size: $title-sm;
+  font-weight: 700;
+  line-height: $leading-normal;
+}
+
+.body-lg {
+  font-family: $font-body;
+  font-size: $body-lg;
+  font-weight: 400;
+  line-height: $leading-normal;
+}
+
+.body-md {
+  font-family: $font-body;
+  font-size: $body-md;
+  font-weight: 400;
+  line-height: $leading-normal;
+}
+
+.body-sm {
+  font-family: $font-body;
+  font-size: $body-sm;
+  font-weight: 400;
+  line-height: $leading-normal;
+}
+
+.label-lg {
+  font-family: $font-label;
+  font-size: $label-lg;
+  font-weight: 500;
+  line-height: $leading-normal;
+}
+
+.label-md {
+  font-family: $font-label;
+  font-size: $label-md;
+  font-weight: 500;
+  line-height: $leading-normal;
+}
+
+.label-sm {
+  font-family: $font-label;
+  font-size: $label-sm;
+  font-weight: 700;
+  line-height: $leading-normal;
+}
+
+// Utility Classes
+.text-primary { color: $primary; }
+.text-on-primary { color: $on-primary; }
+.text-secondary { color: $secondary; }
+.text-on-secondary { color: $on-secondary; }
+.text-tertiary { color: $tertiary; }
+.text-on-tertiary { color: $on-tertiary; }
+.text-surface { color: $surface; }
+.text-on-surface { color: $on-surface; }
+.text-on-surface-variant { color: $on-surface-variant; }
+.text-on-background { color: $on-background; }
+.text-error { color: $error; }
+.text-on-error { color: $on-error; }
+
+.bg-primary { background-color: $primary; }
+.bg-primary-container { background-color: $primary-container; }
+.bg-secondary { background-color: $secondary; }
+.bg-secondary-container { background-color: $secondary-container; }
+.bg-tertiary { background-color: $tertiary; }
+.bg-tertiary-container { background-color: $tertiary-container; }
+.bg-surface { background-color: $surface; }
+.bg-surface-container { background-color: $surface-container; }
+.bg-surface-container-low { background-color: $surface-container-low; }
+.bg-surface-container-high { background-color: $surface-container-high; }
+.bg-surface-container-highest { background-color: $surface-container-highest; }
+.bg-surface-container-lowest { background-color: $surface-container-lowest; }
+.bg-error { background-color: $error; }
+.bg-error-container { background-color: $error-container; }
+
+// Layout Components
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: $surface;
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Button Styles
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $radius-md;
+  font-family: $font-body;
+  font-weight: 600;
+  font-size: $body-sm;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &--primary {
+    background: $primary;
+    color: $on-primary;
+    box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.1);
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+  }
+
+  &--secondary {
+    background: $surface-container-high;
+    color: $on-surface;
+
+    &:hover {
+      background: $surface-variant;
+    }
+  }
+
+  &--tertiary {
+    background: transparent;
+    color: $primary;
+    padding: $spacing-xs $spacing-sm;
+
+    &:hover {
+      background: rgba($primary, 0.05);
+    }
+  }
+
+  &--icon {
+    padding: $spacing-sm;
+    border-radius: $radius-full;
+
+    &:hover {
+      background: rgba($on-surface-variant, 0.05);
+    }
+  }
+}
+
+// Card Styles
+.card {
+  background: $surface-container-lowest;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-2px);
+  }
+
+  &--interactive {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: $shadow-lg, 0 0 0 1px rgba($primary, 0.05);
+    }
+  }
+}
+
+// Loading Animation
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Glass Effect
+.glass {
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid rgba($outline-variant, 0.1);
+}
+
+// Focus Styles
+.focus-ring {
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($primary, 0.2);
+  }
+}
+
+// Scrollbar Styles
+.no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+// Responsive Utilities
+@media (max-width: $mobile) {
+  .hide-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: $tablet) {
+  .hide-tablet {
+    display: none;
+  }
+}
+
+@media (min-width: $desktop) {
+  .show-desktop {
+    display: block;
+  }
+}

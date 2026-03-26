@@ -1,0 +1,402 @@
+@use '../../styles/variables.scss' as *;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16rem; // 256px
+  height: 100vh;
+  background: $surface-container-lowest;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: $shadow-lg;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+  visibility: visible;
+  opacity: 1;
+
+  &--open {
+    transform: translateX(0);
+    visibility: visible;
+    opacity: 1;
+    z-index: 1002;
+  }
+
+  &__brand {
+    padding: $spacing-xl $spacing-lg;
+    border-bottom: 1px solid rgba($outline-variant, 0.1);
+    background: $surface-container-lowest;
+
+    .brand {
+      &__logo {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        margin-bottom: $spacing-lg;
+        visibility: visible;
+
+        .logo {
+          width: 2.5rem;
+          height: 2.5rem;
+          background: $primary;
+          border-radius: $radius-lg;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $on-primary;
+        }
+
+        .title {
+          h1 {
+            font-family: $font-headline;
+            font-size: $title-lg;
+            font-weight: 800;
+            color: $primary;
+            margin: 0;
+            line-height: $leading-tight;
+          }
+
+          p {
+            font-family: $font-label;
+            font-size: $label-sm;
+            font-weight: 600;
+            color: $on-surface-variant;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: $tracking-widest;
+          }
+        }
+      }
+
+      .new-project-btn {
+        width: 100%;
+        padding: $spacing-sm $spacing-md;
+        background: $primary;
+        color: $on-primary;
+        border: none;
+        border-radius: $radius-lg;
+        font-family: $font-headline;
+        font-weight: 700;
+        font-size: $body-sm;
+        margin-bottom: $spacing-xl;
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing-xs;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+
+  &__nav {
+    flex: 1;
+    padding: 0 $spacing-sm;
+    overflow-y: auto;
+
+    .nav {
+      &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+      }
+
+      &__item {
+        .nav-link {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          padding: $spacing-sm $spacing-md;
+          color: $on-surface;
+          text-decoration: none;
+          font-family: $font-body;
+          font-weight: 500;
+          font-size: $body-sm;
+          border-radius: $radius-md;
+          transition: all 0.2s ease;
+          visibility: visible;
+
+          &:hover {
+            color: $primary;
+            background: rgba($primary, 0.1);
+          }
+
+          &--active {
+            color: $primary;
+            background: rgba($primary, 0.15);
+            font-weight: 600;
+            border-left: 4px solid $primary;
+            padding-left: calc(#{$spacing-sm} - 2px);
+          }
+
+          .icon {
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+  }
+
+  &__footer {
+    padding: $spacing-xl $spacing-lg;
+    border-top: 1px solid rgba($outline-variant, 0.1);
+
+    .footer-nav {
+      &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 $spacing-lg 0;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-xs;
+      }
+
+      &__item {
+        .footer-link {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          padding: $spacing-sm $spacing-md;
+          color: $on-surface-variant;
+          text-decoration: none;
+          font-family: $font-body;
+          font-weight: 500;
+          font-size: $body-sm;
+          border-radius: $radius-md;
+          transition: color 0.2s ease;
+
+          &:hover {
+            color: $primary;
+          }
+
+          .icon {
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-sm $spacing-md;
+
+      .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: $radius-full;
+        object-fit: cover;
+      }
+
+      .user-info {
+        flex: 1;
+        min-width: 0;
+
+        .name {
+          font-family: $font-body;
+          font-weight: 700;
+          font-size: $body-sm;
+          color: $on-surface;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .role {
+          font-family: $font-body;
+          font-size: $label-sm;
+          color: $on-surface-variant;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+// Mobile Responsive Styles
+@media (max-width: $tablet) {
+  .sidebar {
+    transform: translateX(-100%);
+    visibility: hidden;
+    opacity: 0;
+
+    &--open {
+      transform: translateX(0);
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &__brand {
+      padding: $spacing-lg $spacing-md;
+
+      .brand {
+        &__logo {
+          margin-bottom: $spacing-md;
+
+          .logo {
+            width: 2rem;
+            height: 2rem;
+          }
+
+          .title {
+            h1 {
+              font-size: $title-md;
+            }
+
+            p {
+              font-size: $label-sm;
+            }
+          }
+        }
+
+        .new-project-btn {
+          padding: $spacing-xs $spacing-sm;
+          font-size: $label-sm;
+
+          svg {
+            size: 14px;
+          }
+        }
+      }
+    }
+
+    &__nav {
+      .nav__list {
+        .nav-link {
+          padding: $spacing-sm $spacing-md;
+          font-size: $body-sm;
+
+          .icon {
+            size: 18px;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      .footer-nav__list {
+        .footer-link {
+          padding: $spacing-xs $spacing-sm;
+          font-size: $label-sm;
+
+          .icon {
+            size: 16px;
+          }
+        }
+      }
+
+      .user-profile {
+        padding: $spacing-xs $spacing-sm;
+
+        .avatar {
+          width: 2rem;
+          height: 2rem;
+        }
+
+        .user-info {
+          .name {
+            font-size: $label-sm;
+          }
+
+          .role {
+            font-size: $label-sm;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .sidebar {
+    width: 80%;
+    max-width: 280px;
+
+    &__brand {
+      padding: $spacing-md;
+
+      .brand {
+        &__logo {
+          margin-bottom: $spacing-sm;
+
+          .logo {
+            width: 1.75rem;
+            height: 1.75rem;
+          }
+
+          .title {
+            h1 {
+              font-size: $title-sm;
+            }
+
+            p {
+              font-size: $label-sm;
+            }
+          }
+        }
+
+        .new-project-btn {
+          display: none;
+        }
+      }
+    }
+
+    &__nav {
+      .nav__list {
+        .nav-link {
+          padding: $spacing-sm;
+          font-size: $label-sm;
+
+          .icon {
+            size: 16px;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      .footer-nav__list {
+        .footer-link {
+          padding: $spacing-xs;
+          font-size: $label-sm;
+
+          .icon {
+            size: 14px;
+          }
+        }
+      }
+
+      .user-profile {
+        padding: $spacing-xs;
+
+        .avatar {
+          width: 1.75rem;
+          height: 1.75rem;
+        }
+
+        .user-info {
+          .name {
+            font-size: $label-sm;
+          }
+
+          .role {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
