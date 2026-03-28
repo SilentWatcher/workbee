@@ -4,7 +4,7 @@
   // margin-left: 16rem;
   padding: 6rem $spacing-xl $spacing-xl;
   min-height: 100vh;
-  background: $surface;
+  background: var(--surface);
 
   @media (max-width: $tablet) {
     margin-left: 0;
@@ -24,7 +24,7 @@
 
     .header-left {
       .breadcrumb {
-        color: $primary;
+        color: var(--primary);
         font-weight: 600;
         font-size: $body-sm;
         margin: 0 0 $spacing-xs 0;
@@ -34,7 +34,7 @@
         font-family: $font-headline;
         font-size: $display-lg;
         font-weight: 800;
-        color: $on-surface;
+        color: var(--on-surface);
         margin: 0;
         letter-spacing: $tracking-tight;
       }
@@ -49,8 +49,8 @@
         align-items: center;
         gap: $spacing-xs;
         padding: $spacing-sm $spacing-lg;
-        background: $surface-container-high;
-        color: $on-surface;
+        background: var(--surface)-container-high;
+        color: var(--on-surface);
         border: none;
         border-radius: $radius-xl;
         font-weight: 500;
@@ -59,7 +59,7 @@
         transition: all 0.2s ease;
 
         &:hover {
-          background: $surface-container-highest;
+          background: var(--surface)-container-highest;
         }
       }
 
@@ -68,19 +68,19 @@
         align-items: center;
         gap: $spacing-xs;
         padding: $spacing-sm $spacing-lg;
-        background: $primary;
-        color: $on-primary;
+        background: var(--primary);
+        color: var(--on-primary);
         border: none;
         border-radius: $radius-xl;
         font-weight: 600;
         font-size: $body-sm;
         cursor: pointer;
         transition: all 0.2s ease;
-        box-shadow: $shadow-lg, 0 0 0 1px rgba($primary, 0.1);
+        box-shadow: $shadow-lg, 0 0 0 1px rgba(var(--primary), 0.1);
 
         &:hover {
           transform: scale(1.02);
-          box-shadow: $shadow-xl, 0 0 0 1px rgba($primary, 0.15);
+          box-shadow: $shadow-xl, 0 0 0 1px rgba(var(--primary), 0.15);
         }
 
         &:active {
@@ -103,27 +103,27 @@
         left: $spacing-lg;
         top: 50%;
         transform: translateY(-50%);
-        color: $on-surface-variant;
+        color: var(--on-surface)-variant;
         z-index: 1;
       }
 
       .search-input {
         width: 100%;
         padding: $spacing-lg $spacing-lg $spacing-lg 3.5rem;
-        background: $surface-container-low;
+        background: var(--surface)-container-low;
         border: none;
         border-radius: $radius-xl;
         font-size: $body-sm;
-        color: $on-surface;
+        color: var(--on-surface);
         transition: all 0.2s ease;
 
         &:focus {
           outline: none;
-          box-shadow: 0 0 0 2px rgba($primary, 0.1);
+          box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
         }
 
         &::placeholder {
-          color: $on-surface-variant;
+          color: var(--on-surface)-variant;
         }
       }
     }
@@ -137,7 +137,7 @@
     margin-bottom: $spacing-4xl;
 
     .project-card {
-      background: $surface-container-lowest;
+      background: var(--surface)-container-lowest;
       border-radius: $radius-xl;
       padding: $spacing-xl;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -147,12 +147,12 @@
 
       &:hover {
         transform: translateY(-4px);
-        box-shadow: $shadow-xl, 0 0 0 1px rgba($primary, 0.05);
+        box-shadow: $shadow-xl, 0 0 0 1px rgba(var(--primary), 0.05);
       }
 
       &--hero {
-        background: linear-gradient(135deg, $primary, #2a1aa0);
-        color: $on-primary;
+        background: linear-gradient(135deg, var(--primary), var(--primary-container));
+        color: var(--on-primary);
         border: none;
         grid-column: span 1;
 
@@ -188,25 +188,25 @@
             }
 
             .project-title {
-              color: $on-primary;
+              color: var(--on-primary);
               margin-bottom: $spacing-md;
             }
 
             .project-description {
-              color: rgba($on-primary, 0.9);
+              color: rgba(var(--on-primary), 0.9);
               margin-bottom: $spacing-xl;
             }
 
             .progress-section {
               .progress-header {
-                color: rgba($on-primary, 0.8);
+                color: rgba(var(--on-primary), 0.8);
               }
 
               .progress-bar {
                 background: rgba(255, 255, 255, 0.2);
                 
                 .progress-fill {
-                  background: $on-primary;
+                  background: var(--on-primary);
                 }
               }
             }
@@ -221,7 +221,7 @@
                 align-items: center;
 
                 .team-avatar {
-                  border-color: rgba($on-primary, 0.3);
+                  border-color: rgba(var(--on-primary), 0.3);
                 }
               }
 
@@ -232,7 +232,7 @@
 
                 .status-badge {
                   background: rgba(255, 255, 255, 0.2);
-                  color: $on-primary;
+                  color: var(--on-primary);
                   backdrop-filter: blur(10px);
                   border: 1px solid rgba(255, 255, 255, 0.1);
                 }
@@ -243,7 +243,7 @@
                   gap: $spacing-xs;
                   padding: $spacing-xs $spacing-sm;
                   background: rgba(255, 255, 255, 0.2);
-                  color: $on-primary;
+                  color: var(--on-primary);
                   border: 1px solid rgba(255, 255, 255, 0.2);
                   border-radius: $radius-full;
                   font-size: $label-sm;
@@ -281,7 +281,7 @@
         .card-menu {
           background: transparent;
           border: none;
-          color: $outline-variant;
+          color: var(--outline)-variant;
           cursor: pointer;
           padding: $spacing-xs;
           border-radius: $radius-sm;
@@ -289,8 +289,8 @@
           transition: all 0.2s ease;
 
           &:hover {
-            color: $on-surface-variant;
-            background: $surface-container-low;
+            color: var(--on-surface)-variant;
+            background: var(--surface)-container-low;
           }
         }
       }
@@ -303,12 +303,12 @@
         font-family: $font-headline;
         font-size: $title-lg;
         font-weight: 700;
-        color: $on-surface;
+        color: var(--on-surface);
         margin: 0 0 $spacing-sm 0;
       }
 
       .project-description {
-        color: $on-surface-variant;
+        color: var(--on-surface)-variant;
         font-size: $body-sm;
         line-height: $leading-normal;
         margin: 0 0 $spacing-xl 0;
@@ -329,34 +329,34 @@
           text-transform: uppercase;
           letter-spacing: $tracking-widest;
           margin-bottom: $spacing-xs;
-          color: $on-surface-variant;
+          color: var(--on-surface)-variant;
 
           span:last-child {
-            color: $primary;
+            color: var(--primary);
           }
         }
 
         .risk-header span:last-child {
-          color: $error;
+          color: var(--error);
         }
 
         .progress-bar,
         .risk-bar {
           height: 6px;
-          background: $surface-container;
+          background: var(--surface)-container;
           border-radius: $radius-full;
           overflow: hidden;
 
           .progress-fill {
             height: 100%;
-            background: $primary;
+            background: var(--primary);
             border-radius: $radius-full;
             transition: width 0.3s ease;
           }
 
           .risk-fill {
             height: 100%;
-            background: $error;
+            background: var(--error);
             border-radius: $radius-full;
             transition: width 0.3s ease;
           }
@@ -371,7 +371,7 @@
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: $tracking-widest;
-          color: $error;
+          color: var(--error);
         }
       }
 
@@ -388,7 +388,7 @@
             width: 2rem;
             height: 2rem;
             border-radius: $radius-full;
-            border: 2px solid $surface-container-lowest;
+            border: 2px solid var(--surface)-container-lowest;
             margin-left: -0.5rem;
 
             &:first-child {
@@ -400,22 +400,22 @@
             width: 2rem;
             height: 2rem;
             border-radius: $radius-full;
-            background: $surface-container-high;
+            background: var(--surface)-container-high;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: $label-sm;
             font-weight: 700;
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
             margin-left: -0.5rem;
-            border: 2px solid $surface-container-lowest;
+            border: 2px solid var(--surface)-container-lowest;
           }
 
           .unassigned {
             display: flex;
             align-items: center;
             gap: $spacing-xs;
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
             font-size: $label-sm;
             font-weight: 500;
           }
@@ -430,23 +430,23 @@
           border-radius: $radius-full;
 
           &.status-active {
-            background: rgba($primary, 0.1);
-            color: $primary;
+            background: rgba(var(--primary), 0.1);
+            color: var(--primary);
           }
 
           &.status-in-review {
-            background: rgba($tertiary-container, 0.1);
-            color: $tertiary-container;
+            background: rgba(var(--tertiary-container), 0.1);
+            color: var(--tertiary)-container;
           }
 
           &.status-urgent {
-            background: rgba($error, 0.1);
-            color: $error;
+            background: rgba(var(--error), 0.1);
+            color: var(--error);
           }
 
           &.status-backlog {
-            background: rgba($surface-container-high, 0.8);
-            color: $on-surface-variant;
+            background: rgba(var(--surface-container-high), 0.8);
+            color: var(--on-surface)-variant;
           }
         }
       }
@@ -454,7 +454,7 @@
 
     .add-project-card {
       background: transparent;
-      border: 2px dashed rgba($outline-variant, 0.3);
+      border: 2px dashed rgba(var(--outline-variant), 0.3);
       border-radius: $radius-xl;
       padding: $spacing-xl;
       cursor: pointer;
@@ -467,46 +467,46 @@
       text-align: center;
 
       &:hover {
-        border-color: $primary;
-        background: rgba($primary, 0.02);
+        border-color: var(--primary);
+        background: rgba(var(--primary), 0.02);
         transform: translateY(-2px);
 
         .add-icon {
-          background: $primary;
-          color: $on-primary;
+          background: var(--primary);
+          color: var(--on-primary);
           transform: scale(1.1);
         }
 
         .add-text {
-          color: $on-surface;
+          color: var(--on-surface);
         }
       }
 
       .add-icon {
         width: 3rem;
         height: 3rem;
-        background: $surface-container-high;
+        background: var(--surface)-container-high;
         border-radius: $radius-full;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: $spacing-lg;
         transition: all 0.3s ease;
-        border: 2px dashed rgba($outline-variant, 0.3);
+        border: 2px dashed rgba(var(--outline-variant), 0.3);
       }
 
       .add-text {
         font-family: $font-headline;
         font-size: $title-lg;
         font-weight: 700;
-        color: $on-surface-variant;
+        color: var(--on-surface)-variant;
         margin-bottom: $spacing-xs;
         transition: color 0.3s ease;
       }
 
       .add-subtext {
         font-size: $label-sm;
-        color: $on-surface-variant;
+        color: var(--on-surface)-variant;
       }
     }
   }
@@ -517,12 +517,12 @@
       font-family: $font-headline;
       font-size: $title-lg;
       font-weight: 700;
-      color: $on-surface;
+      color: var(--on-surface);
       margin: 0 0 $spacing-xl 0;
     }
 
     .deliverables-table {
-      background: $surface-container-lowest;
+      background: var(--surface)-container-lowest;
       border-radius: $radius-xl;
       overflow: hidden;
       box-shadow: $shadow-sm;
@@ -532,7 +532,7 @@
         border-collapse: collapse;
 
         thead {
-          background: $surface-container-high;
+          background: var(--surface)-container-high;
 
           th {
             padding: $spacing-lg;
@@ -541,17 +541,17 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: $tracking-widest;
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
           }
         }
 
         tbody {
           tr {
-            border-bottom: 1px solid rgba($outline-variant, 0.05);
+            border-bottom: 1px solid rgba(var(--outline-variant), 0.05);
             transition: background-color 0.2s ease;
 
             &:hover {
-              background: rgba($surface-container-low, 0.5);
+              background: rgba(var(--surface-container-low), 0.5);
             }
 
             &:last-child {
@@ -564,7 +564,7 @@
 
               &.resource-name {
                 font-weight: 600;
-                color: $on-surface;
+                color: var(--on-surface);
               }
 
               .status-indicator {
@@ -583,20 +583,20 @@
                 }
 
                 &.completed {
-                  background: rgba($tertiary-container, 0.1);
-                  color: $tertiary-container;
+                  background: rgba(var(--tertiary-container), 0.1);
+                  color: var(--tertiary)-container;
 
                   .status-dot {
-                    background: $tertiary-container;
+                    background: var(--tertiary)-container;
                   }
                 }
 
                 &.in-progress {
-                  background: rgba($primary, 0.1);
-                  color: $primary;
+                  background: rgba(var(--primary), 0.1);
+                  color: var(--primary);
 
                   .status-dot {
-                    background: $primary;
+                    background: var(--primary);
                     animation: pulse 2s infinite;
                   }
                 }
@@ -615,7 +615,7 @@
               }
 
               &.timeline {
-                color: $on-surface-variant;
+                color: var(--on-surface)-variant;
               }
 
               &.actions {
@@ -624,15 +624,15 @@
                 .action-btn {
                   background: transparent;
                   border: none;
-                  color: $outline-variant;
+                  color: var(--outline)-variant;
                   cursor: pointer;
                   padding: $spacing-xs;
                   border-radius: $radius-sm;
                   transition: all 0.2s ease;
 
                   &:hover {
-                    color: $primary;
-                    background: rgba($primary, 0.05);
+                    color: var(--primary);
+                    background: rgba(var(--primary), 0.05);
                   }
                 }
               }
@@ -659,7 +659,7 @@
     padding: $spacing-xl;
 
     .modal-content {
-      background: $surface-container-lowest;
+      background: var(--surface)-container-lowest;
       border-radius: $radius-2xl;
       width: 100%;
       max-width: 600px;
@@ -673,28 +673,28 @@
         justify-content: space-between;
         align-items: center;
         padding: $spacing-xl;
-        border-bottom: 1px solid rgba($outline-variant, 0.1);
+        border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
 
         h2 {
           font-family: $font-headline;
           font-size: $title-lg;
           font-weight: 700;
-          color: $on-surface;
+          color: var(--on-surface);
           margin: 0;
         }
 
         .close-btn {
           background: transparent;
           border: none;
-          color: $on-surface-variant;
+          color: var(--on-surface)-variant;
           cursor: pointer;
           padding: $spacing-xs;
           border-radius: $radius-sm;
           transition: all 0.2s ease;
 
           &:hover {
-            color: $on-surface;
-            background: $surface-container-low;
+            color: var(--on-surface);
+            background: var(--surface)-container-low;
           }
         }
       }
@@ -708,7 +708,7 @@
           label {
             display: block;
             font-weight: 600;
-            color: $on-surface;
+            color: var(--on-surface);
             margin-bottom: $spacing-xs;
             font-size: $body-sm;
           }
@@ -718,21 +718,21 @@
           select {
             width: 100%;
             padding: $spacing-sm $spacing-md;
-            border: 1px solid rgba($outline-variant, 0.2);
+            border: 1px solid rgba(var(--outline-variant), 0.2);
             border-radius: $radius-lg;
-            background: $surface-container-high;
+            background: var(--surface)-container-high;
             font-size: $body-sm;
-            color: $on-surface;
+            color: var(--on-surface);
             transition: all 0.2s ease;
 
             &:focus {
               outline: none;
-              border-color: $primary;
-              box-shadow: 0 0 0 2px rgba($primary, 0.1);
+              border-color: var(--primary);
+              box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
             }
 
             &::placeholder {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
             }
           }
 
@@ -749,7 +749,7 @@
             display: block;
             margin-top: $spacing-xs;
             font-size: $label-sm;
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
           }
         }
 
@@ -765,7 +765,7 @@
           gap: $spacing-md;
           margin-top: $spacing-xl;
           padding-top: $spacing-lg;
-          border-top: 1px solid rgba($outline-variant, 0.1);
+          border-top: 1px solid rgba(var(--outline-variant), 0.1);
 
           .btn {
             display: flex;
@@ -780,18 +780,18 @@
             transition: all 0.2s ease;
 
             &--secondary {
-              background: $surface-container-high;
-              color: $on-surface;
+              background: var(--surface)-container-high;
+              color: var(--on-surface);
 
               &:hover {
-                background: $surface-variant;
+                background: var(--surface)-variant;
               }
             }
 
             &--primary {
-              background: $primary;
-              color: $on-primary;
-              box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.1);
+              background: var(--primary);
+              color: var(--on-primary);
+              box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.1);
 
               &:hover {
                 opacity: 0.9;

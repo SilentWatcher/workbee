@@ -4,7 +4,7 @@
   // margin-left: 16rem;
   padding: 6rem $spacing-xl $spacing-xl;
   min-height: 100vh;
-  background: $surface;
+  background: var(--surface);
 
   @media (max-width: $tablet) {
     margin-left: 0;
@@ -22,7 +22,7 @@
     align-items: center;
     margin-bottom: $spacing-2xl;
     padding-bottom: $spacing-lg;
-    border-bottom: 1px solid rgba($outline-variant, 0.1);
+    border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
 
     .header-left {
       display: flex;
@@ -33,14 +33,14 @@
         font-family: $font-headline;
         font-size: $display-lg;
         font-weight: 800;
-        color: $on-surface;
+        color: var(--on-surface);
         margin: 0;
         letter-spacing: $tracking-tight;
       }
 
       .view-switcher {
         display: flex;
-        background: $surface-container-low;
+        background: var(--surface)-container-low;
         border-radius: $radius-lg;
         padding: $spacing-xs;
         gap: $spacing-xs;
@@ -55,19 +55,19 @@
           border-radius: $radius-md;
           font-size: $body-sm;
           font-weight: 500;
-          color: $on-surface-variant;
+          color: var(--on-surface)-variant;
           cursor: pointer;
           transition: all 0.2s ease;
 
           &.active {
-            background: $primary;
-            color: $on-primary;
+            background: var(--primary);
+            color: var(--on-primary);
             box-shadow: $shadow-sm;
           }
 
           &:hover:not(.active) {
-            background: $surface-container-high;
-            color: $on-surface;
+            background: var(--surface)-container-high;
+            color: var(--on-surface);
           }
         }
       }
@@ -79,15 +79,15 @@
         align-items: center;
         gap: $spacing-xs;
         padding: $spacing-sm $spacing-lg;
-        background: $primary;
-        color: $on-primary;
+        background: var(--primary);
+        color: var(--on-primary);
         border: none;
         border-radius: $radius-lg;
         font-size: $body-sm;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.2s ease;
-        box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.1);
+        box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.1);
 
         &:hover {
           opacity: 0.9;
@@ -104,14 +104,14 @@
     align-items: center;
     margin-bottom: $spacing-2xl;
     padding: $spacing-lg;
-    background: $surface-container-lowest;
+    background: var(--surface)-container-lowest;
     border-radius: $radius-xl;
-    border: 1px solid rgba($outline-variant, 0.08);
+    border: 1px solid rgba(var(--outline-variant), 0.08);
 
     .search-box {
       display: flex;
       align-items: center;
-      background: $surface-container-high;
+      background: var(--surface)-container-high;
       border-radius: $radius-lg;
       padding: $spacing-sm $spacing-md;
       min-width: 300px;
@@ -119,12 +119,12 @@
       transition: all 0.2s ease;
 
       &:focus-within {
-        border-color: $primary;
-        box-shadow: 0 0 0 2px rgba($primary, 0.1);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
       }
 
       svg {
-        color: $on-surface-variant;
+        color: var(--on-surface)-variant;
         margin-right: $spacing-xs;
       }
 
@@ -133,11 +133,11 @@
         background: transparent;
         outline: none;
         font-size: $body-sm;
-        color: $on-surface;
+        color: var(--on-surface);
         flex: 1;
 
         &::placeholder {
-          color: $on-surface-variant;
+          color: var(--on-surface)-variant;
         }
       }
     }
@@ -148,18 +148,18 @@
 
       .filter-select {
         padding: $spacing-sm $spacing-md;
-        border: 1px solid rgba($outline-variant, 0.2);
+        border: 1px solid rgba(var(--outline-variant), 0.2);
         border-radius: $radius-lg;
-        background: $surface-container-high;
+        background: var(--surface)-container-high;
         font-size: $body-sm;
-        color: $on-surface;
+        color: var(--on-surface);
         cursor: pointer;
         transition: all 0.2s ease;
 
         &:focus {
           outline: none;
-          border-color: $primary;
-          box-shadow: 0 0 0 2px rgba($primary, 0.1);
+          border-color: var(--primary);
+          box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
         }
       }
     }
@@ -178,8 +178,8 @@
       gap: $spacing-md;
 
       .task-item {
-        background: $surface-container-lowest;
-        border: 1px solid rgba($outline-variant, 0.08);
+        background: var(--surface)-container-lowest;
+        border: 1px solid rgba(var(--outline-variant), 0.08);
         border-radius: $radius-xl;
         padding: $spacing-lg;
         display: flex;
@@ -189,8 +189,8 @@
         transition: all 0.2s ease;
 
         &:hover {
-          border-color: rgba($primary, 0.2);
-          box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.05);
+          border-color: rgba(var(--primary), 0.2);
+          box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.05);
           transform: translateY(-2px);
         }
 
@@ -204,14 +204,14 @@
             input[type="checkbox"] {
               width: 1.25rem;
               height: 1.25rem;
-              border: 2px solid $outline-variant;
+              border: 2px solid var(--outline)-variant;
               border-radius: $radius-md;
               cursor: pointer;
               transition: all 0.2s ease;
 
               &:checked {
-                background: $primary;
-                border-color: $primary;
+                background: var(--primary);
+                border-color: var(--primary);
               }
             }
           }
@@ -221,13 +221,13 @@
 
             .task-title {
               font-weight: 600;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0 0 $spacing-xs 0;
               font-size: $body-lg;
             }
 
             .task-description {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
               font-size: $body-sm;
               margin: 0 0 $spacing-md 0;
               line-height: $leading-normal;
@@ -240,7 +240,7 @@
               flex-wrap: wrap;
 
               .project-name {
-                color: $primary;
+                color: var(--primary);
                 font-size: $label-sm;
                 font-weight: 500;
               }
@@ -254,18 +254,18 @@
                 border-radius: $radius-full;
 
                 &.status-completed {
-                  background: rgba($tertiary-container, 0.1);
-                  color: $tertiary-container;
+                  background: rgba(var(--tertiary-container), 0.1);
+                  color: var(--tertiary)-container;
                 }
 
                 &.status-in-progress {
-                  background: rgba($primary, 0.1);
-                  color: $primary;
+                  background: rgba(var(--primary), 0.1);
+                  color: var(--primary);
                 }
 
                 &.status-pending {
-                  background: rgba($surface-container-high, 0.8);
-                  color: $on-surface-variant;
+                  background: rgba(var(--surface-container-high), 0.8);
+                  color: var(--on-surface)-variant;
                 }
               }
 
@@ -278,18 +278,18 @@
                 border-radius: $radius-full;
 
                 &.priority-high {
-                  background: rgba($error, 0.1);
-                  color: $error;
+                  background: rgba(var(--error), 0.1);
+                  color: var(--error);
                 }
 
                 &.priority-medium {
-                  background: rgba($tertiary-container, 0.1);
-                  color: $tertiary-container;
+                  background: rgba(var(--tertiary-container), 0.1);
+                  color: var(--tertiary)-container;
                 }
 
                 &.priority-low {
-                  background: rgba($surface-container-high, 0.8);
-                  color: $on-surface-variant;
+                  background: rgba(var(--surface-container-high), 0.8);
+                  color: var(--on-surface)-variant;
                 }
               }
 
@@ -297,7 +297,7 @@
                 display: flex;
                 align-items: center;
                 gap: $spacing-xs;
-                color: $on-surface-variant;
+                color: var(--on-surface)-variant;
                 font-size: $label-sm;
                 font-weight: 500;
               }
@@ -319,7 +319,7 @@
               display: flex;
               align-items: center;
               gap: $spacing-xs;
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
               font-size: $label-sm;
             }
           }
@@ -329,22 +329,22 @@
               width: 2rem;
               height: 2rem;
               border-radius: $radius-full;
-              border: 2px solid $surface-container-lowest;
+              border: 2px solid var(--surface)-container-lowest;
             }
           }
 
           .task-menu {
             background: transparent;
             border: none;
-            color: $outline-variant;
+            color: var(--outline)-variant;
             cursor: pointer;
             padding: $spacing-xs;
             border-radius: $radius-sm;
             transition: all 0.2s ease;
 
             &:hover {
-              color: $on-surface-variant;
-              background: $surface-container-low;
+              color: var(--on-surface)-variant;
+              background: var(--surface)-container-low;
             }
           }
         }
@@ -365,7 +365,7 @@
         top: $spacing-lg;
         bottom: $spacing-lg;
         width: 2px;
-        background: rgba($outline-variant, 0.2);
+        background: rgba(var(--outline-variant), 0.2);
       }
 
       .timeline-item {
@@ -388,34 +388,34 @@
             width: 1rem;
             height: 1rem;
             border-radius: $radius-full;
-            background: $primary;
+            background: var(--primary);
             position: relative;
             z-index: 2;
 
             &.priority-high {
-              background: $error;
+              background: var(--error);
             }
 
             &.priority-medium {
-              background: $tertiary-container;
+              background: var(--tertiary)-container;
             }
 
             &.priority-low {
-              background: $on-surface-variant;
+              background: var(--on-surface)-variant;
             }
           }
 
           .timeline-line {
             width: 2px;
             flex: 1;
-            background: rgba($outline-variant, 0.2);
+            background: rgba(var(--outline-variant), 0.2);
             margin-top: $spacing-xs;
           }
         }
 
         .timeline-content {
-          background: $surface-container-lowest;
-          border: 1px solid rgba($outline-variant, 0.08);
+          background: var(--surface)-container-lowest;
+          border: 1px solid rgba(var(--outline-variant), 0.08);
           border-radius: $radius-xl;
           padding: $spacing-lg;
           margin-left: $spacing-xl;
@@ -423,8 +423,8 @@
           transition: all 0.2s ease;
 
           &:hover {
-            border-color: rgba($primary, 0.2);
-            box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.05);
+            border-color: rgba(var(--primary), 0.2);
+            box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.05);
             transform: translateY(-2px);
           }
 
@@ -436,7 +436,7 @@
 
             .timeline-title {
               font-weight: 600;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0;
               font-size: $body-lg;
             }
@@ -450,24 +450,24 @@
               border-radius: $radius-full;
 
               &.status-completed {
-                background: rgba($tertiary-container, 0.1);
-                color: $tertiary-container;
+                background: rgba(var(--tertiary-container), 0.1);
+                color: var(--tertiary)-container;
               }
 
               &.status-in-progress {
-                background: rgba($primary, 0.1);
-                color: $primary;
+                background: rgba(var(--primary), 0.1);
+                color: var(--primary);
               }
 
               &.status-pending {
-                background: rgba($surface-container-high, 0.8);
-                color: $on-surface-variant;
+                background: rgba(var(--surface-container-high), 0.8);
+                color: var(--on-surface)-variant;
               }
             }
           }
 
           .timeline-description {
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
             font-size: $body-sm;
             margin: 0 0 $spacing-md 0;
             line-height: $leading-normal;
@@ -484,7 +484,7 @@
               gap: $spacing-md;
 
               .project-name {
-                color: $primary;
+                color: var(--primary);
                 font-size: $label-sm;
                 font-weight: 500;
               }
@@ -493,7 +493,7 @@
                 display: flex;
                 align-items: center;
                 gap: $spacing-xs;
-                color: $on-surface-variant;
+                color: var(--on-surface)-variant;
                 font-size: $label-sm;
                 font-weight: 500;
               }
@@ -504,7 +504,7 @@
                 width: 2rem;
                 height: 2rem;
                 border-radius: $radius-full;
-                border: 2px solid $surface-container-lowest;
+                border: 2px solid var(--surface)-container-lowest;
               }
             }
           }
@@ -524,7 +524,7 @@
       .kanban-column {
         min-width: 320px;
         width: 320px;
-        background: $surface-container-low;
+        background: var(--surface)-container-low;
         border-radius: $radius-xl;
         padding: $spacing-lg;
 
@@ -538,15 +538,15 @@
             font-family: $font-headline;
             font-size: $body-sm;
             font-weight: 700;
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
             text-transform: uppercase;
             letter-spacing: $tracking-widest;
             margin: 0;
           }
 
           .task-count {
-            background: $surface-container-high;
-            color: $on-surface-variant;
+            background: var(--surface)-container-high;
+            color: var(--on-surface)-variant;
             font-size: $label-sm;
             font-weight: 700;
             padding: $spacing-xs $spacing-sm;
@@ -560,16 +560,16 @@
           gap: $spacing-md;
 
           .kanban-task {
-            background: $surface-container-lowest;
-            border: 1px solid rgba($outline-variant, 0.08);
+            background: var(--surface)-container-lowest;
+            border: 1px solid rgba(var(--outline-variant), 0.08);
             border-radius: $radius-lg;
             padding: $spacing-lg;
             cursor: pointer;
             transition: all 0.2s ease;
 
             &:hover {
-              border-color: rgba($primary, 0.2);
-              box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.05);
+              border-color: rgba(var(--primary), 0.2);
+              box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.05);
               transform: translateY(-2px);
             }
 
@@ -588,31 +588,31 @@
                 border-radius: $radius-full;
 
                 &.priority-high {
-                  background: rgba($error, 0.1);
-                  color: $error;
+                  background: rgba(var(--error), 0.1);
+                  color: var(--error);
                 }
 
                 &.priority-medium {
-                  background: rgba($tertiary-container, 0.1);
-                  color: $tertiary-container;
+                  background: rgba(var(--tertiary-container), 0.1);
+                  color: var(--tertiary)-container;
                 }
 
                 &.priority-low {
-                  background: rgba($surface-container-high, 0.8);
-                  color: $on-surface-variant;
+                  background: rgba(var(--surface-container-high), 0.8);
+                  color: var(--on-surface)-variant;
                 }
               }
             }
 
             .task-title {
               font-weight: 600;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0 0 $spacing-xs 0;
               font-size: $body-sm;
             }
 
             .task-description {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
               font-size: $label-sm;
               margin: 0 0 $spacing-md 0;
               line-height: $leading-normal;
@@ -629,7 +629,7 @@
                 gap: $spacing-sm;
 
                 .project-name {
-                  color: $primary;
+                  color: var(--primary);
                   font-size: $label-sm;
                   font-weight: 500;
                 }
@@ -638,7 +638,7 @@
                   display: flex;
                   align-items: center;
                   gap: $spacing-xs;
-                  color: $on-surface-variant;
+                  color: var(--on-surface)-variant;
                   font-size: $label-sm;
                   font-weight: 500;
                 }
@@ -649,7 +649,7 @@
                   width: 1.5rem;
                   height: 1.5rem;
                   border-radius: $radius-full;
-                  border: 2px solid $surface-container-lowest;
+                  border: 2px solid var(--surface)-container-lowest;
                 }
               }
             }
@@ -658,10 +658,10 @@
           .add-task-btn {
             width: 100%;
             padding: $spacing-md;
-            border: 2px dashed rgba($outline-variant, 0.3);
+            border: 2px dashed rgba(var(--outline-variant), 0.3);
             background: transparent;
             border-radius: $radius-lg;
-            color: $on-surface-variant;
+            color: var(--on-surface)-variant;
             font-size: $body-sm;
             font-weight: 600;
             cursor: pointer;
@@ -672,9 +672,9 @@
             gap: $spacing-xs;
 
             &:hover {
-              border-color: $primary;
-              color: $primary;
-              background: rgba($primary, 0.02);
+              border-color: var(--primary);
+              color: var(--primary);
+              background: rgba(var(--primary), 0.02);
             }
           }
         }
@@ -718,7 +718,7 @@
     }
 
     .modal-content {
-      background: $surface-container-lowest;
+      background: var(--surface)-container-lowest;
       border-radius: $radius-2xl;
       width: 100%;
       max-width: 900px;
@@ -733,7 +733,7 @@
         justify-content: space-between;
         align-items: flex-start;
         padding: $spacing-xl;
-        border-bottom: 1px solid rgba($outline-variant, 0.1);
+        border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
 
         .header-left {
           flex: 1;
@@ -742,15 +742,15 @@
             font-family: $font-headline;
             font-size: $title-lg;
             font-weight: 700;
-            color: $on-surface;
+            color: var(--on-surface);
             margin: 0 0 $spacing-md 0;
 
             .task-title-input {
               width: 100%;
-              border: 1px solid rgba($outline-variant, 0.2);
+              border: 1px solid rgba(var(--outline-variant), 0.2);
               border-radius: $radius-lg;
               padding: $spacing-sm $spacing-md;
-              background: $surface-container-high;
+              background: var(--surface)-container-high;
               font-size: inherit;
               font-weight: inherit;
               color: inherit;
@@ -758,8 +758,8 @@
 
               &:focus {
                 outline: none;
-                border-color: $primary;
-                box-shadow: 0 0 0 2px rgba($primary, 0.1);
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
               }
             }
           }
@@ -777,18 +777,18 @@
               border-radius: $radius-full;
 
               &.status-completed {
-                background: rgba($tertiary-container, 0.1);
-                color: $tertiary-container;
+                background: rgba(var(--tertiary-container), 0.1);
+                color: var(--tertiary)-container;
               }
 
               &.status-in-progress {
-                background: rgba($primary, 0.1);
-                color: $primary;
+                background: rgba(var(--primary), 0.1);
+                color: var(--primary);
               }
 
               &.status-pending {
-                background: rgba($surface-container-high, 0.8);
-                color: $on-surface-variant;
+                background: rgba(var(--surface-container-high), 0.8);
+                color: var(--on-surface)-variant;
               }
             }
 
@@ -801,18 +801,18 @@
               border-radius: $radius-full;
 
               &.priority-high {
-                background: rgba($error, 0.1);
-                color: $error;
+                background: rgba(var(--error), 0.1);
+                color: var(--error);
               }
 
               &.priority-medium {
-                background: rgba($tertiary-container, 0.1);
-                color: $tertiary-container;
+                background: rgba(var(--tertiary-container), 0.1);
+                color: var(--tertiary)-container;
               }
 
               &.priority-low {
-                background: rgba($surface-container-high, 0.8);
-                color: $on-surface-variant;
+                background: rgba(var(--surface-container-high), 0.8);
+                color: var(--on-surface)-variant;
               }
             }
           }
@@ -835,44 +835,44 @@
             transition: all 0.2s ease;
 
             &.save-btn {
-              color: $primary;
-              background: rgba($primary, 0.1);
+              color: var(--primary);
+              background: rgba(var(--primary), 0.1);
 
               &:hover {
-                background: rgba($primary, 0.2);
+                background: rgba(var(--primary), 0.2);
               }
             }
 
             &.cancel-btn {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
 
               &:hover {
-                background: $surface-container-low;
+                background: var(--surface)-container-low;
               }
             }
 
             &.edit-btn {
-              color: $primary;
+              color: var(--primary);
 
               &:hover {
-                background: rgba($primary, 0.1);
+                background: rgba(var(--primary), 0.1);
               }
             }
 
             &.delete-btn {
-              color: $error;
+              color: var(--error);
 
               &:hover {
-                background: rgba($error, 0.1);
+                background: rgba(var(--error), 0.1);
               }
             }
 
             &.close-btn {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
 
               &:hover {
-                color: $on-surface;
-                background: $surface-container-low;
+                color: var(--on-surface);
+                background: var(--surface)-container-low;
               }
             }
           }
@@ -893,29 +893,29 @@
               font-family: $font-headline;
               font-size: $title-lg;
               font-weight: 600;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0 0 $spacing-md 0;
             }
 
             .task-description-input {
               width: 100%;
-              border: 1px solid rgba($outline-variant, 0.2);
+              border: 1px solid rgba(var(--outline-variant), 0.2);
               border-radius: $radius-lg;
               padding: $spacing-sm $spacing-md;
-              background: $surface-container-high;
+              background: var(--surface)-container-high;
               font-size: $body-sm;
-              color: $on-surface;
+              color: var(--on-surface);
               resize: vertical;
 
               &:focus {
                 outline: none;
-                border-color: $primary;
-                box-shadow: 0 0 0 2px rgba($primary, 0.1);
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
               }
             }
 
             p {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
               line-height: $leading-normal;
               margin: 0;
             }
@@ -932,14 +932,14 @@
                 display: block;
                 font-size: $label-sm;
                 font-weight: 600;
-                color: $on-surface-variant;
+                color: var(--on-surface)-variant;
                 text-transform: uppercase;
                 letter-spacing: $tracking-widest;
                 margin-bottom: $spacing-xs;
               }
 
               span {
-                color: $on-surface;
+                color: var(--on-surface);
                 font-weight: 500;
               }
 
@@ -962,7 +962,7 @@
 
                 .progress-fill {
                   height: 6px;
-                  background: $primary;
+                  background: var(--primary);
                   border-radius: $radius-full;
                   transition: width 0.3s ease;
                 }
@@ -970,7 +970,7 @@
                 span {
                   font-size: $label-sm;
                   font-weight: 600;
-                  color: $primary;
+                  color: var(--primary);
                 }
               }
 
@@ -983,8 +983,8 @@
                   display: flex;
                   align-items: center;
                   gap: $spacing-xs;
-                  background: $surface-container-high;
-                  color: $on-surface-variant;
+                  background: var(--surface)-container-high;
+                  color: var(--on-surface)-variant;
                   padding: $spacing-xs $spacing-sm;
                   border-radius: $radius-full;
                   font-size: $label-sm;
@@ -1001,7 +1001,7 @@
               font-family: $font-headline;
               font-size: $title-lg;
               font-weight: 600;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0 0 $spacing-md 0;
             }
 
@@ -1015,29 +1015,29 @@
                 transition: background-color 0.2s ease;
 
                 &:hover {
-                  background: $surface-container-low;
+                  background: var(--surface)-container-low;
                 }
 
                 input[type="checkbox"] {
                   width: 1rem;
                   height: 1rem;
-                  border: 2px solid $outline-variant;
+                  border: 2px solid var(--outline)-variant;
                   border-radius: $radius-sm;
                   cursor: pointer;
 
                   &:checked {
-                    background: $primary;
-                    border-color: $primary;
+                    background: var(--primary);
+                    border-color: var(--primary);
                   }
                 }
 
                 span {
-                  color: $on-surface;
+                  color: var(--on-surface);
                   font-size: $body-sm;
 
                   &.completed {
                     text-decoration: line-through;
-                    color: $on-surface-variant;
+                    color: var(--on-surface)-variant;
                   }
                 }
               }
@@ -1049,8 +1049,8 @@
               gap: $spacing-xs;
               margin-top: $spacing-lg;
               padding: $spacing-sm $spacing-md;
-              background: $tertiary-container;
-              color: $on-tertiary-container;
+              background: var(--tertiary)-container;
+              color: var(--on-tertiary)-container;
               border: none;
               border-radius: $radius-lg;
               font-size: $body-sm;
@@ -1059,7 +1059,7 @@
               transition: all 0.2s ease;
 
               &:hover {
-                background: $tertiary-container;
+                background: var(--tertiary)-container;
                 transform: translateY(-1px);
                 box-shadow: $shadow-md;
               }
@@ -1076,7 +1076,7 @@
               font-family: $font-headline;
               font-size: $title-sm;
               font-weight: 600;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0 0 $spacing-md 0;
             }
 
@@ -1098,7 +1098,7 @@
                   flex: 1;
 
                   p {
-                    color: $on-surface;
+                    color: var(--on-surface);
                     font-size: $body-sm;
                     margin: 0 0 $spacing-xs 0;
 
@@ -1108,7 +1108,7 @@
                   }
 
                   .activity-time {
-                    color: $on-surface-variant;
+                    color: var(--on-surface)-variant;
                     font-size: $label-sm;
                   }
                 }
@@ -1122,17 +1122,17 @@
                 gap: $spacing-sm;
                 padding: $spacing-sm;
                 border-radius: $radius-lg;
-                background: $surface-container-low;
+                background: var(--surface)-container-low;
                 margin-bottom: $spacing-sm;
                 cursor: pointer;
                 transition: background-color 0.2s ease;
 
                 &:hover {
-                  background: $surface-container-high;
+                  background: var(--surface)-container-high;
                 }
 
                 span {
-                  color: $on-surface;
+                  color: var(--on-surface);
                   font-size: $body-sm;
                 }
               }
@@ -1174,11 +1174,11 @@
           }
 
           &::-webkit-scrollbar-track {
-            background: $surface-container-low;
+            background: var(--surface)-container-low;
           }
 
           &::-webkit-scrollbar-thumb {
-            background: $outline-variant;
+            background: var(--outline)-variant;
             border-radius: $radius-full;
           }
         }
@@ -1415,7 +1415,7 @@
     }
 
     .task-form-content {
-      background: $surface-container-lowest;
+      background: var(--surface)-container-lowest;
       border-radius: $radius-2xl;
       width: 100%;
       max-width: 600px;
@@ -1430,28 +1430,28 @@
         justify-content: space-between;
         align-items: center;
         padding: $spacing-xl $spacing-xl $spacing-lg $spacing-xl;
-        border-bottom: 1px solid rgba($outline-variant, 0.1);
+        border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
 
         h3 {
           font-family: $font-headline;
           font-size: $title-lg;
           font-weight: 700;
-          color: $on-surface;
+          color: var(--on-surface);
           margin: 0;
         }
 
         .close-btn {
           background: transparent;
           border: none;
-          color: $on-surface-variant;
+          color: var(--on-surface)-variant;
           cursor: pointer;
           padding: $spacing-xs;
           border-radius: $radius-sm;
           transition: all 0.2s ease;
 
           &:hover {
-            color: $on-surface;
-            background: $surface-container-low;
+            color: var(--on-surface);
+            background: var(--surface)-container-low;
           }
         }
       }
@@ -1465,7 +1465,7 @@
           label {
             display: block;
             font-weight: 600;
-            color: $on-surface;
+            color: var(--on-surface);
             margin-bottom: $spacing-xs;
             font-size: $body-sm;
           }
@@ -1475,21 +1475,21 @@
           select {
             width: 100%;
             padding: $spacing-sm $spacing-md;
-            border: 1px solid rgba($outline-variant, 0.2);
+            border: 1px solid rgba(var(--outline-variant), 0.2);
             border-radius: $radius-lg;
-            background: $surface-container-high;
+            background: var(--surface)-container-high;
             font-size: $body-sm;
-            color: $on-surface;
+            color: var(--on-surface);
             transition: all 0.2s ease;
 
             &:focus {
               outline: none;
-              border-color: $primary;
-              box-shadow: 0 0 0 2px rgba($primary, 0.1);
+              border-color: var(--primary);
+              box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
             }
 
             &::placeholder {
-              color: $on-surface-variant;
+              color: var(--on-surface)-variant;
             }
           }
 
@@ -1511,7 +1511,7 @@
           gap: $spacing-md;
           margin-top: $spacing-xl;
           padding-top: $spacing-lg;
-          border-top: 1px solid rgba($outline-variant, 0.1);
+          border-top: 1px solid rgba(var(--outline-variant), 0.1);
 
           .btn {
             display: flex;
@@ -1526,18 +1526,18 @@
             transition: all 0.2s ease;
 
             &--secondary {
-              background: $surface-container-high;
-              color: $on-surface;
+              background: var(--surface)-container-high;
+              color: var(--on-surface);
 
               &:hover {
-                background: $surface-variant;
+                background: var(--surface)-variant;
               }
             }
 
             &--primary {
-              background: $primary;
-              color: $on-primary;
-              box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.1);
+              background: var(--primary);
+              color: var(--on-primary);
+              box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.1);
 
               &:hover {
                 opacity: 0.9;

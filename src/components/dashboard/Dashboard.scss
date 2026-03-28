@@ -60,7 +60,7 @@
           rgba(var(--primary), 0.1) 0%, 
           rgba(var(--tertiary-container), 0.05) 50%, 
           rgba(var(--secondary-container), 0.1) 100%);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(var(--surface) 0 0) content-box, linear-gradient(var(--surface) 0 0);
         mask-composite: xor;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -85,7 +85,7 @@
       }
 
       &:hover {
-        background: linear-gradient(135deg, var(--primary), #2a1aa0);
+        background: linear-gradient(135deg, var(--primary), var(--primary-container));
         transform: translateY(-4px) scale(1.02);
         box-shadow: 
           $shadow-lg,
@@ -132,7 +132,7 @@
         }
 
         &:hover {
-          background: linear-gradient(135deg, var(--error), #dc2626);
+          background: linear-gradient(135deg, var(--error), var(--error-container));
           box-shadow: 
             $shadow-lg,
             0 0 0 1px rgba(var(--error), 0.2),
@@ -193,7 +193,7 @@
           font-family: $font-headline;
           font-size: $display-lg;
           font-weight: 800;
-          color: $on-surface;
+          color: var(--on-surface);
           line-height: $leading-tight;
           transition: color 0.3s ease;
         }
@@ -223,7 +223,7 @@
           font-family: $font-headline;
           font-size: $headline-md;
           font-weight: 700;
-          color: $on-surface;
+          color: var(--on-surface);
           margin: 0;
         }
 
@@ -405,7 +405,7 @@
             }
 
             .check-icon {
-              color: white;
+              color: var(--on-primary);
               opacity: 0;
               transition: opacity 0.2s ease;
             }
@@ -615,7 +615,7 @@
   }
 
   &__velocity {
-    background: linear-gradient(135deg, var(--primary), #2a1aa0);
+    background: linear-gradient(135deg, var(--primary), var(--primary-container));
     border-radius: $radius-2xl;
     padding: $spacing-2xl;
     color: var(--on-primary);

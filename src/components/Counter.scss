@@ -1,19 +1,22 @@
+@use '../../styles/variables.scss' as *;
+
 .counter {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: $spacing-md;
   padding: $spacing-xl;
-  background: white;
+  background: var(--surface);
   border-radius: $radius-lg;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow-md;
   max-width: 300px;
   margin: 0 auto;
+  border: 1px solid var(--outline-variant);
 
   &__value {
     font-size: 2rem;
     font-weight: bold;
-    color: $primary-color;
+    color: var(--primary);
   }
 
   &__buttons {
@@ -25,29 +28,31 @@
     padding: $spacing-sm $spacing-md;
     border: none;
     border-radius: $radius-md;
-    background: $primary-color;
-    color: white;
+    background: var(--primary);
+    color: var(--on-primary);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 
     &:hover {
-      background: darken($primary-color, 10%);
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     &:disabled {
-      background: $border-color;
+      background: var(--surface-container-high);
+      color: var(--on-surface-variant);
       cursor: not-allowed;
     }
   }
 
   &__status {
     font-size: 0.875rem;
-    color: $text-color;
+    color: var(--on-surface-variant);
     margin-top: $spacing-sm;
   }
 
   &__error {
-    color: #ef4444;
+    color: var(--error);
     font-size: 0.875rem;
   }
 }

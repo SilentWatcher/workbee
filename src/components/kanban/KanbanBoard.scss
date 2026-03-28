@@ -4,7 +4,7 @@
   margin-left: 16rem;
   padding: 6rem $spacing-xl $spacing-xl;
   min-height: 100vh;
-  background: $surface;
+  background: var(--surface);
   display: flex;
   flex-direction: column;
 
@@ -21,32 +21,32 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: var(--spacing-2xl);
 
     .project-info {
       h3 {
-        font-family: $font-headline;
-        font-size: $display-lg;
+        font-family: var(--font-headline);
+        font-size: var(--display-lg);
         font-weight: 800;
-        color: $on-surface;
-        margin: 0 0 $spacing-sm 0;
-        letter-spacing: $tracking-tightest;
+        color: var(--on-surface);
+        margin: 0 0 var(--spacing-sm) 0;
+        letter-spacing: var(--tracking-tightest);
       }
 
       .project-meta {
         display: flex;
         align-items: center;
-        gap: $spacing-md;
+        gap: var(--spacing-md);
 
         .team-avatars {
           display: flex;
-          margin-right: $spacing-sm;
+          margin-right: var(--spacing-sm);
 
           .avatar {
             width: 2rem;
             height: 2rem;
-            border-radius: $radius-full;
-            border: 2px solid $surface;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--surface);
             margin-left: -0.5rem;
 
             &:first-child {
@@ -57,15 +57,15 @@
           .more-indicator {
             width: 2rem;
             height: 2rem;
-            border-radius: $radius-full;
-            border: 2px solid $surface;
-            background: $surface-container-highest;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--surface);
+            background: var(--surface-container-highest);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: $label-sm;
+            font-size: var(--label-sm);
             font-weight: 700;
-            color: $on-surface-variant;
+            color: var(--on-surface-variant);
             margin-left: -0.5rem;
           }
         }
@@ -73,9 +73,9 @@
         .date-range {
           display: flex;
           align-items: center;
-          gap: $spacing-xs;
-          color: $on-surface-variant;
-          font-size: $body-sm;
+          gap: var(--spacing-xs);
+          color: var(--on-surface-variant);
+          font-size: var(--body-sm);
           font-weight: 500;
         }
       }
@@ -83,34 +83,34 @@
 
     .board-actions {
       display: flex;
-      gap: $spacing-sm;
+      gap: var(--spacing-sm);
 
       .action-btn {
         display: flex;
         align-items: center;
-        gap: $spacing-xs;
-        padding: $spacing-sm $spacing-md;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-sm) var(--spacing-md);
         border: none;
-        border-radius: $radius-md;
-        font-family: $font-body;
+        border-radius: var(--radius-md);
+        font-family: var(--font-body);
         font-weight: 600;
-        font-size: $body-sm;
+        font-size: var(--body-sm);
         cursor: pointer;
         transition: all 0.2s ease;
 
         &--secondary {
-          background: $surface-container-high;
-          color: $on-surface;
+          background: var(--surface-container-high);
+          color: var(--on-surface);
 
           &:hover {
-            background: $surface-variant;
+            background: var(--surface-variant);
           }
         }
 
         &--primary {
-          background: $primary;
-          color: $on-primary;
-          box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.1);
+          background: var(--primary);
+          color: var(--on-primary);
+          box-shadow: var(--shadow-md), 0 0 0 1px rgba(var(--primary), 0.1);
 
           &:hover {
             opacity: 0.9;
@@ -123,9 +123,9 @@
   &__content {
     flex: 1;
     display: flex;
-    gap: $spacing-lg;
+    gap: var(--spacing-lg);
     overflow-x: auto;
-    padding-bottom: $spacing-lg;
+    padding-bottom: var(--spacing-lg);
     min-height: 0;
 
     // Hide scrollbar
@@ -142,50 +142,49 @@
     width: 20rem;
     display: flex;
     flex-direction: column;
-    gap: $spacing-md;
+    gap: var(--spacing-md);
 
     .column-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 $spacing-sm;
+      padding: 0 var(--spacing-sm);
 
       .column-title {
         display: flex;
         align-items: center;
-        gap: $spacing-sm;
+        gap: var(--spacing-sm);
 
         h4 {
-          font-family: $font-headline;
+          font-family: var(--font-headline);
           font-weight: 700;
-          font-size: $label-sm;
-          color: $on-surface-variant;
+          font-size: var(--label-sm);
+          color: var(--on-surface-variant);
           text-transform: uppercase;
-          letter-spacing: $tracking-widest;
+          letter-spacing: var(--tracking-widest);
           margin: 0;
         }
 
         .task-count {
-          padding: $spacing-xs $spacing-xs;
-          background: $surface-container;
-          border-radius: $radius-sm;
-          font-size: $label-sm;
+          padding: var(--spacing-xs) var(--spacing-xs);
+          background: var(--surface-container);
+          border-radius: var(--radius-sm);
+          font-size: var(--label-sm);
           font-weight: 700;
-          color: $on-surface-variant;
+          color: var(--on-surface-variant);
         }
       }
 
       .column-menu {
         background: none;
         border: none;
-        padding: $spacing-xs;
-        color: $on-surface-variant;
+        padding: var(--spacing-lg);
         cursor: pointer;
-        border-radius: $radius-sm;
+        border-radius: var(--radius-sm);
         transition: all 0.2s ease;
 
         &:hover {
-          color: $primary;
+          color: var(--primary);
         }
       }
     }
@@ -194,24 +193,24 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: var(--spacing-md);
     }
 
     .task-card {
-      background: $surface-container-lowest;
+      background: var(--surface-container-lowest);
       border: 1px solid transparent;
-      border-radius: $radius-lg;
-      padding: $spacing-lg;
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
       cursor: grab;
       transition: all 0.2s ease;
-      box-shadow: $shadow-sm;
+      box-shadow: var(--shadow-sm);
       position: relative;
       overflow: hidden;
 
       &:hover {
-        border-color: rgba($outline-variant, 0.2);
+        border-color: rgba(var(--outline-variant), 0.2);
         transform: translateY(-2px);
-        box-shadow: $shadow-lg;
+        box-shadow: var(--shadow-lg);
       }
 
       &:active {
@@ -219,23 +218,23 @@
       }
 
       &--in-progress {
-        border-left: 4px solid $primary;
-        box-shadow: $shadow-md;
+        border-left: 4px solid var(--primary);
+        box-shadow: var(--shadow-md);
 
         &::before {
           content: '';
           position: absolute;
           top: 0;
-          right: $spacing-sm;
+          right: var(--spacing-sm);
           opacity: 0.2;
           transform: rotate(12deg);
         }
 
         .trending-icon {
           position: absolute;
-          top: $spacing-sm;
-          right: $spacing-sm;
-          color: $primary;
+          top: var(--spacing-sm);
+          right: var(--spacing-sm);
+          color: var(--on-primary);
           opacity: 0.2;
           transform: rotate(12deg);
         }
@@ -243,11 +242,11 @@
 
       &--completed {
         opacity: 0.8;
-        background: rgba($surface-container-lowest, 0.6);
+        background: rgba(var(--surface-container-lowest), 0.6);
 
         .task-title {
           text-decoration: line-through;
-          color: rgba($on-surface, 0.6);
+          color: rgba(var(--on-surface), 0.6);
         }
       }
 
@@ -255,52 +254,52 @@
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: $spacing-lg;
+        margin-bottom: var(--spacing-lg);
 
         .priority-badge {
-          padding: $spacing-xs $spacing-xs;
-          border-radius: $radius-sm;
-          font-size: $label-sm;
+          padding: var(--spacing-xs) var(--spacing-xs);
+          border-radius: var(--radius-sm);
+          font-size: var(--label-sm);
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: $tracking-wider;
+          letter-spacing: var(--tracking-wider);
 
           &--high {
-            background: rgba($error, 0.1);
-            color: $error;
+            background: rgba(var(--error), 0.1);
+            color: var(--error);
           }
 
           &--medium {
-            background: $secondary-container;
-            color: $on-secondary-container;
+            background: var(--secondary-container);
+            color: var(--on-secondary-container);
           }
 
           &--low {
-            background: $surface-container-high;
-            color: $on-surface-variant;
+            background: var(--surface-container-high);
+            color: var(--on-surface-variant);
           }
         }
 
         .drag-handle {
-          color: $outline-variant;
+          color: var(--outline-variant);
           cursor: grab;
-          padding: $spacing-xs;
-          border-radius: $radius-sm;
+          padding: var(--spacing-xs);
+          border-radius: var(--radius-sm);
           transition: all 0.2s ease;
 
           &:hover {
-            color: $on-surface-variant;
+            color: var(--on-surface-variant);
           }
         }
       }
 
       .task-title {
-        font-family: $font-body;
+        font-family: var(--font-body);
         font-weight: 600;
-        font-size: $body-sm;
-        color: $on-surface;
-        line-height: $leading-tight;
-        margin-bottom: $spacing-lg;
+        font-size: var(--body-sm);
+        color: var(--on-surface);
+        line-height: var(--leading-tight);
+        margin-bottom: var(--spacing-lg);
       }
 
       .task-footer {
@@ -311,28 +310,28 @@
         .task-meta {
           display: flex;
           align-items: center;
-          gap: $spacing-xs;
-          font-size: $label-sm;
+          gap: var(--spacing-xs);
+          font-size: var(--label-sm);
           font-weight: 500;
-          color: $on-surface-variant;
-          background: $surface-container-low;
-          padding: $spacing-xs $spacing-xs;
-          border-radius: $radius-sm;
+          color: var(--on-surface-variant);
+          background: var(--surface-container-low);
+          padding: var(--spacing-xs) var(--spacing-xs);
+          border-radius: var(--radius-sm);
 
           .meta-icon {
-            font-size: $label-md;
+            font-size: var(--label-md);
           }
         }
 
         .task-assignees {
           display: flex;
-          gap: $spacing-xs;
+          gap: var(--spacing-xs);
 
           .assignee {
             width: 1.5rem;
             height: 1.5rem;
-            border-radius: $radius-full;
-            background: $surface-container-low;
+            border-radius: var(--radius-full);
+            background: var(--surface-container-low);
             object-fit: cover;
           }
         }
@@ -341,24 +340,24 @@
 
     .add-task-btn {
       width: 100%;
-      padding: $spacing-md;
+      padding: var(--spacing-md);
       background: transparent;
-      border: 2px dashed rgba($outline-variant, 0.3);
-      border-radius: $radius-lg;
-      color: $on-surface-variant;
-      font-family: $font-body;
+      border: 2px dashed rgba(var(--outline-variant), 0.3);
+      border-radius: var(--radius-lg);
+      color: var(--on-surface-variant);
+      font-family: var(--font-body);
       font-weight: 600;
-      font-size: $body-sm;
+      font-size: var(--body-sm);
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: $spacing-xs;
+      gap: var(--spacing-xs);
 
       &:hover {
-        background: $surface-container-low;
-        border-color: rgba($outline-variant, 0.4);
+        background: var(--surface-container-low);
+        border-color: rgba(var(--outline-variant), 0.4);
       }
     }
   }
@@ -370,14 +369,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed rgba($outline-variant, 0.2);
-    border-radius: $radius-2xl;
+    border: 2px dashed rgba(var(--outline-variant), 0.2);
+    border-radius: var(--radius-2xl);
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-      background: rgba($surface-container-low, 0.5);
-      border-color: rgba($primary, 0.3);
+      background: rgba(var(--surface-container-low), 0.5);
+      border-color: rgba(var(--primary), 0.3);
     }
 
     .add-column-content {
@@ -386,31 +385,31 @@
       .add-icon {
         width: 3rem;
         height: 3rem;
-        background: $surface-container-high;
-        border-radius: $radius-full;
+        background: var(--surface-container-high);
+        border-radius: var(--radius-full);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto $spacing-sm 0;
+        margin: 0 auto var(--spacing-sm) 0;
         transition: all 0.2s ease;
       }
 
       &:hover .add-icon {
-        background: rgba($primary, 0.1);
-        color: $primary;
+        background: rgba(var(--primary), 0.1);
+        color: var(--primary);
       }
 
       p {
-        font-family: $font-body;
+        font-family: var(--font-body);
         font-weight: 700;
         font-size: $body-sm;
-        color: $on-surface-variant;
+        color: var(--on-surface-variant);
         margin: 0;
         transition: color 0.2s ease;
       }
 
       &:hover p {
-        color: $primary;
+        color: var(--primary);
       }
     }
   }
