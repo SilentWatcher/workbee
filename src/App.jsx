@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ThemeProvider } from './contexts/ThemeContext'
 import Sidebar from './components/layout/Sidebar'
 import Header from './components/layout/Header'
 import AppLayout from './components/layout/AppLayout'
@@ -12,18 +13,20 @@ import './App.scss'
 
 function App() {
   return (
-    <Router>
-      <AppLayout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/projects" element={<ProjectKanbanBoard />} />
-          <Route path="/workspace" element={<WorkspaceProjects />} />
-          <Route path="/tasks" element={<TasksOverview />} />
-          <Route path="/tasks/:id" element={<TasksOverview />} />
-        </Routes>
-      </AppLayout>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/projects" element={<ProjectKanbanBoard />} />
+            <Route path="/workspace" element={<WorkspaceProjects />} />
+            <Route path="/tasks" element={<TasksOverview />} />
+            <Route path="/tasks/:id" element={<TasksOverview />} />
+          </Routes>
+        </AppLayout>
+      </Router>
+    </ThemeProvider>
   )
 }
 

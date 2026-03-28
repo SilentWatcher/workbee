@@ -40,7 +40,7 @@ const Sidebar = ({ className = '' }) => {
               <FiTool size={20} />
             </div>
             <div className="title">
-              <h1>Precision PM</h1>
+              <h1>Work Bee</h1>
               <p>The Workspace</p>
             </div>
           </div>

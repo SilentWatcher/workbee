@@ -25,8 +25,8 @@
 
   &__brand {
     padding: $spacing-xl $spacing-lg;
-    border-bottom: 1px solid rgba($outline-variant, 0.1);
-    background: $surface-container-lowest;
+    border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
+    background: var(--surface-container-lowest);
 
     .brand {
       &__logo {
@@ -39,12 +39,12 @@
         .logo {
           width: 2.5rem;
           height: 2.5rem;
-          background: $primary;
+          background: var(--primary);
           border-radius: $radius-lg;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: $on-primary;
+          color: var(--on-primary);
         }
 
         .title {
@@ -52,7 +52,7 @@
             font-family: $font-headline;
             font-size: $title-lg;
             font-weight: 800;
-            color: $primary;
+            color: var(--primary);
             margin: 0;
             line-height: $leading-tight;
           }
@@ -61,7 +61,7 @@
             font-family: $font-label;
             font-size: $label-sm;
             font-weight: 600;
-            color: $on-surface-variant;
+            color: var(--on-surface-variant);
             margin: 0;
             text-transform: uppercase;
             letter-spacing: $tracking-widest;
@@ -72,8 +72,8 @@
       .new-project-btn {
         width: 100%;
         padding: $spacing-sm $spacing-md;
-        background: $primary;
-        color: $on-primary;
+        background: var(--primary);
+        color: var(--on-primary);
         border: none;
         border-radius: $radius-lg;
         font-family: $font-headline;
@@ -115,7 +115,7 @@
           align-items: center;
           gap: $spacing-sm;
           padding: $spacing-sm $spacing-md;
-          color: $on-surface;
+          color: var(--on-surface);
           text-decoration: none;
           font-family: $font-body;
           font-weight: 500;
@@ -125,15 +125,15 @@
           visibility: visible;
 
           &:hover {
-            color: $primary;
-            background: rgba($primary, 0.1);
+            color: var(--primary);
+            background: rgba(var(--primary), 0.1);
           }
 
           &--active {
-            color: $primary;
-            background: rgba($primary, 0.15);
+            color: var(--primary);
+            background: rgba(var(--primary), 0.15);
             font-weight: 600;
-            border-left: 4px solid $primary;
+            border-left: 4px solid var(--primary);
             padding-left: calc(#{$spacing-sm} - 2px);
           }
 
@@ -146,13 +146,14 @@
   }
 
   &__footer {
-    padding: $spacing-xl $spacing-lg;
-    border-top: 1px solid rgba($outline-variant, 0.1);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    border-top: 1px solid rgba(var(--outline-variant), 0.1);
 
     .footer-nav {
       &__list {
         list-style: none;
         padding: 0;
+        margin: 0 0 var(--spacing-lg) 0;
         margin: 0 0 $spacing-lg 0;
         display: flex;
         flex-direction: column;
@@ -165,7 +166,7 @@
           align-items: center;
           gap: $spacing-sm;
           padding: $spacing-sm $spacing-md;
-          color: $on-surface-variant;
+          color: var(--on-surface-variant);
           text-decoration: none;
           font-family: $font-body;
           font-weight: 500;
@@ -174,7 +175,7 @@
           transition: color 0.2s ease;
 
           &:hover {
-            color: $primary;
+            color: var(--primary);
           }
 
           .icon {
@@ -205,7 +206,7 @@
           font-family: $font-body;
           font-weight: 700;
           font-size: $body-sm;
-          color: $on-surface;
+          color: var(--on-surface);
           margin: 0;
           white-space: nowrap;
           overflow: hidden;
@@ -215,7 +216,7 @@
         .role {
           font-family: $font-body;
           font-size: $label-sm;
-          color: $on-surface-variant;
+          color: var(--on-surface-variant);
           margin: 0;
           white-space: nowrap;
           overflow: hidden;

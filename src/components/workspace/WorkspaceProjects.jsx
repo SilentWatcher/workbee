@@ -214,7 +214,7 @@ const WorkspaceProjects = () => {
       {/* Header */}
       <div className="workspace-header">
         <div className="header-left">
-          <p className="breadcrumb">Precision PM / Workspace</p>
+          <p className="breadcrumb">Work Bee / Workspace</p>
           <h1 className="page-title">Design Engineering</h1>
         </div>
         <div className="header-actions">

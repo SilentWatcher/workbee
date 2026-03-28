@@ -1,4 +1,5 @@
 @use './styles/variables.scss' as *;
+@use './styles/themes.scss' as *;
 
 // Global Reset & Base Styles
 * {
@@ -7,14 +8,27 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: $font-body;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $surface;
-  color: $on-surface;
+  background: var(--surface);
+  color: var(--on-surface);
   line-height: $leading-normal;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--on-surface);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 // Typography Classes
@@ -104,40 +118,40 @@ body {
 }
 
 // Utility Classes
-.text-primary { color: $primary; }
-.text-on-primary { color: $on-primary; }
-.text-secondary { color: $secondary; }
-.text-on-secondary { color: $on-secondary; }
-.text-tertiary { color: $tertiary; }
-.text-on-tertiary { color: $on-tertiary; }
-.text-surface { color: $surface; }
-.text-on-surface { color: $on-surface; }
-.text-on-surface-variant { color: $on-surface-variant; }
-.text-on-background { color: $on-background; }
-.text-error { color: $error; }
-.text-on-error { color: $on-error; }
+.text-primary { color: var(--primary); }
+.text-on-primary { color: var(--on-primary); }
+.text-secondary { color: var(--secondary); }
+.text-on-secondary { color: var(--on-secondary); }
+.text-tertiary { color: var(--tertiary); }
+.text-on-tertiary { color: var(--on-tertiary); }
+.text-surface { color: var(--surface); }
+.text-on-surface { color: var(--on-surface); }
+.text-on-surface-variant { color: var(--on-surface-variant); }
+.text-on-background { color: var(--on-background); }
+.text-error { color: var(--error); }
+.text-on-error { color: var(--on-error); }
 
-.bg-primary { background-color: $primary; }
-.bg-primary-container { background-color: $primary-container; }
-.bg-secondary { background-color: $secondary; }
-.bg-secondary-container { background-color: $secondary-container; }
-.bg-tertiary { background-color: $tertiary; }
-.bg-tertiary-container { background-color: $tertiary-container; }
-.bg-surface { background-color: $surface; }
-.bg-surface-container { background-color: $surface-container; }
-.bg-surface-container-low { background-color: $surface-container-low; }
-.bg-surface-container-high { background-color: $surface-container-high; }
-.bg-surface-container-highest { background-color: $surface-container-highest; }
-.bg-surface-container-lowest { background-color: $surface-container-lowest; }
-.bg-error { background-color: $error; }
-.bg-error-container { background-color: $error-container; }
+.bg-primary { background-color: var(--primary); }
+.bg-primary-container { background-color: var(--primary-container); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-secondary-container { background-color: var(--secondary-container); }
+.bg-tertiary { background-color: var(--tertiary); }
+.bg-tertiary-container { background-color: var(--tertiary-container); }
+.bg-surface { background-color: var(--surface); }
+.bg-surface-container { background-color: var(--surface-container); }
+.bg-surface-container-low { background-color: var(--surface-container-low); }
+.bg-surface-container-high { background-color: var(--surface-container-high); }
+.bg-surface-container-highest { background-color: var(--surface-container-highest); }
+.bg-surface-container-lowest { background-color: var(--surface-container-lowest); }
+.bg-error { background-color: var(--error); }
+.bg-error-container { background-color: var(--error-container); }
 
 // Layout Components
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: $surface;
+  background: var(--surface);
 
   &__main {
     flex: 1;
@@ -163,9 +177,9 @@ body {
   text-decoration: none;
 
   &--primary {
-    background: $primary;
-    color: $on-primary;
-    box-shadow: $shadow-md, 0 0 0 1px rgba($primary, 0.1);
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: var(--shadow-sm), 0 0 0 1px rgba(var(--primary), 0.1);
 
     &:hover {
       opacity: 0.9;
@@ -174,21 +188,21 @@ body {
   }
 
   &--secondary {
-    background: $surface-container-high;
-    color: $on-surface;
+    background: var(--surface-container-high);
+    color: var(--on-surface);
 
     &:hover {
-      background: $surface-variant;
+      background: var(--surface-variant);
     }
   }
 
   &--tertiary {
     background: transparent;
-    color: $primary;
+    color: var(--primary);
     padding: $spacing-xs $spacing-sm;
 
     &:hover {
-      background: rgba($primary, 0.05);
+      background: rgba(var(--primary), 0.05);
     }
   }
 
@@ -197,20 +211,20 @@ body {
     border-radius: $radius-full;
 
     &:hover {
-      background: rgba($on-surface-variant, 0.05);
+      background: rgba(var(--on-surface-variant), 0.05);
     }
   }
 }
 
 // Card Styles
 .card {
-  background: $surface-container-lowest;
+  background: var(--surface-container-lowest);
   border-radius: $radius-lg;
   box-shadow: $shadow-sm;
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: $shadow-lg;
+    box-shadow: $shadow-lg, 0 0 0 1px rgba(var(--primary), 0.05);
     transform: translateY(-2px);
   }
 
@@ -218,7 +232,7 @@ body {
     cursor: pointer;
 
     &:hover {
-      box-shadow: $shadow-lg, 0 0 0 1px rgba($primary, 0.05);
+      box-shadow: $shadow-lg, 0 0 0 1px rgba(var(--primary), 0.05);
     }
   }
 }
@@ -239,17 +253,17 @@ body {
 
 // Glass Effect
 .glass {
-  background: $glass-bg;
+  background: var(--glass-bg);
   backdrop-filter: blur($glass-blur);
   -webkit-backdrop-filter: blur($glass-blur);
-  border: 1px solid rgba($outline-variant, 0.1);
+  border: 1px solid rgba(var(--outline-variant), 0.1);
 }
 
 // Focus Styles
 .focus-ring {
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba($primary, 0.2);
+    box-shadow: 0 0 0 2px rgba(var(--primary), 0.2);
   }
 }
 

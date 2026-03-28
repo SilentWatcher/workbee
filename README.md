@@ -1,16 +1,67 @@
-# React + Vite
+# � Work Bee
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A collaborative productivity and project management platform designed to help teams and individuals manage tasks, stay focused, and work efficiently in one unified workspace.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🧠 Overview
 
-## React Compiler
+Work Bee combines task management, real-time collaboration, and personal productivity tools into a single platform.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Instead of switching between multiple apps, users can:
+- Manage tasks and projects
+- Collaborate with team members
+- Maintain personal notes and daily planning
+- Stay focused with a distraction-free environment
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+### 🔐 Authentication
+- User registration & login
+- JWT-based authentication
+- Role-based access (User / Admin)
+
+### 📋 Task Management
+- Create, update, delete tasks
+- Task status (To Do, In Progress, Done)
+- Assign tasks to users
+
+### 👥 Collaboration
+- Multi-user workspace
+- Shared task boards
+- Real-time updates (planned)
+
+### 📝 Notes & Productivity
+- Personal notes
+- Sticky wall for daily planning
+- Quick scratchpad
+
+### 📊 Dashboard
+- Task overview
+- Activity tracking
+- Productivity insights
+
+### 🎵 Focus Mode (Planned)
+- Background music for deep work
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React.js
+
+### Backend
+- Node.js / Nest.js
+
+### Database
+- MySQL / MongoDB
+
+### Authentication
+- JWT (JSON Web Token)
+
+---
+
+## 📂 Project Structure (Planned)

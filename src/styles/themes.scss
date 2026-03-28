@@ -1,0 +1,150 @@
+// Work Bee Theme System
+// Theme switching functionality for yellow/black dark and yellow/white light themes
+
+@use './variables.scss' as *;
+
+// Global theme variables (defaults to light)
+:root {
+  --theme-mode: 'light';
+  
+  // Default to light theme colors
+  --primary: #fbbf24;
+  --primary-container: #fef3c7;
+  --on-primary: #78350f;
+  --on-primary-container: #451a03;
+  
+  --secondary: #e5e7eb;
+  --secondary-container: #f9fafb;
+  --on-secondary: #374151;
+  --on-secondary-container: #1f2937;
+  
+  --tertiary: #fde68a;
+  --tertiary-container: #fef9c3;
+  --on-tertiary: #854d0e;
+  --on-tertiary-container: #713f12;
+  
+  --surface: #ffffff;
+  --surface-container-low: #fafafa;
+  --surface-container: #f4f4f5;
+  --surface-container-high: #e4e4e7;
+  --surface-container-highest: #d4d4d8;
+  --surface-container-lowest: #ffffff;
+  --surface-dim: #d1d5db;
+  --surface-bright: #ffffff;
+  --surface-variant: #e5e7eb;
+  
+  --error: #dc2626;
+  --error-container: #fef2f2;
+  --on-error: #ffffff;
+  --on-error-container: #991b1b;
+  
+  --outline: #d1d5db;
+  --outline-variant: #e5e7eb;
+  
+  --inverse-surface: #404040;
+  --inverse-on-surface: #fafafa;
+  --inverse-primary: #1c1917;
+  
+  --on-surface: #1c1917;
+  --on-surface-variant: #404040;
+  --on-background: #1c1917;
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+
+// Light theme (yellow & white)
+[data-theme="light"] {
+  --primary: #fbbf24;
+  --primary-container: #fef3c7;
+  --on-primary: #78350f;
+  --on-primary-container: #451a03;
+
+  --secondary: #e5e7eb;
+  --secondary-container: #f9fafb;
+  --on-secondary: #374151;
+  --on-secondary-container: #1f2937;
+
+  --tertiary: #fde68a;
+  --tertiary-container: #fef9c3;
+  --on-tertiary: #854d0e;
+  --on-tertiary-container: #713f12;
+
+  --surface: #ffffff;
+  --surface-container-low: #fafafa;
+  --surface-container: #f4f4f5;
+  --surface-container-high: #e4e4e7;
+  --surface-container-highest: #d4d4d8;
+  --surface-container-lowest: #ffffff;
+  --surface-dim: #d1d5db;
+  --surface-bright: #ffffff;
+  --surface-variant: #e5e7eb;
+
+  --error: #dc2626;
+  --error-container: #fef2f2;
+  --on-error: #ffffff;
+  --on-error-container: #991b1b;
+
+  --outline: #d1d5db;
+  --outline-variant: #e5e7eb;
+
+  --inverse-surface: #404040;
+  --inverse-on-surface: #fafafa;
+  --inverse-primary: #1c1917;
+
+  --on-surface: #1c1917;
+  --on-surface-variant: #404040;
+  --on-background: #1c1917;
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+
+// Dark theme (yellow & black)
+[data-theme="dark"] {
+  --primary: #facc15;
+  --primary-container: #854d0e;
+  --on-primary: #1c1917;
+  --on-primary-container: #fef3c7;
+
+  --secondary: #d4d4d8;
+  --secondary-container: #262626;
+  --on-secondary: #1c1917;
+  --on-secondary-container: #a1a1aa;
+
+  --tertiary: #fde047;
+  --tertiary-container: #713f12;
+  --on-tertiary: #1c1917;
+  --on-tertiary-container: #fef9c3;
+
+  --surface: #000000;
+  --surface-container-low: #171717;
+  --surface-container: #262626;
+  --surface-container-high: #404040;
+  --surface-container-highest: #525252;
+  --surface-container-lowest: #0a0a0a;
+  --surface-dim: #000000;
+  --surface-bright: #171717;
+  --surface-variant: #262626;
+
+  --error: #ef4444;
+  --error-container: #7f1d1d;
+  --on-error: #ffffff;
+  --on-error-container: #fecaca;
+
+  --outline: #525252;
+  --outline-variant: #404040;
+
+  --inverse-surface: #fafafa;
+  --inverse-on-surface: #1c1917;
+  --inverse-primary: #facc15;
+
+  --on-surface: #fafafa;
+  --on-surface-variant: #d4d4d8;
+  --on-background: #fafafa;
+
+  --glass-bg: rgba(0, 0, 0, 0.7);
+}
+
+// Theme transition
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

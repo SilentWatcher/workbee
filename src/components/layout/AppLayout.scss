@@ -21,8 +21,8 @@
   top: 1rem;
   left: 1rem;
   z-index: 1003;
-  background: $primary;
-  color: $on-primary;
+  background: var(--primary);
+  color: var(--on-primary);
   border: none;
   border-radius: $radius-lg;
   padding: $spacing-sm;
@@ -31,7 +31,7 @@
   box-shadow: $shadow-md;
 
   &:hover {
-    background: rgba($primary, 0.9);
+    background: rgba(var(--primary), 0.9);
     transform: translateY(-1px);
   }
 

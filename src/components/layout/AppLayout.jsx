@@ -41,7 +41,7 @@ const AppLayout = ({ children }) => {
     if (path === '/workspace') return 'Workspace Projects'
     if (path === '/tasks') return 'Tasks Overview'
     if (path.startsWith('/tasks/')) return 'Task Details'
-    return 'Precision PM'
+    return 'Work Bee'
   }
 
   return (
@@ -103,7 +103,7 @@ const AppLayout = ({ children }) => {
                 />
               </svg>
             </div>
-            <p className="body-md text-on-surface-variant">Loading Precision PM...</p>
+            <p className="body-md text-on-surface-variant">Loading Work Bee...</p>
           </div>
         ) : (
           children

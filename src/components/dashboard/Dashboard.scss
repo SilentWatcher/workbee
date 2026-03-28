@@ -4,7 +4,7 @@
   // margin-left: 16rem;
   padding: 6rem $spacing-xl $spacing-xl;
   min-height: 100vh;
-  background: $surface;
+  background: var(--surface);
 
   @media (max-width: $tablet) {
     margin-left: 0;
@@ -34,7 +34,7 @@
     }
 
     .stat-card {
-      background: $surface-container-lowest;
+      background: var(--surface-container-lowest);
       padding: $spacing-xl;
       border-radius: $radius-lg;
       display: flex;
@@ -42,7 +42,7 @@
       justify-content: space-between;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
-      border: 2px solid rgba($outline-variant, 0.08);
+      border: 2px solid rgba(var(--outline-variant), 0.08);
       position: relative;
       overflow: hidden;
 
@@ -57,9 +57,9 @@
         border-radius: $radius-lg;
         padding: 2px;
         background: linear-gradient(135deg, 
-          rgba($primary, 0.1) 0%, 
-          rgba($tertiary-container, 0.05) 50%, 
-          rgba($secondary-container, 0.1) 100%);
+          rgba(var(--primary), 0.1) 0%, 
+          rgba(var(--tertiary-container), 0.05) 50%, 
+          rgba(var(--secondary-container), 0.1) 100%);
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: xor;
         opacity: 0;
@@ -76,7 +76,7 @@
         height: 200%;
         background: radial-gradient(
           circle at 30% 80%,
-          rgba($primary, 0.03) 0%,
+          rgba(var(--primary), 0.03) 0%,
           transparent 50%
         );
         opacity: 0;
@@ -85,12 +85,12 @@
       }
 
       &:hover {
-        background: linear-gradient(135deg, $primary, #2a1aa0);
+        background: linear-gradient(135deg, var(--primary), #2a1aa0);
         transform: translateY(-4px) scale(1.02);
         box-shadow: 
           $shadow-lg,
-          0 0 0 1px rgba($primary, 0.1),
-          0 20px 40px rgba($primary, 0.15);
+          0 0 0 1px rgba(var(--primary), 0.1),
+          0 20px 40px rgba(var(--primary), 0.15);
 
         &::before {
           opacity: 1;
@@ -101,42 +101,42 @@
         }
 
         .stat-icon {
-          color: $on-primary;
+          color: var(--on-primary);
           transform: scale(1.1);
         }
 
         .stat-label {
-          color: rgba($on-primary, 0.9);
+          color: rgba(var(--on-primary), 0.9);
         }
 
         .stat-value {
-          color: $on-primary;
+          color: var(--on-primary);
         }
 
         .stat-badge {
           background: rgba(255, 255, 255, 0.25);
-          color: $on-primary;
+          color: var(--on-primary);
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255, 255, 255, 0.1);
         }
       }
 
       &--critical {
-        border-color: rgba($error, 0.2);
+        border-color: rgba(var(--error), 0.2);
         
         &::before {
           background: linear-gradient(135deg, 
-            rgba($error, 0.15) 0%, 
-            rgba($error, 0.05) 50%, 
-            rgba($error, 0.15) 100%);
+            rgba(var(--error), 0.15) 0%, 
+            rgba(var(--error), 0.05) 50%, 
+            rgba(var(--error), 0.15) 100%);
         }
 
         &:hover {
-          background: linear-gradient(135deg, $error, #dc2626);
+          background: linear-gradient(135deg, var(--error), #dc2626);
           box-shadow: 
             $shadow-lg,
-            0 0 0 1px rgba($error, 0.2),
-            0 20px 40px rgba($error, 0.15);
+            0 0 0 1px rgba(var(--error), 0.2),
+            0 20px 40px rgba(var(--error), 0.15);
 
           &::after {
             background: radial-gradient(
@@ -156,7 +156,7 @@
       }
 
       .stat-icon {
-        color: $primary;
+        color: var(--primary);
         font-size: 1.875rem;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
@@ -168,11 +168,11 @@
         font-weight: 700;
         padding: $spacing-xs $spacing-sm;
         border-radius: $radius-full;
-        background: rgba($tertiary-container, 0.1);
-        color: $tertiary-container;
+        background: rgba(var(--tertiary-container), 0.1);
+        color: var(--tertiary-container);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba($tertiary-container, 0.1);
+        border: 1px solid rgba(var(--tertiary-container), 0.1);
         position: relative;
         z-index: 2;
       }
@@ -182,7 +182,7 @@
           font-family: $font-label;
           font-size: $label-sm;
           font-weight: 700;
-          color: $on-surface-variant;
+          color: var(--on-surface-variant);
           text-transform: uppercase;
           letter-spacing: $tracking-widest;
           margin-bottom: $spacing-xs;
@@ -230,13 +230,13 @@
         p {
           font-family: $font-body;
           font-size: $body-sm;
-          color: $on-surface-variant;
+          color: var(--on-surface-variant);
           margin: $spacing-xs 0 0 0;
         }
       }
 
       .view-all-btn {
-        color: $primary;
+        color: var(--primary);
         font-family: $font-body;
         font-weight: 700;
         font-size: $body-sm;
@@ -260,7 +260,7 @@
       gap: $spacing-md;
 
       .workspace-card {
-        background: $surface-container-lowest;
+        background: var(--surface-container-lowest);
         padding: $spacing-lg;
         border-radius: $radius-lg;
         display: flex;
@@ -271,7 +271,7 @@
 
         &:hover {
           transform: translateY(-4px);
-          box-shadow: $shadow-lg, 0 0 0 1px rgba($primary, 0.05);
+          box-shadow: $shadow-lg, 0 0 0 1px rgba(var(--primary), 0.05);
         }
 
         .workspace-icon {
@@ -284,23 +284,23 @@
           font-size: 1.875rem;
 
           &--indigo {
-            background: rgba($primary, 0.1);
-            color: $primary;
+            background: rgba(var(--primary), 0.1);
+            color: var(--primary);
           }
 
           &--emerald {
-            background: rgba($tertiary-container, 0.1);
-            color: $tertiary-container;
+            background: rgba(var(--tertiary-container), 0.1);
+            color: var(--tertiary-container);
           }
 
           &--amber {
-            background: rgba($error, 0.1);
-            color: $error;
+            background: rgba(var(--error), 0.1);
+            color: var(--error);
           }
 
           &--purple {
-            background: rgba($secondary-container, 0.1);
-            color: $secondary;
+            background: rgba(var(--secondary-container), 0.1);
+            color: var(--secondary);
           }
         }
 
@@ -309,14 +309,14 @@
             font-family: $font-body;
             font-weight: 700;
             font-size: $body-lg;
-            color: $on-surface;
+            color: var(--on-surface);
             margin: 0;
           }
 
           p {
             font-family: $font-body;
             font-size: $label-sm;
-            color: $on-surface-variant;
+            color: var(--on-surface-variant);
             margin: $spacing-xs 0 0 0;
           }
         }
@@ -325,14 +325,14 @@
   }
 
   &__tasks {
-    background: $surface-container-lowest;
+    background: var(--surface-container-lowest);
     border-radius: $radius-2xl;
     overflow: hidden;
     box-shadow: $shadow-sm;
 
     .tasks-header {
       padding: $spacing-xl $spacing-2xl;
-      border-bottom: 1px solid rgba($outline-variant, 0.1);
+      border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -341,7 +341,7 @@
         font-family: $font-headline;
         font-size: $title-lg;
         font-weight: 700;
-        color: $on-surface;
+        color: var(--on-surface);
         margin: 0;
       }
 
@@ -354,12 +354,12 @@
           border-radius: $radius-full;
           font-size: $label-sm;
           font-weight: 700;
-          background: $surface-container-low;
-          color: $on-surface-variant;
+          background: var(--surface-container-low);
+          color: var(--on-surface-variant);
 
           &--active {
-            background: $primary;
-            color: $on-primary;
+            background: var(--primary);
+            color: var(--on-primary);
           }
         }
       }
@@ -371,12 +371,12 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid rgba($outline-variant, 0.05);
+        border-bottom: 1px solid rgba(var(--outline-variant), 0.05);
         transition: background-color 0.2s ease;
         cursor: pointer;
 
         &:hover {
-          background: rgba($surface-container-low, 0.5);
+          background: rgba(var(--surface-container-low), 0.5);
         }
 
         &:last-child {
@@ -391,7 +391,7 @@
           .task-checkbox {
             width: 1.5rem;
             height: 1.5rem;
-            border: 2px solid $outline-variant;
+            border: 2px solid var(--outline-variant);
             border-radius: $radius-md;
             display: flex;
             align-items: center;
@@ -401,7 +401,7 @@
             transition: all 0.2s ease;
 
             &:hover {
-              border-color: $primary;
+              border-color: var(--primary);
             }
 
             .check-icon {
@@ -420,7 +420,7 @@
               font-family: $font-body;
               font-weight: 600;
               font-size: $body-sm;
-              color: $on-surface;
+              color: var(--on-surface);
               margin: 0;
             }
 
@@ -430,13 +430,13 @@
               gap: $spacing-sm;
               margin-top: $spacing-xs;
               font-size: $label-sm;
-              color: $on-surface-variant;
+              color: var(--on-surface-variant);
 
               .status-dot {
                 width: 0.5rem;
                 height: 0.5rem;
                 border-radius: $radius-full;
-                background: $primary;
+                background: var(--primary);
               }
             }
           }
@@ -455,7 +455,7 @@
               width: 1.75rem;
               height: 1.75rem;
               border-radius: $radius-full;
-              border: 2px solid $surface-container-lowest;
+              border: 2px solid var(--surface-container-lowest);
               margin-left: -0.5rem;
 
               &:first-child {
@@ -465,15 +465,15 @@
           }
 
           .task-menu {
-            color: $outline-variant;
+            color: var(--outline-variant);
             cursor: pointer;
             padding: $spacing-xs;
             border-radius: $radius-sm;
             transition: all 0.2s ease;
 
             &:hover {
-              color: $on-surface-variant;
-              background: rgba($on-surface-variant, 0.05);
+              color: var(--on-surface-variant);
+              background: rgba(var(--on-surface-variant), 0.05);
             }
           }
         }
@@ -482,11 +482,11 @@
 
     .tasks-footer {
       padding: $spacing-lg;
-      background: rgba($surface-container-low, 0.3);
+      background: rgba(var(--surface-container-low), 0.3);
       text-align: center;
 
       .view-all-tasks {
-        color: $on-surface-variant;
+        color: var(--on-surface-variant);
         font-family: $font-body;
         font-weight: 700;
         font-size: $body-sm;
@@ -496,7 +496,7 @@
         transition: color 0.2s ease;
 
         &:hover {
-          color: $primary;
+          color: var(--primary);
         }
       }
     }
@@ -514,7 +514,7 @@
         top: $spacing-sm;
         bottom: $spacing-sm;
         width: 1px;
-        background: rgba($outline-variant, 0.1);
+        background: rgba(var(--outline-variant), 0.1);
       }
 
       .activity-item {
@@ -536,18 +536,18 @@
           z-index: 1;
 
           &--blue {
-            background: rgba($primary, 0.1);
-            color: $primary;
+            background: rgba(var(--primary), 0.1);
+            color: var(--primary);
           }
 
           &--emerald {
-            background: rgba($tertiary-container, 0.1);
-            color: $tertiary-container;
+            background: rgba(var(--tertiary-container), 0.1);
+            color: var(--tertiary-container);
           }
 
           &--amber {
-            background: rgba($error, 0.1);
-            color: $error;
+            background: rgba(var(--error), 0.1);
+            color: var(--error);
           }
         }
 
@@ -555,7 +555,7 @@
           p {
             font-family: $font-body;
             font-size: $body-sm;
-            color: $on-surface;
+            color: var(--on-surface);
             margin: 0 0 $spacing-xs 0;
 
             strong {
@@ -563,7 +563,7 @@
             }
 
             .activity-link {
-              color: $primary;
+              color: var(--primary);
               font-weight: 500;
             }
           }
@@ -571,22 +571,22 @@
           .activity-time {
             font-family: $font-body;
             font-size: $label-sm;
-            color: $on-surface-variant;
+            color: var(--on-surface-variant);
             margin: 0;
           }
 
           .activity-comment {
             margin-top: $spacing-sm;
             padding: $spacing-sm;
-            background: $surface-container-low;
-            border-left: 4px solid $primary;
+            background: var(--surface-container-low);
+            border-left: 4px solid var(--primary);
             border-radius: $radius-md;
 
             p {
               font-family: $font-body;
               font-size: $label-sm;
               font-style: italic;
-              color: $on-surface-variant;
+              color: var(--on-surface-variant);
               margin: 0;
             }
           }
@@ -599,26 +599,26 @@
       margin-top: $spacing-2xl;
       padding: $spacing-sm;
       background: transparent;
-      border: 1px solid rgba($outline-variant, 0.1);
+      border: 1px solid rgba(var(--outline-variant), 0.1);
       border-radius: $radius-lg;
       font-family: $font-body;
       font-weight: 700;
       font-size: $label-sm;
-      color: $on-surface-variant;
+      color: var(--on-surface-variant);
       cursor: pointer;
       transition: all 0.2s ease;
 
       &:hover {
-        background: $surface-container-low;
+        background: var(--surface-container-low);
       }
     }
   }
 
   &__velocity {
-    background: linear-gradient(135deg, $primary, #2a1aa0);
+    background: linear-gradient(135deg, var(--primary), #2a1aa0);
     border-radius: $radius-2xl;
     padding: $spacing-2xl;
-    color: $on-primary;
+    color: var(--on-primary);
     position: relative;
     overflow: hidden;
 

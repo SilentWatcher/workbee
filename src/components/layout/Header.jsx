@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiSearch, FiBell, FiMessageSquare, FiGrid, FiMenu } from 'react-icons/fi'
+import ThemeToggle from '../ui/ThemeToggle'
 import './Header.scss'
 
 const Header = ({ title = "Project Overview", onMenuClick }) => {
@@ -37,6 +38,7 @@ const Header = ({ title = "Project Overview", onMenuClick }) => {
         <div className="divider"></div>
 
         <div className="action-buttons">
+          <ThemeToggle />
           <button className="action-btn" title="Notifications">
             <FiBell size={20} />
           </button>
