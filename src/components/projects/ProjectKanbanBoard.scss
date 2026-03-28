@@ -11,51 +11,65 @@
   &__header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    margin-bottom: $spacing-xl;
     padding-bottom: $spacing-lg;
     border-bottom: 1px solid var(--outline);
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: $spacing-2xl;
+      gap: $spacing-xl;
 
       .project-info {
-        h3 {
+        h1 {
           font-size: $headline-lg;
           font-weight: 700;
           color: var(--on-surface);
-          letter-spacing: -0.02em;
-          margin-bottom: $spacing-xs;
+          margin: 0;
+          letter-spacing: $tracking-tight;
         }
 
         .project-meta {
           display: flex;
           align-items: center;
-          gap: $spacing-lg;
+          gap: $spacing-md;
+          margin-top: 4px;
+
+          .project-name {
+            font-size: $label-md;
+            font-weight: 600;
+            color: var(--on-surface-variant);
+          }
+
+          .separator {
+            width: 1px;
+            height: 12px;
+            background: var(--outline);
+          }
 
           .team-avatars {
             display: flex;
             .avatar {
-              width: 24px;
-              height: 24px;
+              width: 20px;
+              height: 20px;
               border-radius: $radius-full;
               border: 2px solid var(--surface-container-lowest);
-              margin-left: -8px;
+              margin-left: -6px;
               &:first-child { margin-left: 0; }
             }
             .more-indicator {
-              width: 24px;
-              height: 24px;
+              width: 20px;
+              height: 20px;
               border-radius: $radius-full;
               background: var(--surface-container-high);
               display: flex;
               align-items: center;
               justify-content: center;
-              font-size: $label-sm;
+              font-size: $label-xs;
               font-weight: 700;
               color: var(--on-surface-variant);
-              margin-left: -8px;
+              margin-left: -6px;
               border: 2px solid var(--surface-container-lowest);
             }
           }
@@ -65,7 +79,8 @@
             align-items: center;
             gap: $spacing-xs;
             color: var(--on-surface-variant);
-            font-size: $body-sm;
+            font-size: $label-md;
+            font-weight: 500;
           }
         }
       }
@@ -74,52 +89,33 @@
         display: flex;
         background: var(--surface-container-low);
         border: 1px solid var(--outline);
-        border-radius: $radius-lg;
+        border-radius: $radius-md;
         padding: 4px;
         gap: 4px;
 
         .view-btn {
           display: flex;
           align-items: center;
-          gap: $spacing-sm;
-          height: 32px;
-          padding: 0 $spacing-lg;
+          gap: $spacing-xs;
+          padding: $spacing-xs $spacing-sm;
           border: none;
           background: transparent;
-          border-radius: $radius-md;
+          border-radius: $radius-sm;
           font-size: $body-sm;
-          font-weight: 600;
+          font-weight: 500;
           color: var(--on-surface-variant);
           cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-
-          svg {
-            opacity: 0.7;
-            transition: opacity 0.2s ease;
-          }
-
-          span {
-            line-height: 1;
-          }
+          transition: $transition-fast;
 
           &.active {
-            background: var(--surface);
-            color: var(--primary);
-            box-shadow: $shadow-sm, 0 0 0 1px var(--outline);
-            
-            svg {
-              opacity: 1;
-              color: var(--primary);
-            }
+            background: var(--primary);
+            color: var(--on-primary);
+            box-shadow: $shadow-sm;
           }
 
           &:hover:not(.active) {
             background: var(--surface-container-high);
             color: var(--on-surface);
-            
-            svg {
-              opacity: 1;
-            }
           }
         }
       }
@@ -133,36 +129,33 @@
         display: flex;
         align-items: center;
         gap: $spacing-xs;
-        height: 32px;
-        padding: 0 $spacing-lg;
+        padding: $spacing-sm $spacing-md;
+        background: var(--primary);
+        color: var(--on-primary);
+        border: none;
         border-radius: $radius-md;
         font-size: $body-sm;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: $transition-fast;
+        box-shadow: $shadow-sm;
 
         &--secondary {
-          background: var(--surface-container-high);
+          background: var(--surface-container-low);
           border: 1px solid var(--outline);
-          color: var(--on-surface);
-          &:hover { 
-            background: var(--surface-container-highest);
-            border-color: var(--outline-variant);
+          color: var(--on-surface-variant);
+          box-shadow: none;
+
+          &:hover {
+            background: var(--surface-container-high);
+            color: var(--on-surface);
           }
         }
 
         &--primary {
-          background: var(--primary);
-          border: none;
-          color: var(--on-primary);
-          box-shadow: $shadow-sm;
-          &:hover { 
+          &:hover {
             opacity: 0.9;
             transform: translateY(-1px);
-            box-shadow: $shadow-md;
-          }
-          &:active {
-            transform: translateY(0);
           }
         }
       }
@@ -173,34 +166,44 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-sm 0;
+    margin-bottom: $spacing-lg;
+    gap: $spacing-lg;
 
     .filters-left {
       display: flex;
       align-items: center;
       gap: $spacing-md;
+      flex: 1;
 
       .search-box {
         position: relative;
         display: flex;
         align-items: center;
+        max-width: 300px;
+        flex: 1;
         
         svg {
           position: absolute;
           left: $spacing-md;
           color: var(--on-surface-variant);
+          pointer-events: none;
         }
 
         input {
-          height: 32px;
-          padding: 0 $spacing-md 0 32px;
+          height: 36px;
+          padding: 0 $spacing-md 0 36px;
           background: var(--surface-container-low);
           border: 1px solid var(--outline);
           border-radius: $radius-md;
           font-size: $body-sm;
           color: var(--on-surface);
-          width: 200px;
-          transition: $transition-fast;
+          width: 100%;
+          transition: all 0.2s ease;
+
+          &::placeholder {
+            color: var(--on-surface-variant);
+            opacity: 0.6;
+          }
 
           &:focus {
             outline: none;
@@ -212,40 +215,33 @@
       }
 
       .filter-select {
-        height: 32px;
-        padding: 0 $spacing-md;
+        height: 36px;
+        padding: 0 $spacing-lg 0 $spacing-md;
         background: var(--surface-container-low);
         border: 1px solid var(--outline);
         border-radius: $radius-md;
         font-size: $body-sm;
+        font-weight: 500;
         color: var(--on-surface);
         cursor: pointer;
-        transition: $transition-fast;
+        transition: all 0.2s ease;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        background-size: 16px;
+        min-width: 140px;
 
         &:hover {
-          background: var(--surface-container-high);
+          background-color: var(--surface-container-high);
+          border-color: var(--outline-variant);
         }
-      }
-    }
 
-    .add-project-btn-main {
-      height: 32px;
-      padding: 0 $spacing-lg;
-      background: var(--primary);
-      color: var(--on-primary);
-      border: none;
-      border-radius: $radius-md;
-      font-size: $body-sm;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: $spacing-xs;
-      cursor: pointer;
-      transition: $transition-fast;
-
-      &:hover {
-        opacity: 0.9;
-        transform: translateY(-1px);
+        &:focus {
+          outline: none;
+          border-color: var(--primary);
+          box-shadow: 0 0 0 2px var(--primary-container);
+        }
       }
     }
   }

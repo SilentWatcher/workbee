@@ -224,6 +224,17 @@ const TasksOverview = () => {
     triggerMilestoneConfetti()
   }
 
+  const filteredTasks = tasksData.filter(task => {
+    const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         task.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = filters.status === 'all' || task.status === filters.status;
+    const matchesAssignee = filters.assignee === 'all' || 
+                           task.assignee.name.toLowerCase().replace(' ', '') === filters.assignee.toLowerCase();
+    const matchesPriority = filters.priority === 'all' || task.priority === filters.priority;
+    
+    return matchesSearch && matchesStatus && matchesAssignee && matchesPriority;
+  })
+
   const renderListView = () => (
     <motion.div 
       className="tasks-list"
@@ -231,7 +242,7 @@ const TasksOverview = () => {
       initial="hidden"
       animate="show"
     >
-      {tasksData.map((task) => (
+      {filteredTasks.map((task) => (
         <motion.div 
           key={task.id} 
           className="task-row"
@@ -273,7 +284,7 @@ const TasksOverview = () => {
   )
 
   const renderTimelineView = () => {
-    const sortedTasks = [...tasksData].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+    const sortedTasks = [...filteredTasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
     
     return (
       <div className="tasks-timeline-view">
@@ -314,9 +325,9 @@ const TasksOverview = () => {
 
   const renderKanbanView = () => {
     const columns = [
-      { id: 'pending', title: 'To Do', tasks: tasksData.filter(t => t.status === 'pending') },
-      { id: 'in-progress', title: 'In Progress', tasks: tasksData.filter(t => t.status === 'in-progress') },
-      { id: 'completed', title: 'Done', tasks: tasksData.filter(t => t.status === 'completed') }
+      { id: 'pending', title: 'To Do', tasks: filteredTasks.filter(t => t.status === 'pending') },
+      { id: 'in-progress', title: 'In Progress', tasks: filteredTasks.filter(t => t.status === 'in-progress') },
+      { id: 'completed', title: 'Done', tasks: filteredTasks.filter(t => t.status === 'completed') }
     ]
 
     return (
@@ -372,207 +383,167 @@ const TasksOverview = () => {
   }
 
   const renderTaskDetail = () => {
-    if (!selectedTask) return null
-
     return (
-      <div className="task-detail-modal">
-        <div className="modal-overlay" onClick={() => setShowTaskDetail(false)}></div>
-        <div className="modal-content">
-          <div className="modal-header">
-            <div className="header-left">
-              <h2 className="task-title">
-                {editingTask ? (
-                  <input 
-                    type="text" 
-                    value={selectedTask.title}
-                    onChange={(e) => setSelectedTask({...selectedTask, title: e.target.value})}
-                    className="task-title-input"
-                  />
-                ) : (
-                  selectedTask.title
-                )}
-              </h2>
-              <div className="task-badges">
-                <span className={`status-badge ${getStatusClass(selectedTask.status)}`}>
-                  {selectedTask.status.replace('-', ' ')}
-                </span>
-                <span className={`priority-badge ${getPriorityClass(selectedTask.priority)}`}>
-                  {selectedTask.priority}
-                </span>
-              </div>
-            </div>
-            <div className="header-actions">
-              {editingTask ? (
-                <>
-                  <button 
-                    className="save-btn"
-                    onClick={() => setEditingTask(false)}
-                  >
-                    <FiSave size={16} />
-                    Save
-                  </button>
-                  <button 
-                    className="cancel-btn"
-                    onClick={() => setEditingTask(false)}
-                  >
-                    <FiX size={16} />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button 
-                    className="edit-btn"
-                    onClick={() => setEditingTask(true)}
-                  >
-                    <FiEdit size={16} />
-                  </button>
-                  <button className="delete-btn">
-                    <FiTrash2 size={16} />
-                  </button>
-                  <button 
-                    className="close-btn"
-                    onClick={() => setShowTaskDetail(false)}
-                  >
-                    <FiX size={20} />
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="modal-body">
-            <div className="task-main-content">
-              <div className="task-description-section">
-                <h3>Description</h3>
-                {editingTask ? (
-                  <textarea 
-                    value={selectedTask.description}
-                    onChange={(e) => setSelectedTask({...selectedTask, description: e.target.value})}
-                    className="task-description-input"
-                    rows={6}
-                  />
-                ) : (
-                  <p>{selectedTask.description}</p>
-                )}
-              </div>
-
-              <div className="task-details-grid">
-                <div className="detail-item">
-                  <label>Project</label>
-                  <span>{selectedTask.project}</span>
-                </div>
-                <div className="detail-item">
-                  <label>Assignee</label>
-                  <div className="assignee-info">
-                    <img src={selectedTask.assignee.avatar} alt={selectedTask.assignee.name} />
-                    <span>{selectedTask.assignee.name}</span>
+      <AnimatePresence>
+        {showTaskDetail && selectedTask && (
+          <div className="task-detail-container">
+            <motion.div 
+              className="task-detail-overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowTaskDetail(false)}
+            />
+            <motion.div 
+              className="task-detail-drawer"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="drawer-header">
+                <div className="header-top">
+                  <div className="task-badges">
+                    <span className={`status-badge ${getStatusClass(selectedTask.status)}`}>
+                      {selectedTask.status.replace('-', ' ')}
+                    </span>
+                    <span className={`priority-badge ${getPriorityClass(selectedTask.priority)}`}>
+                      {selectedTask.priority}
+                    </span>
+                  </div>
+                  <div className="header-actions">
+                    <button className="action-btn edit-btn" onClick={() => setEditingTask(!editingTask)}>
+                      <FiEdit size={18} />
+                    </button>
+                    <button className="action-btn delete-btn">
+                      <FiTrash2 size={18} />
+                    </button>
+                    <button className="action-btn close-btn" onClick={() => setShowTaskDetail(false)}>
+                      <FiX size={24} />
+                    </button>
                   </div>
                 </div>
-                <div className="detail-item">
-                  <label>Due Date</label>
-                  <span>{selectedTask.dueDate}</span>
+                
+                <h2 className="task-title">
+                  {editingTask ? (
+                    <input 
+                      type="text" 
+                      value={selectedTask.title}
+                      onChange={(e) => setSelectedTask({...selectedTask, title: e.target.value})}
+                      className="task-title-input"
+                    />
+                  ) : (
+                    selectedTask.title
+                  )}
+                </h2>
+              </div>
+
+              <div className="drawer-body">
+                <div className="detail-section">
+                  <label>Description</label>
+                  {editingTask ? (
+                    <textarea 
+                      value={selectedTask.description}
+                      onChange={(e) => setSelectedTask({...selectedTask, description: e.target.value})}
+                      className="task-description-input"
+                      rows={4}
+                    />
+                  ) : (
+                    <p className="description-text">{selectedTask.description}</p>
+                  )}
                 </div>
-                <div className="detail-item">
-                  <label>Created</label>
-                  <span>{selectedTask.createdDate}</span>
-                </div>
-                <div className="detail-item">
-                  <label>Progress</label>
-                  <div className="progress-bar">
-                    <div 
-                      className="progress-fill" 
-                      style={{ width: `${selectedTask.progress}%` }}
-                    ></div>
-                    <span>{selectedTask.progress}%</span>
+
+                <div className="detail-grid">
+                  <div className="grid-item">
+                    <FiLayout size={16} />
+                    <div className="item-content">
+                      <label>Project</label>
+                      <span>{selectedTask.project}</span>
+                    </div>
+                  </div>
+                  <div className="grid-item">
+                    <FiUser size={16} />
+                    <div className="item-content">
+                      <label>Assignee</label>
+                      <div className="assignee-pill">
+                        <img src={selectedTask.assignee.avatar} alt={selectedTask.assignee.name} />
+                        <span>{selectedTask.assignee.name}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid-item">
+                    <FiCalendar size={16} />
+                    <div className="item-content">
+                      <label>Due Date</label>
+                      <span>{selectedTask.dueDate}</span>
+                    </div>
+                  </div>
+                  <div className="grid-item">
+                    <FiClock size={16} />
+                    <div className="item-content">
+                      <label>Progress</label>
+                      <div className="progress-mini">
+                        <div className="progress-track">
+                          <div className="progress-fill" style={{ width: `${selectedTask.progress}%` }}></div>
+                        </div>
+                        <span>{selectedTask.progress}%</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="detail-item">
-                  <label>Tags</label>
-                  <div className="tags">
-                    {selectedTask.tags.map((tag, index) => (
-                      <span key={index} className="tag">
-                        <FiTag size={12} />
-                        {tag}
-                      </span>
+
+                <div className="detail-section">
+                  <label>Subtasks</label>
+                  <div className="subtasks-list">
+                    {selectedTask.subtasks.map((subtask) => (
+                      <div key={subtask.id} className="subtask-item">
+                        <input 
+                          type="checkbox" 
+                          checked={subtask.completed}
+                          onChange={(e) => {
+                            if (e.target.checked) triggerTaskCompletionConfetti()
+                          }}
+                        />
+                        <span className={subtask.completed ? 'completed' : ''}>
+                          {subtask.title}
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
+
+                <div className="detail-section">
+                  <label>Attachments</label>
+                  <div className="attachments-grid">
+                    <div className="attachment-card">
+                      <FiPaperclip size={16} />
+                      <span>design-specs.pdf</span>
+                    </div>
+                    <div className="attachment-card">
+                      <FiPaperclip size={16} />
+                      <span>wireframes.fig</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="subtasks-section">
-                <h3>Subtasks</h3>
-                <div className="subtasks-list">
-                  {selectedTask.subtasks.map((subtask) => (
-                    <div key={subtask.id} className="subtask-item">
-                      <input 
-                        type="checkbox" 
-                        checked={subtask.completed}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            triggerTaskCompletionConfetti()
-                          }
-                        }}
-                      />
-                      <span className={subtask.completed ? 'completed' : ''}>
-                        {subtask.title}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-                {selectedTask.progress === 100 && (
-                  <button 
-                    className="milestone-btn"
-                    onClick={handleMilestoneComplete}
-                  >
-                    <FiCheckCircle size={16} />
-                    Mark as Milestone
+              <div className="drawer-footer">
+                {editingTask ? (
+                  <button className="save-btn" onClick={() => setEditingTask(false)}>
+                    <FiSave size={18} />
+                    Save Changes
+                  </button>
+                ) : (
+                  <button className="complete-task-btn" onClick={() => handleTaskComplete(selectedTask.id)}>
+                    <FiCheckCircle size={18} />
+                    Mark as Complete
                   </button>
                 )}
               </div>
-            </div>
-
-            <div className="task-sidebar">
-              <div className="activity-section">
-                <h3>Activity</h3>
-                <div className="activity-feed">
-                  <div className="activity-item">
-                    <div className="activity-avatar">
-                      <img src={selectedTask.assignee.avatar} alt={selectedTask.assignee.name} />
-                    </div>
-                    <div className="activity-content">
-                      <p><strong>{selectedTask.assignee.name}</strong> created this task</p>
-                      <span className="activity-time">2 days ago</span>
-                    </div>
-                  </div>
-                  <div className="activity-item">
-                    <div className="activity-avatar">
-                      <img src={selectedTask.assignee.avatar} alt={selectedTask.assignee.name} />
-                    </div>
-                    <div className="activity-content">
-                      <p><strong>{selectedTask.assignee.name}</strong> updated progress to {selectedTask.progress}%</p>
-                      <span className="activity-time">1 day ago</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="attachments-section">
-                <h3>Attachments ({selectedTask.attachments})</h3>
-                <div className="attachments-list">
-                  <div className="attachment-item">
-                    <FiPaperclip size={16} />
-                    <span>design-specs.pdf</span>
-                  </div>
-                  <div className="attachment-item">
-                    <FiPaperclip size={16} />
-                    <span>wireframes.fig</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
-      </div>
+        )}
+      </AnimatePresence>
     )
   }
 

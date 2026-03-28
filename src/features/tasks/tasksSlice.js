@@ -9,35 +9,40 @@ export const fetchTasks = createAsyncThunk(
     return [
       {
         id: 1,
-        title: 'Update Design System documentation',
-        project: 'Precision Design System',
-        dueDate: 'Due tomorrow',
-        priority: 'medium',
+        title: 'Complete UI Redesign',
+        description: 'Update the workspace UI to be more elegant and modern.',
+        projectId: 1,
         status: 'in-progress',
-        assignees: [
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuDdp6LFPgIwefieI6OW3USyzEHwyJYZ1zrI5ff8xbqidBum64p8olX8bkHkCy2HsilLrwAo2h_cs0c6BniZ8k1x1glBdgS-Vysehy-cc05m3bZudCFj95FqCbYh283uM3IEyC0QkWD4XRwtXaBbnFkM8VqZyqoU6KsFr5kd-RcBN12vOucMsAdpFJbdVwM1_fVSuIcSUPDJXWvrpUI5G-RShKXV99ytBabv04XEDGJqVZG5F1B8IQpdmg6SlUoOjCFlLzH4mkVV9Q',
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuDqYm5hAndIr8iHfDBRWHi2Feyetf8wfUb_m-6GvfNs6eZiveeLnofbyXUqoMgG8Lyrx-R-hlMBBr3UNHXvcAd2Ex2oB2t431OVhzGJFNXTV4R7n34PW_-MS94lL44MTkWs5Mke_34x2pRI06F2vK5HvJG51jttCUnH4MRkRnTyVQnytQUPHM6Gif_ztoUVv7T-J1QLm1VjOu7uy8O4iQFE1pmzB-ZsP16UKCNxgFCDb7YSpKtLRPA2bBAUZO_o2huONbgoKA3Izw'
+        priority: 'high',
+        dueDate: '2026-04-01',
+        subtasks: [
+          { id: 101, title: 'Define color palette', completed: true },
+          { id: 102, title: 'Create new card components', completed: false },
+          { id: 103, title: 'Implement drilldown logic', completed: false }
         ]
       },
       {
         id: 2,
-        title: 'Review Q4 Product Roadmap with Stakeholders',
-        project: 'Product Launch',
-        dueDate: 'Oct 24',
-        priority: 'high',
+        title: 'API Integration',
+        description: 'Connect the frontend with the backend services.',
+        projectId: 1,
         status: 'pending',
-        assignees: [
-          'https://lh3.googleusercontent.com/aida-public/AB6AXuDj4ci6LhgVt80TWOJHD111SWaLOGZEkE0CMOKOHLvhsf1KjkG7H-6wJs_L_qN1xf4t2QVJO8Pi7dtEH0E5kQG2tOMcaRqGO6FJQue23nP6StBX2BB1Qpp01xlljlz0UOimk-fGAY0u4RZ4V2fosFiXZxznIJ2Tue4htthNKhc8LtV6kSYy0TMHxeQ4H-935PZ5Q53VruQ2X21ZIb5atZlbDMfsH8XL2PlloLGQ8e8kSBdwt2xZOWgNdxfczAb6pq9dhI9Ya1LgOg'
-        ]
+        priority: 'medium',
+        dueDate: '2026-04-05',
+        subtasks: []
       },
       {
         id: 3,
-        title: 'Draft final audit report for finance team',
-        project: 'Internal Audit',
-        dueDate: 'Oct 28',
-        priority: 'medium',
-        status: 'pending',
-        assignees: []
+        title: 'Design Guidelines',
+        description: 'Create a set of design principles for the team.',
+        projectId: 2,
+        status: 'completed',
+        priority: 'low',
+        dueDate: '2026-03-20',
+        subtasks: [
+          { id: 301, title: 'Typography rules', completed: true },
+          { id: 302, title: 'Spacing system', completed: true }
+        ]
       }
     ]
   }
@@ -46,30 +51,28 @@ export const fetchTasks = createAsyncThunk(
 export const createTask = createAsyncThunk(
   'tasks/createTask',
   async (taskData) => {
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 500))
     return {
       id: Date.now(),
       ...taskData,
       status: 'pending',
+      subtasks: [],
       createdAt: new Date().toISOString()
     }
   }
 )
 
-export const updateTaskStatus = createAsyncThunk(
-  'tasks/updateTaskStatus',
-  async ({ taskId, status }) => {
-    // Simulate API call
+export const updateTask = createAsyncThunk(
+  'tasks/updateTask',
+  async (taskData) => {
     await new Promise(resolve => setTimeout(resolve, 300))
-    return { taskId, status }
+    return taskData
   }
 )
 
 export const deleteTask = createAsyncThunk(
   'tasks/deleteTask',
   async (taskId) => {
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 300))
     return taskId
   }
@@ -81,28 +84,31 @@ const tasksSlice = createSlice({
     tasks: [],
     status: 'idle',
     error: null,
-    filters: {
-      status: 'all', // all, pending, in-progress, completed
-      priority: 'all', // all, high, medium, low
-      project: 'all'
-    }
+    selectedTaskId: null
   },
   reducers: {
-    setTaskFilter: (state, action) => {
-      const { filterType, value } = action.payload
-      state.filters[filterType] = value
+    setSelectedTaskId: (state, action) => {
+      state.selectedTaskId = action.payload
     },
-    clearTaskFilters: (state) => {
-      state.filters = {
-        status: 'all',
-        priority: 'all',
-        project: 'all'
+    toggleSubtask: (state, action) => {
+      const { taskId, subtaskId } = action.payload
+      const task = state.tasks.find(t => t.id === taskId)
+      if (task) {
+        const subtask = task.subtasks.find(st => st.id === subtaskId)
+        if (subtask) {
+          subtask.completed = !subtask.completed
+        }
       }
     },
-    toggleTaskComplete: (state, action) => {
-      const task = state.tasks.find(t => t.id === action.payload)
+    addSubtask: (state, action) => {
+      const { taskId, title } = action.payload
+      const task = state.tasks.find(t => t.id === taskId)
       if (task) {
-        task.status = task.status === 'completed' ? 'in-progress' : 'completed'
+        task.subtasks.push({
+          id: Date.now(),
+          title,
+          completed: false
+        })
       }
     }
   },
@@ -122,48 +128,17 @@ const tasksSlice = createSlice({
       .addCase(createTask.fulfilled, (state, action) => {
         state.tasks.push(action.payload)
       })
-      .addCase(updateTaskStatus.fulfilled, (state, action) => {
-        const { taskId, status } = action.payload
-        const task = state.tasks.find(t => t.id === taskId)
-        if (task) {
-          task.status = status
+      .addCase(updateTask.fulfilled, (state, action) => {
+        const index = state.tasks.findIndex(t => t.id === action.payload.id)
+        if (index !== -1) {
+          state.tasks[index] = { ...state.tasks[index], ...action.payload }
         }
       })
       .addCase(deleteTask.fulfilled, (state, action) => {
-        const taskId = action.payload
-        state.tasks = state.tasks.filter(t => t.id !== taskId)
+        state.tasks = state.tasks.filter(t => t.id !== action.payload)
       })
   },
 })
 
-export const { setTaskFilter, clearTaskFilters, toggleTaskComplete } = tasksSlice.actions
-
-// Selectors
-export const selectFilteredTasks = (state) => {
-  const { tasks, filters } = state.tasks
-  return tasks.filter(task => {
-    if (filters.status !== 'all' && task.status !== filters.status) {
-      return false
-    }
-    if (filters.priority !== 'all' && task.priority !== filters.priority) {
-      return false
-    }
-    if (filters.project !== 'all' && task.project !== filters.project) {
-      return false
-    }
-    return true
-  })
-}
-
-export const selectTaskStats = (state) => {
-  const tasks = state.tasks.tasks
-  return {
-    total: tasks.length,
-    pending: tasks.filter(t => t.status === 'pending').length,
-    inProgress: tasks.filter(t => t.status === 'in-progress').length,
-    completed: tasks.filter(t => t.status === 'completed').length,
-    highPriority: tasks.filter(t => t.priority === 'high').length
-  }
-}
-
+export const { setSelectedTaskId, toggleSubtask, addSubtask } = tasksSlice.actions
 export default tasksSlice.reducer

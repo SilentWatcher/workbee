@@ -5,39 +5,37 @@ export const fetchProjects = createAsyncThunk(
   'projects/fetchProjects',
   async () => {
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 800))
     return [
       {
         id: 1,
         name: 'Product Launch',
-        description: '12 Projects • 48 Tasks',
+        description: 'Launching the new v2.0 flagship product',
         icon: 'rocket_launch',
         color: 'indigo',
-        status: 'active'
+        status: 'active',
+        workspaceId: 1,
+        taskIds: [1, 2]
       },
       {
         id: 2,
         name: 'Design System',
-        description: '4 Projects • 126 Tasks',
+        description: 'Building a unified design language',
         icon: 'design_services',
         color: 'emerald',
-        status: 'active'
+        status: 'active',
+        workspaceId: 1,
+        taskIds: [3]
       },
       {
         id: 3,
-        name: 'Marketing Q3',
-        description: '8 Projects • 32 Tasks',
+        name: 'Marketing Campaign',
+        description: 'Social media and content strategy',
         icon: 'campaign',
         color: 'amber',
-        status: 'active'
-      },
-      {
-        id: 4,
-        name: 'Internal Audit',
-        description: '2 Projects • 15 Tasks',
-        icon: 'analytics',
-        color: 'purple',
-        status: 'active'
+        status: 'active',
+        workspaceId: 2,
+        taskIds: []
       }
     ]
   }
@@ -51,8 +49,17 @@ export const createProject = createAsyncThunk(
     return {
       id: Date.now(),
       ...projectData,
-      status: 'active'
+      status: 'active',
+      taskIds: []
     }
+  }
+)
+
+export const deleteProject = createAsyncThunk(
+  'projects/deleteProject',
+  async (projectId) => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return projectId
   }
 )
 
@@ -62,14 +69,14 @@ const projectsSlice = createSlice({
     projects: [],
     status: 'idle',
     error: null,
-    selectedProject: null
+    selectedProjectId: null
   },
   reducers: {
-    setSelectedProject: (state, action) => {
-      state.selectedProject = action.payload
+    setSelectedProjectId: (state, action) => {
+      state.selectedProjectId = action.payload
     },
     clearSelectedProject: (state) => {
-      state.selectedProject = null
+      state.selectedProjectId = null
     },
     updateProjectStatus: (state, action) => {
       const { projectId, status } = action.payload
@@ -95,8 +102,11 @@ const projectsSlice = createSlice({
       .addCase(createProject.fulfilled, (state, action) => {
         state.projects.push(action.payload)
       })
+      .addCase(deleteProject.fulfilled, (state, action) => {
+        state.projects = state.projects.filter(p => p.id !== action.payload)
+      })
   },
 })
 
-export const { setSelectedProject, clearSelectedProject, updateProjectStatus } = projectsSlice.actions
+export const { setSelectedProjectId, clearSelectedProject, updateProjectStatus } = projectsSlice.actions
 export default projectsSlice.reducer

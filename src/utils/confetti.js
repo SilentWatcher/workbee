@@ -3,7 +3,7 @@ import confetti from 'canvas-confetti'
 export const triggerConfetti = () => {
   const duration = 3 * 1000
   const animationEnd = Date.now() + duration
-  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 }
 
   function randomInRange(min, max) {
     return Math.random() * (max - min) + min
@@ -40,7 +40,8 @@ export const triggerProjectCompletionConfetti = () => {
   // Celebration confetti for project completion
   const count = 200
   const defaults = {
-    origin: { y: 0.7 }
+    origin: { y: 0.7 },
+    zIndex: 9999
   }
 
   function fire(particleRatio, opts) {
@@ -90,7 +91,8 @@ export const triggerTaskCompletionConfetti = () => {
     particleCount: 100,
     spread: 70,
     origin: { y: 0.6 },
-    colors: ['#10b981', '#6366f1']
+    colors: ['#10b981', '#6366f1'],
+    zIndex: 9999
   })
 }
 
@@ -98,7 +100,7 @@ export const triggerMilestoneConfetti = () => {
   // Milestone achievement confetti
   const duration = 2 * 1000
   const animationEnd = Date.now() + duration
-  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 }
+  const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 }
 
   function randomInRange(min, max) {
     return Math.random() * (max - min) + min
