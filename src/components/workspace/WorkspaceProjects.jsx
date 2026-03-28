@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FiFilter,
   FiPlus,
@@ -111,6 +112,21 @@ const WorkspaceProjects = () => {
 
   const [projects, setProjects] = useState(projectsData)
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 }
+  };
+
   const recentDeliverables = [
     {
       id: 1,
@@ -212,46 +228,53 @@ const WorkspaceProjects = () => {
   return (
     <div className="workspace-projects">
       {/* Header */}
-      <div className="workspace-header">
+      <header className="workspace-header">
         <div className="header-left">
-          <p className="breadcrumb">Work Bee / Workspace</p>
-          <h1 className="page-title">Design Engineering</h1>
+          <p className="breadcrumb">Workspaces / Engineering</p>
+          <h1 className="page-title">Workspace Projects</h1>
         </div>
         <div className="header-actions">
           <button className="sort-btn">
-            <FiFilter size={16} />
-            Sort by Recent
+            <FiFilter size={18} />
+            Sort by: Recent
           </button>
           <button 
             className="new-project-btn"
             onClick={() => setShowNewWorkspaceForm(true)}
           >
-            <FiPlus size={16} />
+            <FiPlus size={18} />
             New Workspace
           </button>
         </div>
-      </div>
+      </header>
 
       {/* Search Bar */}
-      <div className="search-section">
+      <section className="search-section">
         <div className="search-container">
           <FiSearch size={20} className="search-icon" />
           <input
             type="text"
-            placeholder="Search projects..."
+            placeholder="Search within this workspace..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
         </div>
-      </div>
+      </section>
 
       {/* Projects Grid */}
-      <div className="projects-grid">
+      <motion.div 
+        className="projects-grid"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         {projects.map((project) => (
-          <div 
+          <motion.div 
             key={project.id} 
             className={`project-card ${project.isHero ? 'project-card--hero' : ''}`}
+            variants={item}
+            whileHover={{ y: -5, boxShadow: '0 8px 30px rgba(0,0,0,0.12)' }}
           >
             {project.isHero ? (
               // Hero Card
@@ -379,21 +402,23 @@ const WorkspaceProjects = () => {
                 </div>
               </>
             )}
-          </div>
+          </motion.div>
         ))}
 
         {/* Add New Workspace Card */}
-        <button 
+        <motion.button 
           className="add-project-card"
           onClick={() => setShowNewWorkspaceForm(true)}
+          variants={item}
+          whileHover={{ y: -5, boxShadow: '0 8px 30px rgba(0,0,0,0.12)' }}
         >
           <div className="add-icon">
             <FiPlus size={24} />
           </div>
           <span className="add-text">Start New Workspace</span>
           <span className="add-subtext">Create a custom workflow</span>
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
 
       {/* Recent Deliverables Table */}
       <div className="deliverables-section">

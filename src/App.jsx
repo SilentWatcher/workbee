@@ -9,6 +9,8 @@ import KanbanBoard from './components/kanban/KanbanBoard'
 import ProjectKanbanBoard from './components/projects/ProjectKanbanBoard'
 import WorkspaceProjects from './components/workspace/WorkspaceProjects'
 import TasksOverview from './components/tasks/TasksOverview'
+import Team from './components/team/Team'
+import Activity from './components/activity/Activity'
 import './App.scss'
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
             <Route path="/workspace" element={<WorkspaceProjects />} />
             <Route path="/tasks" element={<TasksOverview />} />
             <Route path="/tasks/:id" element={<TasksOverview />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/activity" element={<Activity />} />
           </Routes>
         </AppLayout>
       </Router>

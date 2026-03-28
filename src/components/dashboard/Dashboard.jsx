@@ -145,68 +145,27 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* Summary Statistics Bento Grid */}
-      <div className="dashboard__stats-grid">
-        {statsData.map((stat, index) => (
-          <div 
-            key={index} 
-            className={`stat-card ${stat.isCritical ? 'stat-card--critical' : ''}`}
-          >
-            <div className="stat-header">
-              <stat.icon className="stat-icon" />
-              <span className="stat-badge">{stat.badge}</span>
-            </div>
-            <div className="stat-content">
-              <div className="stat-label">{stat.label}</div>
-              <div className="stat-value">{stat.value}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="dashboard__content-grid">
-        {/* Left Column: Workspaces & Tasks */}
-        <div className="dashboard__content-grid-left">
-          {/* Workspaces Section */}
-          <section className="dashboard__section dashboard__workspaces">
-            <div className="section-header">
-              <div>
-                <h2>Active Workspaces</h2>
-                <p>Manage and access your specialized project environments.</p>
-              </div>
-              <a href="#" className="view-all-btn">
-                View All <FiArrowRight size={16} />
-              </a>
-            </div>
-            <div className="workspaces-grid">
-              {workspacesData.map((workspace, index) => (
-                <div key={index} className="workspace-card">
-                  <div className={`workspace-icon ${workspace.colorClass}`}>
-                    <workspace.icon size={24} />
-                  </div>
-                  <div className="workspace-info">
-                    <h4>{workspace.title}</h4>
-                    <p>{workspace.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* My Tasks Widget */}
+      <div className="dashboard__grid">
+        {/* Main Content Area */}
+        <div className="dashboard__main">
+          {/* Priority Tasks Section - Top Left (Primary Focus) */}
           <section className="dashboard__section dashboard__tasks">
-            <div className="tasks-header">
-              <h2>My Priority Tasks</h2>
+            <div className="section-header">
+              <div className="section-title">
+                <h2>My Priority Tasks</h2>
+                <p>Focused list of your immediate action items.</p>
+              </div>
               <div className="task-filters">
-                <span className="filter-chip">All Tasks</span>
                 <span className="filter-chip filter-chip--active">In Progress</span>
+                <span className="filter-chip">Upcoming</span>
               </div>
             </div>
+            
             <div className="tasks-list">
               {tasksData.map((task, index) => (
                 <div key={index} className="task-item">
                   <div className="task-left">
-                    <button className="task-checkbox">
+                    <button className="task-checkbox" aria-label="Mark task as complete">
                       <FiCheck size={12} className="check-icon" />
                     </button>
                     <div className="task-content">
@@ -215,8 +174,11 @@ const Dashboard = () => {
                         <span 
                           className="status-dot" 
                           style={{ backgroundColor: task.statusDot }}
+                          title="Task Status"
                         ></span>
-                        {task.project} • {task.dueDate}
+                        <span className="project-name">{task.project}</span>
+                        <span className="meta-separator">•</span>
+                        <span className="due-date">{task.dueDate}</span>
                       </div>
                     </div>
                   </div>
@@ -227,40 +189,92 @@ const Dashboard = () => {
                           <img
                             key={idx}
                             src={assignee}
-                            alt={`Assignee ${idx + 1}`}
+                            alt="Team member"
                             className="assignee-avatar"
                           />
                         ))}
                       </div>
                     )}
-                    <FiMoreVertical className="task-menu" size={20} />
+                    <button className="task-menu-btn" aria-label="Task options">
+                      <FiMoreVertical size={16} />
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="tasks-footer">
-              <button className="view-all-tasks">View all 14 upcoming tasks</button>
+            <div className="section-footer">
+              <button className="view-all-btn">
+                View all tasks <FiArrowRight size={14} />
+              </button>
+            </div>
+          </section>
+
+          {/* Workspaces Section */}
+          <section className="dashboard__section dashboard__workspaces">
+            <div className="section-header">
+              <div className="section-title">
+                <h2>Active Workspaces</h2>
+                <p>Your specialized project environments.</p>
+              </div>
+            </div>
+            <div className="workspaces-grid">
+              {workspacesData.map((workspace, index) => (
+                <div key={index} className="workspace-card">
+                  <div className={`workspace-icon ${workspace.colorClass}`}>
+                    <workspace.icon size={20} />
+                  </div>
+                  <div className="workspace-info">
+                    <h4>{workspace.title}</h4>
+                    <p>{workspace.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
         </div>
 
-        {/* Right Column: Activity Feed & Team */}
-        <div className="dashboard__content-grid-right">
-          {/* Recent Activity Feed */}
+        {/* Sidebar / Secondary Content */}
+        <div className="dashboard__sidebar">
+          {/* Summary Stats - Secondary Focus */}
+          <div className="dashboard__stats-mini">
+            {statsData.map((stat, index) => (
+              <div 
+                key={index} 
+                className={`stat-pill ${stat.isCritical ? 'stat-pill--critical' : ''}`}
+              >
+                <div className="stat-pill-icon">
+                  <stat.icon size={16} />
+                </div>
+                <div className="stat-pill-content">
+                  <span className="stat-pill-label">{stat.label}</span>
+                  <span className="stat-pill-value">{stat.value}</span>
+                </div>
+                {stat.badge && (
+                  <span className="stat-pill-badge">{stat.badge}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Recent Activity */}
           <section className="dashboard__section dashboard__activity">
-            <h2>Recent Activity</h2>
+            <div className="section-header">
+              <div className="section-title">
+                <h2>Recent Activity</h2>
+              </div>
+            </div>
             <div className="activity-feed">
               {activityData.map((activity, index) => (
                 <div key={index} className="activity-item">
-                  <div className={`activity-icon ${activity.iconClass}`}>
-                    <activity.icon size={16} />
+                  <div className={`activity-icon-wrapper ${activity.iconClass}`}>
+                    <activity.icon size={14} />
                   </div>
-                  <div className="activity-content">
-                    <p>
-                      <strong>{activity.user}</strong> {activity.action}{' '}
+                  <div className="activity-details">
+                    <p className="activity-text">
+                      <span className="user-name">{activity.user}</span> {activity.action}{' '}
                       <span className="activity-link">{activity.target}</span>
                     </p>
-                    <p className="activity-time">{activity.time}</p>
+                    <span className="activity-time">{activity.time}</span>
                     {activity.comment && (
                       <div className="activity-comment">
                         <p>{activity.comment}</p>
@@ -270,14 +284,16 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
-            <button className="show-more-btn">Show More Activity</button>
+            <button className="show-more-btn">See all activity</button>
           </section>
 
-          {/* Project Timeline Mini */}
+          {/* Project Velocity */}
           <section className="dashboard__section dashboard__velocity">
-            <div className="velocity-header">
-              <h2>Project Velocity</h2>
-              <p>Tracking your team's efficiency this week.</p>
+            <div className="section-header">
+              <div className="section-title">
+                <h2>Team Velocity</h2>
+              </div>
+              <div className="velocity-value">84%</div>
             </div>
             <div className="velocity-chart">
               {chartBars.map((height, index) => (
@@ -285,15 +301,9 @@ const Dashboard = () => {
                   key={index} 
                   className="chart-bar" 
                   style={{ height: `${height}%` }}
+                  title={`${height}% efficiency`}
                 ></div>
               ))}
-            </div>
-            <div className="velocity-stats">
-              <div className="stat">
-                <p className="value">84%</p>
-                <p className="label">Weekly Target</p>
-              </div>
-              <FiTrendingUp className="trend-icon" size={40} />
             </div>
           </section>
         </div>

@@ -4,11 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $spacing-md;
-  padding: $spacing-xl;
+  gap: var(--spacing);
+  padding: var(--spacing);
   background: var(--surface);
-  border-radius: $radius-lg;
-  box-shadow: $shadow-md;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   max-width: 300px;
   margin: 0 auto;
   border: 1px solid var(--outline-variant);
@@ -21,13 +21,13 @@
 
   &__buttons {
     display: flex;
-    gap: $spacing-sm;
+    gap: var(--spacing);
   }
 
   &__button {
-    padding: $spacing-sm $spacing-md;
+    padding: var(--spacing) var(--spacing);
     border: none;
-    border-radius: $radius-md;
+    border-radius: var(--radius);
     background: var(--primary);
     color: var(--on-primary);
     cursor: pointer;
@@ -48,7 +48,7 @@
   &__status {
     font-size: 0.875rem;
     color: var(--on-surface-variant);
-    margin-top: $spacing-sm;
+    margin-top: var(--spacing);
   }
 
   &__error {

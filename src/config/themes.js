@@ -5,114 +5,114 @@ export const THEMES = {
   light: {
     name: 'Light',
     colors: {
-      // Primary Colors - Yellow
-      primary: '#fbbf24',           // Yellow-400
-      primaryContainer: '#fef3c7',  // Yellow-100
-      onPrimary: '#78350f',         // Yellow-900
-      onPrimaryContainer: '#451a03', // Yellow-950
+      // Primary Colors - Professional Indigo
+      primary: '#4f46e5',           // Indigo-600
+      primaryContainer: '#eef2ff',  // Indigo-50
+      onPrimary: '#ffffff',
+      onPrimaryContainer: '#3730a3', // Indigo-800
 
-      // Secondary Colors - Gray
-      secondary: '#e5e7eb',         // Gray-200
-      secondaryContainer: '#f9fafb', // Gray-50
-      onSecondary: '#374151',       // Gray-700
-      onSecondaryContainer: '#1f2937', // Gray-800
+      // Secondary Colors - Slate
+      secondary: '#64748b',         // Slate-500
+      secondaryContainer: '#f1f5f9', // Slate-100
+      onSecondary: '#1e293b',       // Slate-800
+      onSecondaryContainer: '#0f172a', // Slate-900
 
-      // Tertiary Colors - Yellow variants
-      tertiary: '#fde68a',          // Yellow-200
-      tertiaryContainer: '#fef9c3', // Yellow-50
-      onTertiary: '#854d0e',        // Yellow-800
-      onTertiaryContainer: '#713f12', // Yellow-900
+      // Tertiary Colors - Cyan/Teal
+      tertiary: '#0891b2',          // Cyan-600
+      tertiaryContainer: '#ecfeff', // Cyan-50
+      onTertiary: '#ffffff',
+      onTertiaryContainer: '#155e75', // Cyan-800
 
-      // Surface Colors - White based
+      // Surface Colors - White/Slate based
       surface: '#ffffff',
-      surfaceContainerLow: '#fafafa',
-      surfaceContainer: '#f4f4f5',
-      surfaceContainerHigh: '#e4e4e7',
-      surfaceContainerHighest: '#d4d4d8',
+      surfaceContainerLow: '#f8fafc',
+      surfaceContainer: '#f1f5f9',
+      surfaceContainerHigh: '#e2e8f0',
+      surfaceContainerHighest: '#cbd5e1',
       surfaceContainerLowest: '#ffffff',
-      surfaceDim: '#d1d5db',
+      surfaceDim: '#f1f5f9',
       surfaceBright: '#ffffff',
-      surfaceVariant: '#e5e7eb',
+      surfaceVariant: '#f1f5f9',
 
       // Error Colors
-      error: '#dc2626',
+      error: '#ef4444',
       errorContainer: '#fef2f2',
       onError: '#ffffff',
       onErrorContainer: '#991b1b',
 
       // Outline Colors
-      outline: '#d1d5db',
-      outlineVariant: '#e5e7eb',
+      outline: '#e2e8f0',
+      outlineVariant: '#cbd5e1',
 
       // Inverse Colors
-      inverseSurface: '#404040',
-      inverseOnSurface: '#fafafa',
-      inversePrimary: '#1c1917',
+      inverseSurface: '#0f172a',
+      inverseOnSurface: '#f8fafc',
+      inversePrimary: '#818cf8',
 
       // Text Colors
-      onSurface: '#1c1917',
-      onSurfaceVariant: '#404040',
-      onBackground: '#1c1917',
+      onSurface: '#0f172a',
+      onSurfaceVariant: '#475569',
+      onBackground: '#0f172a',
 
       // Glass effect
-      glassBg: 'rgba(255, 255, 255, 0.7)',
+      glassBg: 'rgba(255, 255, 255, 0.8)',
     }
   },
 
   dark: {
     name: 'Dark',
     colors: {
-      // Primary Colors - Yellow
-      primary: '#facc15',           // Yellow-400
-      primaryContainer: '#854d0e',  // Yellow-800
-      onPrimary: '#1c1917',         // Stone-900
-      onPrimaryContainer: '#fef3c7', // Yellow-100
+      // Primary Colors - Bright Indigo
+      primary: '#818cf8',           // Indigo-400
+      primaryContainer: '#312e81',  // Indigo-900
+      onPrimary: '#ffffff',
+      onPrimaryContainer: '#eef2ff', // Indigo-50
 
-      // Secondary Colors - Gray
-      secondary: '#d4d4d8',         // Gray-300
-      secondaryContainer: '#262626', // Neutral-800
-      onSecondary: '#1c1917',       // Stone-900
-      onSecondaryContainer: '#a1a1aa', // Gray-400
+      // Secondary Colors - Slate
+      secondary: '#94a3b8',         // Slate-400
+      secondaryContainer: '#1e293b', // Slate-800
+      onSecondary: '#f1f5f9',       // Slate-100
+      onSecondaryContainer: '#cbd5e1', // Slate-300
 
-      // Tertiary Colors - Yellow variants
-      tertiary: '#fde047',          // Yellow-300
-      tertiaryContainer: '#713f12', // Yellow-900
-      onTertiary: '#1c1917',        // Stone-900
-      onTertiaryContainer: '#fef9c3', // Yellow-50
+      // Tertiary Colors - Cyan
+      tertiary: '#22d3ee',          // Cyan-400
+      tertiaryContainer: '#164e63', // Cyan-900
+      onTertiary: '#0891b2',
+      onTertiaryContainer: '#ecfeff', // Cyan-50
 
-      // Surface Colors - Black based
-      surface: '#000000',           // Pure black
-      surfaceContainerLow: '#171717', // Neutral-900
-      surfaceContainer: '#262626',   // Neutral-800
-      surfaceContainerHigh: '#404040', // Neutral-700
-      surfaceContainerHighest: '#525252', // Neutral-600
-      surfaceContainerLowest: '#0a0a0a', // Neutral-950
-      surfaceDim: '#000000',
-      surfaceBright: '#171717',
-      surfaceVariant: '#262626',
+      // Surface Colors - Deep Slate based
+      surface: '#0f172a',           // Slate-900
+      surfaceContainerLow: '#1e293b', // Slate-800
+      surfaceContainer: '#1e293b',   // Slate-800
+      surfaceContainerHigh: '#334155', // Slate-700
+      surfaceContainerHighest: '#475569', // Slate-600
+      surfaceContainerLowest: '#020617', // Slate-950
+      surfaceDim: '#0f172a',
+      surfaceBright: '#1e293b',
+      surfaceVariant: '#1e293b',
 
       // Error Colors
-      error: '#ef4444',
+      error: '#f87171',
       errorContainer: '#7f1d1d',
       onError: '#ffffff',
       onErrorContainer: '#fecaca',
 
       // Outline Colors
-      outline: '#525252',
-      outlineVariant: '#404040',
+      outline: '#334155',
+      outlineVariant: '#475569',
 
       // Inverse Colors
-      inverseSurface: '#fafafa',
-      inverseOnSurface: '#1c1917',
-      inversePrimary: '#facc15',
+      inverseSurface: '#f8fafc',
+      inverseOnSurface: '#0f172a',
+      inversePrimary: '#4f46e5',
 
       // Text Colors
-      onSurface: '#fafafa',
-      onSurfaceVariant: '#d4d4d8',
-      onBackground: '#fafafa',
+      onSurface: '#f1f5f9',
+      onSurfaceVariant: '#94a3b8',
+      onBackground: '#f1f5f9',
 
       // Glass effect
-      glassBg: 'rgba(0, 0, 0, 0.7)',
+      glassBg: 'rgba(15, 23, 42, 0.8)',
     }
   }
 };

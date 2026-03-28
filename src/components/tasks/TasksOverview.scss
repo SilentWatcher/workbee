@@ -1,38 +1,27 @@
 @use '../../styles/variables.scss' as *;
 
 .tasks-overview {
-  // margin-left: 16rem;
-  padding: 6rem $spacing-xl $spacing-xl;
+  padding: $spacing-xl $spacing-2xl;
   min-height: 100vh;
   background: var(--surface);
-
-  @media (max-width: $tablet) {
-    margin-left: 0;
-    padding: 5rem $spacing-lg $spacing-lg;
-  }
-
-  @media (max-width: $mobile) {
-    padding: 4.5rem $spacing-md $spacing-md;
-  }
 
   // Header Styles
   .tasks-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-2xl;
+    margin-bottom: $spacing-xl;
     padding-bottom: $spacing-lg;
-    border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
+    border-bottom: 1px solid var(--outline);
 
     .header-left {
       display: flex;
       align-items: center;
-      gap: $spacing-2xl;
+      gap: $spacing-xl;
 
       h1 {
-        font-family: $font-headline;
-        font-size: $display-lg;
-        font-weight: 800;
+        font-size: $headline-lg;
+        font-weight: 700;
         color: var(--on-surface);
         margin: 0;
         letter-spacing: $tracking-tight;
@@ -40,24 +29,25 @@
 
       .view-switcher {
         display: flex;
-        background: var(--surface)-container-low;
-        border-radius: $radius-lg;
-        padding: $spacing-xs;
-        gap: $spacing-xs;
+        background: var(--surface-container-low);
+        border: 1px solid var(--outline);
+        border-radius: $radius-md;
+        padding: 4px;
+        gap: 4px;
 
         .view-btn {
           display: flex;
           align-items: center;
           gap: $spacing-xs;
-          padding: $spacing-sm $spacing-md;
+          padding: $spacing-xs $spacing-sm;
           border: none;
           background: transparent;
-          border-radius: $radius-md;
+          border-radius: $radius-sm;
           font-size: $body-sm;
           font-weight: 500;
-          color: var(--on-surface)-variant;
+          color: var(--on-surface-variant);
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: $transition-fast;
 
           &.active {
             background: var(--primary);
@@ -66,7 +56,7 @@
           }
 
           &:hover:not(.active) {
-            background: var(--surface)-container-high;
+            background: var(--surface-container-high);
             color: var(--on-surface);
           }
         }
@@ -78,16 +68,16 @@
         display: flex;
         align-items: center;
         gap: $spacing-xs;
-        padding: $spacing-sm $spacing-lg;
+        padding: $spacing-sm $spacing-md;
         background: var(--primary);
         color: var(--on-primary);
         border: none;
-        border-radius: $radius-lg;
+        border-radius: $radius-md;
         font-size: $body-sm;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.1);
+        transition: $transition-fast;
+        box-shadow: $shadow-sm;
 
         &:hover {
           opacity: 0.9;
@@ -97,1469 +87,87 @@
     }
   }
 
-  // Filters Section
-  .tasks-filters {
+  .tasks-list {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: $spacing-2xl;
-    padding: $spacing-lg;
-    background: var(--surface)-container-lowest;
-    border-radius: $radius-xl;
-    border: 1px solid rgba(var(--outline-variant), 0.08);
+    flex-direction: column;
+    gap: $spacing-sm;
 
-    .search-box {
+    .task-row {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--outline);
+      border-radius: $radius-md;
+      padding: $spacing-md $spacing-xl;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      background: var(--surface)-container-high;
-      border-radius: $radius-lg;
-      padding: $spacing-sm $spacing-md;
-      min-width: 300px;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
+      cursor: pointer;
+      transition: $transition-fast;
 
-      &:focus-within {
+      &:hover {
         border-color: var(--primary);
-        box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
+        box-shadow: $shadow-sm;
       }
 
-      svg {
-        color: var(--on-surface)-variant;
-        margin-right: $spacing-xs;
-      }
-
-      input {
-        border: none;
-        background: transparent;
-        outline: none;
-        font-size: $body-sm;
-        color: var(--on-surface);
-        flex: 1;
-
-        &::placeholder {
-          color: var(--on-surface)-variant;
-        }
-      }
-    }
-
-    .filter-controls {
-      display: flex;
-      gap: $spacing-md;
-
-      .filter-select {
-        padding: $spacing-sm $spacing-md;
-        border: 1px solid rgba(var(--outline-variant), 0.2);
-        border-radius: $radius-lg;
-        background: var(--surface)-container-high;
-        font-size: $body-sm;
-        color: var(--on-surface);
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:focus {
-          outline: none;
-          border-color: var(--primary);
-          box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
-        }
-      }
-    }
-  }
-
-  // Content Area
-  .tasks-content {
-    min-height: 600px;
-  }
-
-  // List View Styles
-  .tasks-list-view {
-    .tasks-list {
-      display: flex;
-      flex-direction: column;
-      gap: $spacing-md;
-
-      .task-item {
-        background: var(--surface)-container-lowest;
-        border: 1px solid rgba(var(--outline-variant), 0.08);
-        border-radius: $radius-xl;
-        padding: $spacing-lg;
+      .task-main {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        gap: $spacing-lg;
 
-        &:hover {
-          border-color: rgba(var(--primary), 0.2);
-          box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.05);
-          transform: translateY(-2px);
-        }
-
-        .task-left {
-          display: flex;
-          align-items: flex-start;
-          gap: $spacing-lg;
-          flex: 1;
-
-          .task-checkbox {
-            input[type="checkbox"] {
-              width: 1.25rem;
-              height: 1.25rem;
-              border: 2px solid var(--outline)-variant;
-              border-radius: $radius-md;
-              cursor: pointer;
-              transition: all 0.2s ease;
-
-              &:checked {
-                background: var(--primary);
-                border-color: var(--primary);
-              }
-            }
-          }
-
-          .task-content {
-            flex: 1;
-
-            .task-title {
-              font-weight: 600;
-              color: var(--on-surface);
-              margin: 0 0 $spacing-xs 0;
-              font-size: $body-lg;
-            }
-
-            .task-description {
-              color: var(--on-surface)-variant;
-              font-size: $body-sm;
-              margin: 0 0 $spacing-md 0;
-              line-height: $leading-normal;
-            }
-
-            .task-meta {
-              display: flex;
-              align-items: center;
-              gap: $spacing-md;
-              flex-wrap: wrap;
-
-              .project-name {
-                color: var(--primary);
-                font-size: $label-sm;
-                font-weight: 500;
-              }
-
-              .status-badge {
-                font-size: $label-sm;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: $tracking-widest;
-                padding: $spacing-xs $spacing-sm;
-                border-radius: $radius-full;
-
-                &.status-completed {
-                  background: rgba(var(--tertiary-container), 0.1);
-                  color: var(--tertiary)-container;
-                }
-
-                &.status-in-progress {
-                  background: rgba(var(--primary), 0.1);
-                  color: var(--primary);
-                }
-
-                &.status-pending {
-                  background: rgba(var(--surface-container-high), 0.8);
-                  color: var(--on-surface)-variant;
-                }
-              }
-
-              .priority-badge {
-                font-size: $label-sm;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: $tracking-widest;
-                padding: $spacing-xs $spacing-sm;
-                border-radius: $radius-full;
-
-                &.priority-high {
-                  background: rgba(var(--error), 0.1);
-                  color: var(--error);
-                }
-
-                &.priority-medium {
-                  background: rgba(var(--tertiary-container), 0.1);
-                  color: var(--tertiary)-container;
-                }
-
-                &.priority-low {
-                  background: rgba(var(--surface-container-high), 0.8);
-                  color: var(--on-surface)-variant;
-                }
-              }
-
-              .due-date {
-                display: flex;
-                align-items: center;
-                gap: $spacing-xs;
-                color: var(--on-surface)-variant;
-                font-size: $label-sm;
-                font-weight: 500;
-              }
-            }
-          }
-        }
-
-        .task-right {
-          display: flex;
-          align-items: center;
-          gap: $spacing-md;
-
-          .task-stats {
-            display: flex;
-            align-items: center;
-            gap: $spacing-sm;
-
-            .stat-item {
-              display: flex;
-              align-items: center;
-              gap: $spacing-xs;
-              color: var(--on-surface)-variant;
-              font-size: $label-sm;
-            }
-          }
-
-          .assignee-avatar {
-            img {
-              width: 2rem;
-              height: 2rem;
-              border-radius: $radius-full;
-              border: 2px solid var(--surface)-container-lowest;
-            }
-          }
-
-          .task-menu {
-            background: transparent;
-            border: none;
-            color: var(--outline)-variant;
-            cursor: pointer;
-            padding: $spacing-xs;
-            border-radius: $radius-sm;
-            transition: all 0.2s ease;
-
-            &:hover {
-              color: var(--on-surface)-variant;
-              background: var(--surface)-container-low;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Timeline View Styles
-  .tasks-timeline-view {
-    .timeline {
-      position: relative;
-      padding-left: $spacing-2xl;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: $spacing-md;
-        top: $spacing-lg;
-        bottom: $spacing-lg;
-        width: 2px;
-        background: rgba(var(--outline-variant), 0.2);
-      }
-
-      .timeline-item {
-        position: relative;
-        margin-bottom: $spacing-2xl;
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-
-        .timeline-marker {
-          position: absolute;
-          left: -$spacing-xl;
-          top: $spacing-xs;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          .timeline-dot {
-            width: 1rem;
-            height: 1rem;
-            border-radius: $radius-full;
-            background: var(--primary);
-            position: relative;
-            z-index: 2;
-
-            &.priority-high {
-              background: var(--error);
-            }
-
-            &.priority-medium {
-              background: var(--tertiary)-container;
-            }
-
-            &.priority-low {
-              background: var(--on-surface)-variant;
-            }
-          }
-
-          .timeline-line {
-            width: 2px;
-            flex: 1;
-            background: rgba(var(--outline-variant), 0.2);
-            margin-top: $spacing-xs;
-          }
-        }
-
-        .timeline-content {
-          background: var(--surface)-container-lowest;
-          border: 1px solid rgba(var(--outline-variant), 0.08);
-          border-radius: $radius-xl;
-          padding: $spacing-lg;
-          margin-left: $spacing-xl;
-          cursor: pointer;
-          transition: all 0.2s ease;
-
-          &:hover {
-            border-color: rgba(var(--primary), 0.2);
-            box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.05);
-            transform: translateY(-2px);
-          }
-
-          .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: $spacing-md;
-
-            .timeline-title {
-              font-weight: 600;
-              color: var(--on-surface);
-              margin: 0;
-              font-size: $body-lg;
-            }
-
-            .status-badge {
-              font-size: $label-sm;
-              font-weight: 600;
-              text-transform: uppercase;
-              letter-spacing: $tracking-widest;
-              padding: $spacing-xs $spacing-sm;
-              border-radius: $radius-full;
-
-              &.status-completed {
-                background: rgba(var(--tertiary-container), 0.1);
-                color: var(--tertiary)-container;
-              }
-
-              &.status-in-progress {
-                background: rgba(var(--primary), 0.1);
-                color: var(--primary);
-              }
-
-              &.status-pending {
-                background: rgba(var(--surface-container-high), 0.8);
-                color: var(--on-surface)-variant;
-              }
-            }
-          }
-
-          .timeline-description {
-            color: var(--on-surface)-variant;
-            font-size: $body-sm;
-            margin: 0 0 $spacing-md 0;
-            line-height: $leading-normal;
-          }
-
-          .timeline-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .timeline-meta {
-              display: flex;
-              align-items: center;
-              gap: $spacing-md;
-
-              .project-name {
-                color: var(--primary);
-                font-size: $label-sm;
-                font-weight: 500;
-              }
-
-              .due-date {
-                display: flex;
-                align-items: center;
-                gap: $spacing-xs;
-                color: var(--on-surface)-variant;
-                font-size: $label-sm;
-                font-weight: 500;
-              }
-            }
-
-            .assignee-avatar {
-              img {
-                width: 2rem;
-                height: 2rem;
-                border-radius: $radius-full;
-                border: 2px solid var(--surface)-container-lowest;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Kanban View Styles
-  .tasks-kanban-view {
-    .kanban-columns {
-      display: flex;
-      gap: $spacing-xl;
-      overflow-x: auto;
-      padding-bottom: $spacing-lg;
-
-      .kanban-column {
-        min-width: 320px;
-        width: 320px;
-        background: var(--surface)-container-low;
-        border-radius: $radius-xl;
-        padding: $spacing-lg;
-
-        .column-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: $spacing-lg;
-
-          h3 {
-            font-family: $font-headline;
-            font-size: $body-sm;
-            font-weight: 700;
-            color: var(--on-surface)-variant;
-            text-transform: uppercase;
-            letter-spacing: $tracking-widest;
-            margin: 0;
-          }
-
-          .task-count {
-            background: var(--surface)-container-high;
-            color: var(--on-surface)-variant;
-            font-size: $label-sm;
-            font-weight: 700;
-            padding: $spacing-xs $spacing-sm;
-            border-radius: $radius-full;
-          }
-        }
-
-        .column-tasks {
-          display: flex;
-          flex-direction: column;
-          gap: $spacing-md;
-
-          .kanban-task {
-            background: var(--surface)-container-lowest;
-            border: 1px solid rgba(var(--outline-variant), 0.08);
-            border-radius: $radius-lg;
-            padding: $spacing-lg;
-            cursor: pointer;
-            transition: all 0.2s ease;
-
-            &:hover {
-              border-color: rgba(var(--primary), 0.2);
-              box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.05);
-              transform: translateY(-2px);
-            }
-
-            .task-header {
-              display: flex;
-              justify-content: space-between;
-              align-items: flex-start;
-              margin-bottom: $spacing-md;
-
-              .priority-badge {
-                font-size: $label-sm;
-                font-weight: 700;
-                text-transform: uppercase;
-                letter-spacing: $tracking-widest;
-                padding: $spacing-xs $spacing-sm;
-                border-radius: $radius-full;
-
-                &.priority-high {
-                  background: rgba(var(--error), 0.1);
-                  color: var(--error);
-                }
-
-                &.priority-medium {
-                  background: rgba(var(--tertiary-container), 0.1);
-                  color: var(--tertiary)-container;
-                }
-
-                &.priority-low {
-                  background: rgba(var(--surface-container-high), 0.8);
-                  color: var(--on-surface)-variant;
-                }
-              }
-            }
-
-            .task-title {
-              font-weight: 600;
-              color: var(--on-surface);
-              margin: 0 0 $spacing-xs 0;
-              font-size: $body-sm;
-            }
-
-            .task-description {
-              color: var(--on-surface)-variant;
-              font-size: $label-sm;
-              margin: 0 0 $spacing-md 0;
-              line-height: $leading-normal;
-            }
-
-            .task-footer {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-
-              .task-meta {
-                display: flex;
-                align-items: center;
-                gap: $spacing-sm;
-
-                .project-name {
-                  color: var(--primary);
-                  font-size: $label-sm;
-                  font-weight: 500;
-                }
-
-                .due-date {
-                  display: flex;
-                  align-items: center;
-                  gap: $spacing-xs;
-                  color: var(--on-surface)-variant;
-                  font-size: $label-sm;
-                  font-weight: 500;
-                }
-              }
-
-              .assignee-avatar {
-                img {
-                  width: 1.5rem;
-                  height: 1.5rem;
-                  border-radius: $radius-full;
-                  border: 2px solid var(--surface)-container-lowest;
-                }
-              }
-            }
-          }
-
-          .add-task-btn {
-            width: 100%;
-            padding: $spacing-md;
-            border: 2px dashed rgba(var(--outline-variant), 0.3);
-            background: transparent;
-            border-radius: $radius-lg;
-            color: var(--on-surface)-variant;
-            font-size: $body-sm;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: $spacing-xs;
-
-            &:hover {
-              border-color: var(--primary);
-              color: var(--primary);
-              background: rgba(var(--primary), 0.02);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Task Detail Modal
-  .task-detail-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-xl;
-
-    .modal-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(var(--surface), 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(var(--surface), 0.3);
-      z-index: -1;
-    }
-
-    .modal-content {
-      background: var(--surface-container-lowest);
-      border-radius: $radius-2xl;
-      width: 100%;
-      max-width: 900px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      z-index: 1;
-      box-shadow: $shadow-xl;
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: $spacing-xl;
-        border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
-
-        .header-left {
-          flex: 1;
-
-          .task-title {
-            font-family: $font-headline;
-            font-size: $title-lg;
-            font-weight: 700;
-            color: var(--on-surface);
-            margin: 0 0 $spacing-md 0;
-
-            .task-title-input {
-              width: 100%;
-              border: 1px solid rgba(var(--outline-variant), 0.2);
-              border-radius: $radius-lg;
-              padding: $spacing-sm $spacing-md;
-              background: var(--surface)-container-high;
-              font-size: inherit;
-              font-weight: inherit;
-              color: inherit;
-              font-family: inherit;
-
-              &:focus {
-                outline: none;
-                border-color: var(--primary);
-                box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
-              }
-            }
-          }
-
-          .task-badges {
-            display: flex;
-            gap: $spacing-sm;
-
-            .status-badge {
-              font-size: $label-sm;
-              font-weight: 600;
-              text-transform: uppercase;
-              letter-spacing: $tracking-widest;
-              padding: $spacing-xs $spacing-sm;
-              border-radius: $radius-full;
-
-              &.status-completed {
-                background: rgba(var(--tertiary-container), 0.1);
-                color: var(--tertiary)-container;
-              }
-
-              &.status-in-progress {
-                background: rgba(var(--primary), 0.1);
-                color: var(--primary);
-              }
-
-              &.status-pending {
-                background: rgba(var(--surface-container-high), 0.8);
-                color: var(--on-surface)-variant;
-              }
-            }
-
-            .priority-badge {
-              font-size: $label-sm;
-              font-weight: 700;
-              text-transform: uppercase;
-              letter-spacing: $tracking-widest;
-              padding: $spacing-xs $spacing-sm;
-              border-radius: $radius-full;
-
-              &.priority-high {
-                background: rgba(var(--error), 0.1);
-                color: var(--error);
-              }
-
-              &.priority-medium {
-                background: rgba(var(--tertiary-container), 0.1);
-                color: var(--tertiary)-container;
-              }
-
-              &.priority-low {
-                background: rgba(var(--surface-container-high), 0.8);
-                color: var(--on-surface)-variant;
-              }
-            }
-          }
-        }
-
-        .header-actions {
-          display: flex;
-          gap: $spacing-sm;
-
-          .save-btn,
-          .edit-btn,
-          .delete-btn,
-          .cancel-btn,
-          .close-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: $spacing-xs;
-            border-radius: $radius-sm;
-            transition: all 0.2s ease;
-
-            &.save-btn {
-              color: var(--primary);
-              background: rgba(var(--primary), 0.1);
-
-              &:hover {
-                background: rgba(var(--primary), 0.2);
-              }
-            }
-
-            &.cancel-btn {
-              color: var(--on-surface)-variant;
-
-              &:hover {
-                background: var(--surface)-container-low;
-              }
-            }
-
-            &.edit-btn {
-              color: var(--primary);
-
-              &:hover {
-                background: rgba(var(--primary), 0.1);
-              }
-            }
-
-            &.delete-btn {
-              color: var(--error);
-
-              &:hover {
-                background: rgba(var(--error), 0.1);
-              }
-            }
-
-            &.close-btn {
-              color: var(--on-surface)-variant;
-
-              &:hover {
-                color: var(--on-surface);
-                background: var(--surface)-container-low;
-              }
-            }
-          }
-        }
-      }
-
-      .modal-body {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: $spacing-xl;
-        padding: $spacing-xl;
-
-        .task-main-content {
-          .task-description-section {
-            margin-bottom: $spacing-xl;
-
-            h3 {
-              font-family: $font-headline;
-              font-size: $title-lg;
-              font-weight: 600;
-              color: var(--on-surface);
-              margin: 0 0 $spacing-md 0;
-            }
-
-            .task-description-input {
-              width: 100%;
-              border: 1px solid rgba(var(--outline-variant), 0.2);
-              border-radius: $radius-lg;
-              padding: $spacing-sm $spacing-md;
-              background: var(--surface)-container-high;
-              font-size: $body-sm;
-              color: var(--on-surface);
-              resize: vertical;
-
-              &:focus {
-                outline: none;
-                border-color: var(--primary);
-                box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
-              }
-            }
-
-            p {
-              color: var(--on-surface)-variant;
-              line-height: $leading-normal;
-              margin: 0;
-            }
-          }
-
-          .task-details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: $spacing-lg;
-            margin-bottom: $spacing-xl;
-
-            .detail-item {
-              label {
-                display: block;
-                font-size: $label-sm;
-                font-weight: 600;
-                color: var(--on-surface)-variant;
-                text-transform: uppercase;
-                letter-spacing: $tracking-widest;
-                margin-bottom: $spacing-xs;
-              }
-
-              span {
-                color: var(--on-surface);
-                font-weight: 500;
-              }
-
-              .assignee-info {
-                display: flex;
-                align-items: center;
-                gap: $spacing-sm;
-
-                img {
-                  width: 1.5rem;
-                  height: 1.5rem;
-                  border-radius: $radius-full;
-                }
-              }
-
-              .progress-bar {
-                display: flex;
-                align-items: center;
-                gap: $spacing-sm;
-
-                .progress-fill {
-                  height: 6px;
-                  background: var(--primary);
-                  border-radius: $radius-full;
-                  transition: width 0.3s ease;
-                }
-
-                span {
-                  font-size: $label-sm;
-                  font-weight: 600;
-                  color: var(--primary);
-                }
-              }
-
-              .tags {
-                display: flex;
-                flex-wrap: wrap;
-                gap: $spacing-xs;
-
-                .tag {
-                  display: flex;
-                  align-items: center;
-                  gap: $spacing-xs;
-                  background: var(--surface)-container-high;
-                  color: var(--on-surface)-variant;
-                  padding: $spacing-xs $spacing-sm;
-                  border-radius: $radius-full;
-                  font-size: $label-sm;
-                  font-weight: 500;
-                }
-              }
-            }
-          }
-
-          .subtasks-section {
-            margin-bottom: $spacing-xl;
-
-            h3 {
-              font-family: $font-headline;
-              font-size: $title-lg;
-              font-weight: 600;
-              color: var(--on-surface);
-              margin: 0 0 $spacing-md 0;
-            }
-
-            .subtasks-list {
-              .subtask-item {
-                display: flex;
-                align-items: center;
-                gap: $spacing-sm;
-                padding: $spacing-sm;
-                border-radius: $radius-lg;
-                transition: background-color 0.2s ease;
-
-                &:hover {
-                  background: var(--surface)-container-low;
-                }
-
-                input[type="checkbox"] {
-                  width: 1rem;
-                  height: 1rem;
-                  border: 2px solid var(--outline)-variant;
-                  border-radius: $radius-sm;
-                  cursor: pointer;
-
-                  &:checked {
-                    background: var(--primary);
-                    border-color: var(--primary);
-                  }
-                }
-
-                span {
-                  color: var(--on-surface);
-                  font-size: $body-sm;
-
-                  &.completed {
-                    text-decoration: line-through;
-                    color: var(--on-surface)-variant;
-                  }
-                }
-              }
-            }
-
-            .milestone-btn {
-              display: flex;
-              align-items: center;
-              gap: $spacing-xs;
-              margin-top: $spacing-lg;
-              padding: $spacing-sm $spacing-md;
-              background: var(--tertiary)-container;
-              color: var(--on-tertiary)-container;
-              border: none;
-              border-radius: $radius-lg;
-              font-size: $body-sm;
-              font-weight: 600;
-              cursor: pointer;
-              transition: all 0.2s ease;
-
-              &:hover {
-                background: var(--tertiary)-container;
-                transform: translateY(-1px);
-                box-shadow: $shadow-md;
-              }
-            }
-          }
-        }
-
-        .task-sidebar {
-          .activity-section,
-          .attachments-section {
-            margin-bottom: $spacing-xl;
-
-            h3 {
-              font-family: $font-headline;
-              font-size: $title-sm;
-              font-weight: 600;
-              color: var(--on-surface);
-              margin: 0 0 $spacing-md 0;
-            }
-
-            .activity-feed {
-              .activity-item {
-                display: flex;
-                gap: $spacing-sm;
-                margin-bottom: $spacing-lg;
-
-                .activity-avatar {
-                  img {
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: $radius-full;
-                  }
-                }
-
-                .activity-content {
-                  flex: 1;
-
-                  p {
-                    color: var(--on-surface);
-                    font-size: $body-sm;
-                    margin: 0 0 $spacing-xs 0;
-
-                    strong {
-                      font-weight: 600;
-                    }
-                  }
-
-                  .activity-time {
-                    color: var(--on-surface)-variant;
-                    font-size: $label-sm;
-                  }
-                }
-              }
-            }
-
-            .attachments-list {
-              .attachment-item {
-                display: flex;
-                align-items: center;
-                gap: $spacing-sm;
-                padding: $spacing-sm;
-                border-radius: $radius-lg;
-                background: var(--surface)-container-low;
-                margin-bottom: $spacing-sm;
-                cursor: pointer;
-                transition: background-color 0.2s ease;
-
-                &:hover {
-                  background: var(--surface)-container-high;
-                }
-
-                span {
-                  color: var(--on-surface);
-                  font-size: $body-sm;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Responsive Design
-  @media (max-width: $tablet) {
-    margin-left: 0;
-    padding: 5rem $spacing-lg $spacing-lg $spacing-lg;
-
-    .tasks-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: $spacing-lg;
-
-      .header-left {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: $spacing-md;
-
-        h1 {
-          font-size: $headline-md;
-        }
-
-        .view-switcher {
-          width: 100%;
-          justify-content: flex-start;
-          overflow-x: auto;
-          padding-bottom: $spacing-xs;
-
-          &::-webkit-scrollbar {
-            height: 4px;
-          }
-
-          &::-webkit-scrollbar-track {
-            background: var(--surface)-container-low;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: var(--outline)-variant;
-            border-radius: $radius-full;
-          }
-        }
-      }
-
-      .header-actions {
-        width: 100%;
-        justify-content: flex-end;
-
-        .add-task-btn {
-          padding: $spacing-sm $spacing-md;
-          font-size: $label-sm;
-        }
-      }
-    }
-
-    .tasks-filters {
-      flex-direction: column;
-      gap: $spacing-lg;
-
-      .search-box {
-        min-width: 100%;
-      }
-
-      .filter-controls {
-        flex-wrap: wrap;
-        gap: $spacing-sm;
-        width: 100%;
-
-        .filter-select {
-          flex: 1;
-          min-width: 150px;
-        }
-      }
-    }
-
-    .tasks-list-view {
-      .tasks-list {
-        .task-item {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: $spacing-md;
-
-          .task-left {
-            width: 100%;
-          }
-
-          .task-right {
-            width: 100%;
-            justify-content: space-between;
-            margin-top: $spacing-sm;
-          }
-        }
-      }
-    }
-
-    .tasks-kanban-view {
-      .kanban-columns {
-        gap: $spacing-md;
-
-        .kanban-column {
-          min-width: 280px;
-          width: 280px;
-        }
-      }
-    }
-
-    .task-detail-modal {
-      padding: $spacing-lg;
-
-      .modal-content {
-        max-width: 100%;
-        margin: $spacing-lg;
-
-        .modal-body {
-          grid-template-columns: 1fr;
-          gap: $spacing-lg;
-        }
-      }
-    }
-  }
-
-  @media (max-width: $mobile) {
-    .tasks-header {
-      .header-left {
-        h1 {
-          font-size: $headline-sm;
-        }
-
-        .view-switcher {
-          .view-btn {
-            padding: $spacing-xs $spacing-sm;
-            font-size: $label-sm;
-            gap: $spacing-xs;
-
-            svg {
-              size: 14px;
-            }
-          }
-        }
-      }
-
-      .header-actions {
-        .add-task-btn {
-          padding: $spacing-xs $spacing-sm;
-          font-size: $label-sm;
-
-          svg {
-            size: 14px;
-          }
-        }
-      }
-    }
-
-    .tasks-filters {
-      padding: $spacing-md;
-
-      .filter-controls {
-        .filter-select {
-          padding: $spacing-xs $spacing-sm;
-          font-size: $label-sm;
-        }
-      }
-    }
-
-    .tasks-list-view {
-      .tasks-list {
-        .task-item {
-          padding: $spacing-md;
-
-          .task-left {
-            .task-content {
-              .task-title {
-                font-size: $body-md;
-              }
-
-              .task-meta {
-                flex-wrap: wrap;
-                gap: $spacing-xs;
-
-                .status-badge,
-                .priority-badge,
-                .due-date {
-                  font-size: $label-sm;
-                }
-              }
-            }
-          }
-
-          .task-right {
-            .task-stats {
-              .stat-item {
-                font-size: $label-sm;
-              }
-            }
-
-            .assignee-avatar img {
-              width: 1.5rem;
-              height: 1.5rem;
-            }
-          }
-        }
-      }
-    }
-
-    .tasks-kanban-view {
-      .kanban-columns {
-        .kanban-column {
-          min-width: 100%;
-          width: 100%;
-        }
-      }
-    }
-
-    .task-detail-modal {
-      padding: $spacing-md;
-
-      .modal-content {
-        .modal-header {
-          padding: $spacing-lg;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: $spacing-md;
-
-          .header-left {
-            width: 100%;
-
-            .task-title {
-              font-size: $title-md;
-            }
-          }
-
-          .header-actions {
-            width: 100%;
-            justify-content: flex-end;
-          }
-        }
-
-        .modal-body {
-          padding: $spacing-lg;
-
-          .task-main-content {
-            .task-details-grid {
-              grid-template-columns: 1fr;
-              gap: $spacing-md;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // Task Form Modal
-  .task-form-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1010;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $spacing-xl;
-
-    .task-form-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(var(--surface), 0.5);
-      backdrop-filter: blur(4px);
-    }
-
-    .task-form-content {
-      background: var(--surface-container-lowest);
-      border-radius: $radius-2xl;
-      width: 100%;
-      max-width: 600px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      z-index: 1;
-      box-shadow: $shadow-xl;
-
-      .task-form-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: $spacing-xl $spacing-xl $spacing-lg $spacing-xl;
-        border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
-
-        h3 {
-          font-family: $font-headline;
-          font-size: $title-lg;
-          font-weight: 700;
-          color: var(--on-surface);
-          margin: 0;
-        }
-
-        .close-btn {
-          background: transparent;
+        .complete-btn {
+          background: none;
           border: none;
-          color: var(--on-surface)-variant;
+          color: var(--on-surface-variant);
           cursor: pointer;
-          padding: $spacing-xs;
-          border-radius: $radius-sm;
-          transition: all 0.2s ease;
+          transition: $transition-fast;
+          &:hover { color: #10b981; }
+        }
 
-          &:hover {
+        .task-info {
+          h4 {
+            font-size: $body-md;
+            font-weight: 600;
             color: var(--on-surface);
-            background: var(--surface)-container-low;
+            margin-bottom: 2px;
+          }
+          p {
+            font-size: $label-md;
+            color: var(--on-surface-variant);
           }
         }
       }
 
-      .task-form {
-        padding: $spacing-xl;
+      .task-meta {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xl;
 
-        .form-group {
-          margin-bottom: $spacing-lg;
-
-          label {
-            display: block;
-            font-weight: 600;
-            color: var(--on-surface);
-            margin-bottom: $spacing-xs;
-            font-size: $body-sm;
-          }
-
-          input,
-          textarea,
-          select {
-            width: 100%;
-            padding: $spacing-sm $spacing-md;
-            border: 1px solid rgba(var(--outline-variant), 0.2);
-            border-radius: $radius-lg;
-            background: var(--surface)-container-high;
-            font-size: $body-sm;
-            color: var(--on-surface);
-            transition: all 0.2s ease;
-
-            &:focus {
-              outline: none;
-              border-color: var(--primary);
-              box-shadow: 0 0 0 2px rgba(var(--primary), 0.1);
-            }
-
-            &::placeholder {
-              color: var(--on-surface)-variant;
-            }
-          }
-
-          textarea {
-            resize: vertical;
-            min-height: 100px;
-          }
+        .priority-tag {
+          font-size: $label-sm;
+          font-weight: 700;
+          padding: 2px 8px;
+          border-radius: $radius-full;
+          text-transform: uppercase;
+          
+          &.priority-high { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+          &.priority-medium { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+          &.priority-low { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
         }
 
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: $spacing-lg;
-        }
-
-        .form-actions {
+        .due-date {
           display: flex;
-          justify-content: flex-end;
-          gap: $spacing-md;
-          margin-top: $spacing-xl;
-          padding-top: $spacing-lg;
-          border-top: 1px solid rgba(var(--outline-variant), 0.1);
-
-          .btn {
-            display: flex;
-            align-items: center;
-            gap: $spacing-xs;
-            padding: $spacing-sm $spacing-lg;
-            border: none;
-            border-radius: $radius-lg;
-            font-size: $body-sm;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-
-            &--secondary {
-              background: var(--surface)-container-high;
-              color: var(--on-surface);
-
-              &:hover {
-                background: var(--surface)-variant;
-              }
-            }
-
-            &--primary {
-              background: var(--primary);
-              color: var(--on-primary);
-              box-shadow: $shadow-md, 0 0 0 1px rgba(var(--primary), 0.1);
-
-              &:hover {
-                opacity: 0.9;
-                transform: translateY(-1px);
-              }
-            }
-          }
+          align-items: center;
+          gap: $spacing-xs;
+          font-size: $label-md;
+          color: var(--on-surface-variant);
+          font-weight: 600;
         }
-      }
-    }
-  }
 
-  @media (max-width: $mobile) {
-    .task-form-modal {
-      padding: $spacing-md;
-
-      .task-form-content {
-        .task-form {
-          padding: $spacing-lg;
-
-          .form-row {
-            grid-template-columns: 1fr;
+        .assignee {
+          img {
+            width: 24px;
+            height: 24px;
+            border-radius: $radius-full;
+            border: 2px solid var(--surface-container-lowest);
           }
         }
       }

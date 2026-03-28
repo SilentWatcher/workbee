@@ -46,15 +46,6 @@ const AppLayout = ({ children }) => {
 
   return (
     <div className="app">
-      {/* Mobile Menu Button */}
-      <button 
-        className="mobile-menu-btn"
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        aria-label="Toggle menu"
-      >
-        {sidebarOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-      </button>
-
       {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div 
@@ -66,7 +57,7 @@ const AppLayout = ({ children }) => {
       <Sidebar className={sidebarOpen ? 'sidebar--open' : ''} />
       
       <div className="app__main">
-        <Header title={getHeaderTitle()} onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+        <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         
         {isLoading ? (
           <div style={{ 

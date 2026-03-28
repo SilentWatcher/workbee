@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FiFilter,
   FiPlus,
@@ -157,6 +158,21 @@ const TasksOverview = () => {
     }
   ]
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05
+      }
+    }
+  };
+
+  const item = {
+    hidden: { x: -20, opacity: 0 },
+    show: { x: 0, opacity: 1 }
+  };
+
   const teamMembers = [
     { id: 'all', name: 'All Assignees', avatar: null },
     { id: 'alex', name: 'Alex Rivera', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDG_8wrdkSD7rqkRlMSM6-qbhl2Y7EaEV30ZAs-unmrc5-9gWr8p3Mkn64qp8Htx6nxVIQ4Jbsoptdf5QKD90nmUUBg1PC0N3DtKKLKHsrA-Lb9rQwTgAoKwBebiPyc1Layoiox4H2GS2bJhcqpzXpjv3L7oKBiN8TXabOK8vLpUpRGyyDIMsPi5yL3DPqgLIbPXNHDQbInSnyEO7EU0oYM9xN2zggmM0w4dTzM_PeIb5UvTdKAxUxjn3YBA0Rs3NS5NPYlwShhVQ' },
@@ -198,10 +214,8 @@ const TasksOverview = () => {
   }
 
   const handleTaskComplete = (taskId) => {
-    // Trigger confetti for task completion
+    // Trigger confetti
     triggerTaskCompletionConfetti()
-    
-    // You could update the task status here
     console.log(`Task ${taskId} completed!`)
   }
 
@@ -211,71 +225,51 @@ const TasksOverview = () => {
   }
 
   const renderListView = () => (
-    <div className="tasks-list-view">
-      <div className="tasks-list">
-        {tasksData.map((task) => (
-          <div 
-            key={task.id} 
-            className="task-item"
-            onClick={() => handleTaskClick(task)}
-          >
-            <div className="task-left">
-              <div className="task-checkbox">
-                <input 
-                  type="checkbox" 
-                  checked={task.status === 'completed'}
-                  onChange={(e) => {
-                    e.stopPropagation()
-                    if (e.target.checked) {
-                      handleTaskComplete(task.id)
-                    }
-                  }}
-                />
-              </div>
-              <div className="task-content">
-                <h4 className="task-title">{task.title}</h4>
-                <p className="task-description">{task.description}</p>
-                <div className="task-meta">
-                  <span className="project-name">{task.project}</span>
-                  <span className={`status-badge ${getStatusClass(task.status)}`}>
-                    {task.status.replace('-', ' ')}
-                  </span>
-                  <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
-                    {task.priority}
-                  </span>
-                  <span className="due-date">
-                    <FiClock size={12} />
-                    {task.dueDate}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="task-right">
-              <div className="task-stats">
-                {task.comments > 0 && (
-                  <span className="stat-item">
-                    <FiMessageSquare size={14} />
-                    {task.comments}
-                  </span>
-                )}
-                {task.attachments > 0 && (
-                  <span className="stat-item">
-                    <FiPaperclip size={14} />
-                    {task.attachments}
-                  </span>
-                )}
-              </div>
-              <div className="assignee-avatar">
-                <img src={task.assignee.avatar} alt={task.assignee.name} />
-              </div>
-              <button className="task-menu">
-                <FiMoreVertical size={16} />
-              </button>
+    <motion.div 
+      className="tasks-list"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
+      {tasksData.map((task) => (
+        <motion.div 
+          key={task.id} 
+          className="task-row"
+          variants={item}
+          whileHover={{ x: 5, background: 'var(--surface-container-low)' }}
+          onClick={() => handleTaskClick(task)}
+        >
+          <div className="task-main">
+            <button 
+              className="complete-btn"
+              onClick={(e) => {
+                e.stopPropagation()
+                handleTaskComplete(task.id)
+              }}
+            >
+              <FiCheckCircle size={20} />
+            </button>
+            <div className="task-info">
+              <h4>{task.title}</h4>
+              <p>{task.project}</p>
             </div>
           </div>
-        ))}
-      </div>
-    </div>
+          
+          <div className="task-meta">
+            <div className={`priority-tag ${getPriorityClass(task.priority)}`}>
+              {task.priority}
+            </div>
+            <div className="due-date">
+              <FiCalendar size={14} />
+              {task.dueDate}
+            </div>
+            <div className="assignee">
+              <img src={task.assignee.avatar} alt={task.assignee.name} title={task.assignee.name} />
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
   )
 
   const renderTimelineView = () => {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FiFilter,
   FiShare,
@@ -113,6 +114,21 @@ const ProjectKanbanBoard = () => {
     }
   ])
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    show: { y: 0, opacity: 1 }
+  };
+
   const teamAvatars = [
     'https://lh3.googleusercontent.com/aida-public/AB6AXuA8VjZ3iO0Z1Lo9BWxPbU_POgAwJUOiUMF_tqEYWqizrJGWBMhcHXVkc0CE05CGI8a-D6q2hya7TZ9cZJou62dUah1Mh1pd-AuYFrKJ_c-hi9GM9i-eanKxr9f3X-fYtUTPPxtIla_8-B5u-5D2UkWzavGUvB8--MEqhfNp5KczGBFpBu8kd_E_IB78EQTOx8u4mvyl0NyRzlN2e9RAXIXt71hVhN-V4bvssReQeNlUCdNpZZ7MQpf1JEmRp-IatliIcJQpN2Mb8g',
     'https://lh3.googleusercontent.com/aida-public/AB6AXuDadcZsDGy7RRTGGiL_-41DnRHh58G92ZdjFX-Egkl9KpOtaydIH1TfE_TDIAAY0LFojdPS80iZI-a9ldxf6T3XcQLbisa6fHk92rsg-uNJQ7w8F_uod2nk4abL-p_Oo7sW220Jcnc70KY3pV5lIaCPBAnwLjNboS-RgyQOgcUzzI6r2QTrXlxahKmQP-sauWoGQKnrOUxN_x78r1-vZWJ1HHHJGMllIIpcPOgwDE7Z8TRsxLKHVvw69DbCB5QQBX_t3FOIbFnqZQ',
@@ -144,9 +160,14 @@ const ProjectKanbanBoard = () => {
   }
 
   const renderKanbanView = () => (
-    <div className="kanban-board__content">
+    <motion.div 
+      className="kanban-board__content"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
       {columns.map((column) => (
-        <div key={column.id} className="kanban-board__column">
+        <motion.div key={column.id} className="kanban-board__column" variants={item}>
           <div className="column-header">
             <div className="column-title">
               <h4>{column.title}</h4>
@@ -162,11 +183,13 @@ const ProjectKanbanBoard = () => {
               const StatusIcon = task.statusIcon;
               
               return (
-              <div
+              <motion.div
                 key={task.id}
                 className={`task-card ${
                   column.id === 'in-progress' ? 'task-card--in-progress' : ''
                 } ${task.isCompleted ? 'task-card--completed' : ''}`}
+                whileHover={{ y: -5, boxShadow: '0 8px 20px rgba(0,0,0,0.1)' }}
+                layoutId={`task-${task.id}`}
               >
                 <div className="task-header">
                   <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
@@ -199,7 +222,7 @@ const ProjectKanbanBoard = () => {
                         <img
                           key={index}
                           src={assignee}
-                          alt={`Assignee ${index + 1}`}
+                          alt="Assignee"
                           className="assignee"
                         />
                       ))}
@@ -214,33 +237,15 @@ const ProjectKanbanBoard = () => {
                     </div>
                   ) : null}
                 </div>
-
-                {task.hasTrendingIcon && (
-                  <FiTrendingUp className="trending-icon" size={48} />
-                )}
-              </div>
+              </motion.div>
             )})}
-            
-            <button 
-              className="add-project-btn"
-              onClick={() => setShowProjectForm(true)}
-            >
-              <FiPlus size={18} />
-              Add Project
+            <button className="quick-add-btn">
+              <FiPlus size={14} /> Add Task
             </button>
           </div>
-        </div>
+        </motion.div>
       ))}
-
-      <div className="kanban-board__add-column">
-        <div className="add-column-content">
-          <div className="add-icon">
-            <FiPlus size={24} />
-          </div>
-          <p>Add Column</p>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   )
 
   const renderListView = () => {
@@ -249,33 +254,38 @@ const ProjectKanbanBoard = () => {
     )
 
     return (
-      <div className="list-view">
+      <motion.div 
+        className="list-view"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         <div className="list-header">
-          <div className="list-header-cell">Task</div>
-          <div className="list-header-cell">Status</div>
-          <div className="list-header-cell">Priority</div>
-          <div className="list-header-cell">Assignee</div>
-          <div className="list-header-cell">Due Date</div>
-          <div className="list-header-cell">Actions</div>
+          <div className="list-header-cell task-col">Task</div>
+          <div className="list-header-cell status-col">Status</div>
+          <div className="list-header-cell priority-col">Priority</div>
+          <div className="list-header-cell assignee-col">Assignee</div>
+          <div className="list-header-cell date-col">Due Date</div>
+          <div className="list-header-cell actions-col"></div>
         </div>
         <div className="list-content">
           {allTasks.map((task) => (
-            <div key={task.id} className="list-row">
-              <div className="list-cell">
+            <motion.div key={task.id} className="list-row" variants={item}>
+              <div className="list-cell task-col">
                 <div className="task-info">
                   <h6>{task.title}</h6>
                   <p className="task-description">{task.description}</p>
                 </div>
               </div>
-              <div className="list-cell">
+              <div className="list-cell status-col">
                 <span className="status-badge">{task.column}</span>
               </div>
-              <div className="list-cell">
+              <div className="list-cell priority-col">
                 <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
                   {task.priority}
                 </span>
               </div>
-              <div className="list-cell">
+              <div className="list-cell assignee-col">
                 {task.assignees ? (
                   <div className="task-assignees">
                     {task.assignees.map((assignee, index) => (
@@ -293,18 +303,18 @@ const ProjectKanbanBoard = () => {
                   </div>
                 )}
               </div>
-              <div className="list-cell">
+              <div className="list-cell date-col">
                 <span className="due-date">{task.dueDate || task.completedDate}</span>
               </div>
-              <div className="list-cell">
+              <div className="list-cell actions-col">
                 <button className="action-btn">
                   <FiMoreHorizontal size={16} />
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     )
   }
 
@@ -324,46 +334,50 @@ const ProjectKanbanBoard = () => {
     })
 
     return (
-      <div className="timeline-view">
+      <motion.div 
+        className="timeline-view"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
         <div className="timeline-content">
           {Object.entries(tasksByDate).map(([date, tasks]) => (
-            <div key={date} className="timeline-date-group">
+            <motion.div key={date} className="timeline-date-group" variants={item}>
               <div className="timeline-date-header">
                 <span className="timeline-date">{date}</span>
               </div>
               <div className="timeline-tasks">
-                {tasks.map((task, index) => (
+                {tasks.map((task) => (
                   <div key={task.id} className="timeline-item">
-                    <div className="timeline-structure">
-                      <div className="timeline-project-line">
-                        <span className="project-name">{task.column}</span>
-                        <span className="arrow-line">{'>'}</span>
+                    <div className="timeline-marker"></div>
+                    <div className="timeline-card">
+                      <div className="card-header">
+                        <span className="column-tag">{task.column}</span>
+                        <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
+                          {task.priority}
+                        </span>
                       </div>
-                      {index === 0 && (
-                        <div className="timeline-task-line">
-                          <span className="task-name">{task.title}</span>
-                          <div className="task-badge">
-                            <span className="task-title-text">[{task.title}]</span>
-                          </div>
+                      <h6>{task.title}</h6>
+                      <p>{task.description}</p>
+                      <div className="card-footer">
+                        <div className="task-assignees">
+                          {task.assignees ? (
+                            task.assignees.map((assignee, index) => (
+                              <img key={index} src={assignee} alt="Assignee" />
+                            ))
+                          ) : task.assignee ? (
+                            <img src={task.assignee} alt="Assignee" />
+                          ) : null}
                         </div>
-                      )}
-                      {index > 0 && (
-                        <div className="timeline-subtask-line">
-                          <span className="arrow">{'>'}</span>
-                          <span className="subtask-name">{task.title}</span>
-                          <div className="subtask-badge">
-                            <span className="subtask-title-text">[{task.title}]</span>
-                          </div>
-                        </div>
-                      )}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     )
   }
 
@@ -393,81 +407,27 @@ const ProjectKanbanBoard = () => {
             </div>
           </div>
           
-          <div 
-            className="view-switcher"
-            style={{
-              display: 'flex',
-              backgroundColor: '#f2f4f6',
-              borderRadius: '12px',
-              padding: '4px',
-              gap: '4px'
-            }}
-          >
+          <div className="view-switcher">
             <button
               className={`view-btn ${viewMode === 'kanban' ? 'active' : ''}`}
               onClick={() => setViewMode('kanban')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '4px',
-                padding: '8px 16px',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '12px',
-                fontWeight: '500',
-                cursor: 'pointer',
-                backgroundColor: viewMode === 'kanban' ? '#3525cd' : 'transparent',
-                color: viewMode === 'kanban' ? '#ffffff' : '#464555',
-                transition: 'all 0.2s ease'
-              }}
             >
-              <FiLayout size={18} />
-              Kanban
+              <FiLayout size={16} />
+              <span>Kanban</span>
             </button>
             <button
               className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
               onClick={() => setViewMode('list')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '4px',
-                padding: '8px 16px',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '12px',
-                fontWeight: '500',
-                cursor: 'pointer',
-                backgroundColor: viewMode === 'list' ? '#3525cd' : 'transparent',
-                color: viewMode === 'list' ? '#ffffff' : '#464555',
-                transition: 'all 0.2s ease'
-              }}
             >
-              <FiList size={18} />
-              List
+              <FiList size={16} />
+              <span>List</span>
             </button>
             <button
               className={`view-btn ${viewMode === 'timeline' ? 'active' : ''}`}
               onClick={() => setViewMode('timeline')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '4px',
-                padding: '8px 16px',
-                border: 'none',
-                borderRadius: '8px',
-                fontSize: '12px',
-                fontWeight: '500',
-                cursor: 'pointer',
-                backgroundColor: viewMode === 'timeline' ? '#3525cd' : 'transparent',
-                color: viewMode === 'timeline' ? '#ffffff' : '#464555',
-                transition: 'all 0.2s ease'
-              }}
             >
-              <FiTimeline size={18} />
-              Timeline
+              <FiTimeline size={16} />
+              <span>Timeline</span>
             </button>
           </div>
         </div>
@@ -477,9 +437,13 @@ const ProjectKanbanBoard = () => {
             <FiFilter size={18} />
             Filters
           </button>
-          <button className="action-btn action-btn--primary">
+          <button className="action-btn action-btn--secondary">
             <FiShare size={18} />
             Share Board
+          </button>
+          <button className="action-btn action-btn--primary" onClick={() => setShowTaskForm(true)}>
+            <FiPlus size={18} />
+            Add Task
           </button>
         </div>
       </div>

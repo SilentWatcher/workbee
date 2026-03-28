@@ -1,403 +1,179 @@
 @use '../../styles/variables.scss' as *;
 
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 16rem; // 256px
+  width: 240px;
   height: 100vh;
-  background: var(--surface-container-lowest);
+  background: var(--surface-container-low);
+  border-right: 1px solid var(--outline);
   display: flex;
   flex-direction: column;
-  z-index: 1000;
-  box-shadow: $shadow-lg;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
-  visibility: visible;
-  opacity: 1;
-
-  &--open {
-    transform: translateX(0);
-    visibility: visible;
-    opacity: 1;
-    z-index: 1002;
-  }
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: $z-fixed;
+  transition: $transition-base;
 
   &__brand {
-    padding: $spacing-xl $spacing-lg;
-    border-bottom: 1px solid rgba(var(--outline-variant), 0.1);
-    background: var(--surface-container-lowest);
+    height: 56px;
+    padding: 0 $spacing-lg;
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    border-bottom: 1px solid var(--outline);
 
-    .brand {
-      &__logo {
-        display: flex;
-        align-items: center;
-        gap: $spacing-sm;
-        margin-bottom: $spacing-lg;
-        visibility: visible;
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: var(--on-primary);
+      border-radius: $radius-md;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .logo {
-          width: 2.5rem;
-          height: 2.5rem;
-          background: var(--primary);
-          border-radius: $radius-lg;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: var(--on-primary);
-        }
+    .brand-name {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
 
-        .title {
-          h1 {
-            font-family: $font-headline;
-            font-size: $title-lg;
-            font-weight: 800;
-            color: var(--primary);
-            margin: 0;
-            line-height: $leading-tight;
-          }
-
-          p {
-            font-family: $font-label;
-            font-size: $label-sm;
-            font-weight: 600;
-            color: var(--on-surface-variant);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: $tracking-widest;
-          }
-        }
+      h1 {
+        font-size: $title-md;
+        font-weight: 700;
+        color: var(--on-surface);
       }
 
-      .new-project-btn {
-        width: 100%;
-        padding: $spacing-sm $spacing-md;
-        background: var(--primary);
-        color: var(--on-primary);
-        border: none;
-        border-radius: $radius-lg;
-        font-family: $font-headline;
+      .brand-badge {
+        font-size: 10px;
         font-weight: 700;
-        font-size: $body-sm;
-        margin-bottom: $spacing-xl;
-        cursor: pointer;
-        transition: opacity 0.2s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: $spacing-xs;
-
-        &:hover {
-          opacity: 0.9;
-        }
+        background: var(--tertiary-container);
+        color: var(--on-tertiary-container);
+        padding: 1px 4px;
+        border-radius: $radius-xs;
+        text-transform: uppercase;
       }
     }
   }
 
-  &__nav {
+  &__content {
     flex: 1;
-    padding: 0 $spacing-sm;
+    padding: $spacing-lg 0;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
 
-    .nav {
-      &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-xs;
+  &__section {
+    .section-label {
+      padding: 0 $spacing-lg;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: $spacing-sm;
+    }
+  }
+
+  &__nav {
+    .nav-list {
+      list-style: none;
+      padding: 0 $spacing-sm;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      padding: $spacing-sm $spacing-md;
+      text-decoration: none;
+      color: var(--on-surface-variant);
+      font-size: $body-md;
+      font-weight: 500;
+      border-radius: $radius-md;
+      transition: $transition-fast;
+
+      .icon {
+        flex-shrink: 0;
       }
 
-      &__item {
-        .nav-link {
-          display: flex;
-          align-items: center;
-          gap: $spacing-sm;
-          padding: $spacing-sm $spacing-md;
-          color: var(--on-surface);
-          text-decoration: none;
-          font-family: $font-body;
-          font-weight: 500;
-          font-size: $body-sm;
-          border-radius: $radius-md;
-          transition: all 0.2s ease;
-          visibility: visible;
+      &:hover {
+        background: var(--surface-container-high);
+        color: var(--on-surface);
+      }
 
-          &:hover {
-            color: var(--primary);
-            background: rgba(var(--primary), 0.1);
-          }
+      &--active {
+        background: var(--primary-container);
+        color: var(--on-primary-container);
+        font-weight: 600;
 
-          &--active {
-            color: var(--primary);
-            background: rgba(var(--primary), 0.15);
-            font-weight: 600;
-            border-left: 4px solid var(--primary);
-            padding-left: calc(#{$spacing-sm} - 2px);
-          }
-
-          .icon {
-            font-size: 1.25rem;
-          }
+        &:hover {
+          background: var(--primary-container);
         }
       }
     }
   }
 
   &__footer {
-    padding: var(--spacing-xl) var(--spacing-lg);
-    border-top: 1px solid rgba(var(--outline-variant), 0.1);
+    padding: $spacing-lg;
+    border-top: 1px solid var(--outline);
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
 
-    .footer-nav {
-      &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 var(--spacing-lg) 0;
-        margin: 0 0 $spacing-lg 0;
-        display: flex;
-        flex-direction: column;
-        gap: $spacing-xs;
-      }
-
-      &__item {
-        .footer-link {
-          display: flex;
-          align-items: center;
-          gap: $spacing-sm;
-          padding: $spacing-sm $spacing-md;
-          color: var(--on-surface-variant);
-          text-decoration: none;
-          font-family: $font-body;
-          font-weight: 500;
-          font-size: $body-sm;
-          border-radius: $radius-md;
-          transition: color 0.2s ease;
-
-          &:hover {
-            color: var(--primary);
-          }
-
-          .icon {
-            font-size: 1.25rem;
-          }
-        }
-      }
-    }
-
-    .user-profile {
+    .new-project-btn {
+      width: 100%;
+      height: 36px;
+      background: var(--surface-container-high);
+      border: 1px solid var(--outline);
+      color: var(--on-surface);
+      border-radius: $radius-md;
       display: flex;
       align-items: center;
-      gap: $spacing-sm;
-      padding: $spacing-sm $spacing-md;
+      justify-content: center;
+      gap: $spacing-xs;
+      font-size: $body-sm;
+      font-weight: 600;
+      cursor: pointer;
+      transition: $transition-fast;
 
-      .avatar {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: $radius-full;
-        object-fit: cover;
+      &:hover {
+        background: var(--surface-container-highest);
+        border-color: var(--outline-variant);
       }
+    }
 
-      .user-info {
-        flex: 1;
-        min-width: 0;
-
-        .name {
-          font-family: $font-body;
-          font-weight: 700;
-          font-size: $body-sm;
-          color: var(--on-surface);
-          margin: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .role {
-          font-family: $font-body;
-          font-size: $label-sm;
-          color: var(--on-surface-variant);
-          margin: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+    .footer-nav {
+      display: flex;
+      justify-content: space-around;
+      
+      .footer-link {
+        color: var(--on-surface-variant);
+        transition: color $transition-fast;
+        &:hover {
+          color: var(--primary);
         }
       }
     }
   }
-}
 
-// Mobile Responsive Styles
-@media (max-width: $tablet) {
-  .sidebar {
+  // Mobile visibility
+  @media (max-width: $tablet) {
     transform: translateX(-100%);
-    visibility: hidden;
-    opacity: 0;
-
     &--open {
       transform: translateX(0);
-      visibility: visible;
-      opacity: 1;
-    }
-
-    &__brand {
-      padding: $spacing-lg $spacing-md;
-
-      .brand {
-        &__logo {
-          margin-bottom: $spacing-md;
-
-          .logo {
-            width: 2rem;
-            height: 2rem;
-          }
-
-          .title {
-            h1 {
-              font-size: $title-md;
-            }
-
-            p {
-              font-size: $label-sm;
-            }
-          }
-        }
-
-        .new-project-btn {
-          padding: $spacing-xs $spacing-sm;
-          font-size: $label-sm;
-
-          svg {
-            size: 14px;
-          }
-        }
-      }
-    }
-
-    &__nav {
-      .nav__list {
-        .nav-link {
-          padding: $spacing-sm $spacing-md;
-          font-size: $body-sm;
-
-          .icon {
-            size: 18px;
-          }
-        }
-      }
-    }
-
-    &__footer {
-      .footer-nav__list {
-        .footer-link {
-          padding: $spacing-xs $spacing-sm;
-          font-size: $label-sm;
-
-          .icon {
-            size: 16px;
-          }
-        }
-      }
-
-      .user-profile {
-        padding: $spacing-xs $spacing-sm;
-
-        .avatar {
-          width: 2rem;
-          height: 2rem;
-        }
-
-        .user-info {
-          .name {
-            font-size: $label-sm;
-          }
-
-          .role {
-            font-size: $label-sm;
-          }
-        }
-      }
     }
   }
 }
 
-@media (max-width: $mobile) {
-  .sidebar {
-    width: 80%;
-    max-width: 280px;
-
-    &__brand {
-      padding: $spacing-md;
-
-      .brand {
-        &__logo {
-          margin-bottom: $spacing-sm;
-
-          .logo {
-            width: 1.75rem;
-            height: 1.75rem;
-          }
-
-          .title {
-            h1 {
-              font-size: $title-sm;
-            }
-
-            p {
-              font-size: $label-sm;
-            }
-          }
-        }
-
-        .new-project-btn {
-          display: none;
-        }
-      }
-    }
-
-    &__nav {
-      .nav__list {
-        .nav-link {
-          padding: $spacing-sm;
-          font-size: $label-sm;
-
-          .icon {
-            size: 16px;
-          }
-        }
-      }
-    }
-
-    &__footer {
-      .footer-nav__list {
-        .footer-link {
-          padding: $spacing-xs;
-          font-size: $label-sm;
-
-          .icon {
-            size: 14px;
-          }
-        }
-      }
-
-      .user-profile {
-        padding: $spacing-xs;
-
-        .avatar {
-          width: 1.75rem;
-          height: 1.75rem;
-        }
-
-        .user-info {
-          .name {
-            font-size: $label-sm;
-          }
-
-          .role {
-            display: none;
-          }
-        }
-      }
-    }
+// Ensure main content accounts for sidebar
+body {
+  padding-left: 240px;
+  @media (max-width: $tablet) {
+    padding-left: 0;
   }
 }
