@@ -126,6 +126,36 @@
     }
   }
 
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-2xl;
+    min-height: 300px;
+
+    .loading-spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--surface-container-high);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    p {
+      margin-top: $spacing-lg;
+      font-size: $body-lg;
+      color: var(--on-surface-variant);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
   .content-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));

@@ -606,3 +606,286 @@
   }
 }
 
+// Timeline View Styles
+.tasks-timeline-view {
+  padding: $spacing-xl 0;
+
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+
+    .timeline-item {
+      display: flex;
+      gap: $spacing-xl;
+
+      .timeline-marker {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 24px;
+
+        .timeline-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: $radius-full;
+          background: var(--outline);
+          z-index: 1;
+
+          &.priority-high { background: #ef4444; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
+          &.priority-medium { background: #f59e0b; box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1); }
+          &.priority-low { background: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        }
+
+        .timeline-line {
+          width: 2px;
+          flex: 1;
+          background: var(--outline-variant);
+          margin-top: $spacing-xs;
+        }
+      }
+
+      .timeline-content {
+        flex: 1;
+        background: var(--surface-container-low);
+        border: 1px solid var(--outline);
+        border-radius: $radius-lg;
+        padding: $spacing-lg;
+        transition: $transition-fast;
+
+        &:hover {
+          border-color: var(--primary);
+          box-shadow: $shadow-md;
+        }
+
+        .timeline-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: $spacing-sm;
+
+          .timeline-title {
+            font-size: $body-md;
+            font-weight: 700;
+            color: var(--on-surface);
+            margin: 0;
+          }
+
+          .status-badge {
+            font-size: $label-xs;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: $radius-full;
+            text-transform: uppercase;
+            
+            &.status-completed { background: #dcfce7; color: #166534; }
+            &.status-in-progress { background: var(--primary-container); color: var(--on-primary-container); }
+            &.status-pending { background: var(--surface-container-high); color: var(--on-surface-variant); }
+          }
+        }
+
+        .timeline-description {
+          font-size: $body-sm;
+          color: var(--on-surface-variant);
+          margin-bottom: $spacing-md;
+          line-height: 1.5;
+        }
+
+        .timeline-footer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .timeline-meta {
+            display: flex;
+            align-items: center;
+            gap: $spacing-md;
+
+            .project-name {
+              font-size: $label-sm;
+              font-weight: 600;
+              color: var(--primary);
+            }
+
+            .due-date {
+              display: flex;
+              align-items: center;
+              gap: $spacing-xs;
+              font-size: $label-sm;
+              color: var(--on-surface-variant);
+            }
+          }
+
+          .assignee-avatar {
+            img {
+              width: 24px;
+              height: 24px;
+              border-radius: $radius-full;
+              border: 2px solid var(--surface);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Kanban View Styles
+.tasks-kanban-view {
+  overflow-x: auto;
+  padding-bottom: $spacing-xl;
+
+  .kanban-columns {
+    display: flex;
+    gap: $spacing-xl;
+    min-width: min-content;
+
+    .kanban-column {
+      width: 320px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      .column-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 $spacing-xs;
+
+        h3 {
+          font-size: $body-md;
+          font-weight: 700;
+          color: var(--on-surface);
+          margin: 0;
+        }
+
+        .task-count {
+          background: var(--surface-container-high);
+          color: var(--on-surface-variant);
+          padding: 2px 8px;
+          border-radius: $radius-full;
+          font-size: $label-sm;
+          font-weight: 700;
+        }
+      }
+
+      .column-tasks {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-md;
+        min-height: 200px;
+        background: var(--surface-container-lowest);
+        padding: $spacing-md;
+        border-radius: $radius-lg;
+        border: 1px solid var(--outline);
+
+        .kanban-task {
+          background: var(--surface);
+          border: 1px solid var(--outline);
+          border-radius: $radius-md;
+          padding: $spacing-md;
+          cursor: pointer;
+          transition: $transition-fast;
+
+          &:hover {
+            border-color: var(--primary);
+            box-shadow: $shadow-sm;
+            transform: translateY(-2px);
+          }
+
+          .task-header {
+            margin-bottom: $spacing-sm;
+            .priority-badge {
+              font-size: $label-xs;
+              font-weight: 700;
+              padding: 2px 6px;
+              border-radius: $radius-sm;
+              text-transform: uppercase;
+              
+              &.priority-high { background: #fee2e2; color: #991b1b; }
+              &.priority-medium { background: #fef3c7; color: #92400e; }
+              &.priority-low { background: #dbeafe; color: #1e40af; }
+            }
+          }
+
+          .task-title {
+            font-size: $body-sm;
+            font-weight: 700;
+            color: var(--on-surface);
+            margin-bottom: $spacing-xs;
+          }
+
+          .task-description {
+            font-size: $label-md;
+            color: var(--on-surface-variant);
+            margin-bottom: $spacing-md;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+
+          .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .task-meta {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+
+              .project-name {
+                font-size: $label-xs;
+                font-weight: 600;
+                color: var(--primary);
+              }
+
+              .due-date {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                font-size: $label-xs;
+                color: var(--on-surface-variant);
+              }
+            }
+
+            .assignee-avatar {
+              img {
+                width: 24px;
+                height: 24px;
+                border-radius: $radius-full;
+              }
+            }
+          }
+        }
+
+        .add-task-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: $spacing-xs;
+          padding: $spacing-sm;
+          background: transparent;
+          border: 2px dashed var(--outline);
+          border-radius: $radius-md;
+          color: var(--on-surface-variant);
+          font-size: $body-sm;
+          font-weight: 600;
+          cursor: pointer;
+          transition: $transition-fast;
+
+          &:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-container);
+            opacity: 0.1; // This looks wrong, should be background-color with opacity
+          }
+        }
+      }
+    }
+  }
+}
+

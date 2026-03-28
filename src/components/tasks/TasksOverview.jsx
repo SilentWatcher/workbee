@@ -19,10 +19,12 @@ import {
   FiSave,
   FiMessageSquare,
   FiPaperclip,
-  FiTag
+  FiTag,
+  FiFileText
 } from 'react-icons/fi'
 import { useParams, useNavigate } from 'react-router-dom'
 import { triggerTaskCompletionConfetti, triggerMilestoneConfetti } from '../../utils/confetti'
+import StickyView from './StickyView'
 import './TasksOverview.scss'
 
 const TasksOverview = () => {
@@ -40,7 +42,14 @@ const TasksOverview = () => {
   const [editingTask, setEditingTask] = useState(false)
   const [showTaskForm, setShowTaskForm] = useState(false)
 
-  const tasksData = [
+  // Helper to format date as "Oct 18"
+  const formatDate = (date) => {
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  };
+
+  const todayStr = formatDate(new Date());
+
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       title: 'Update Design System documentation',
@@ -48,8 +57,8 @@ const TasksOverview = () => {
       project: 'Precision Design System',
       status: 'in-progress',
       priority: 'high',
-      dueDate: 'Oct 18',
-      createdDate: 'Oct 10',
+      dueDate: todayStr,
+      createdDate: todayStr,
       assignee: {
         name: 'Alex Rivera',
         avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDG_8wrdkSD7rqkRlMSM6-qbhl2Y7EaEV30ZAs-unmrc5-9gWr8p3Mkn64qp8Htx6nxVIQ4Jbsoptdf5QKD90nmUUBg1PC0N3DtKKLKHsrA-Lb9rQwTgAoKwBebiPyc1Layoiox4H2GS2bJhcqpzXpjv3L7oKBiN8TXabOK8vLpUpRGyyDIMsPi5yL3DPqgLIbPXNHDQbInSnyEO7EU0oYM9xN2zggmM0w4dTzM_PeIb5UvTdKAxUxjn3YBA0Rs3NS5NPYlwShhVQ'
@@ -66,13 +75,13 @@ const TasksOverview = () => {
     },
     {
       id: 2,
-      title: 'Review Q4 Product Roadmap with Stakeholders',
+      title: 'Review Q4 Product Roadmap',
       description: 'Schedule and conduct stakeholder meetings to review and approve the Q4 product roadmap.',
       project: 'Product Launch',
       status: 'pending',
       priority: 'medium',
-      dueDate: 'Oct 24',
-      createdDate: 'Oct 12',
+      dueDate: todayStr,
+      createdDate: todayStr,
       assignee: {
         name: 'Sarah Jenkins',
         avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAsr2ghT3lYftweZ1nXjYe-2wDmyuXpK9mexT6ZrswC41k6yossNmdGP6uDKxsJQPuW-XDbA70yKHryjFRrIpeC5f3sLItPYCyBTtO8H_bl9sqXyySj1AqBxW9c7NkZlhuTD9oqrOlT8p8kvq5j8pfnTWD-Fbmk_DtgEgQfw5enr7hHBImw0ge9tTDhKCfDUaCsRJsniNc4WT1nIts63tgJ42CimkkPRmYTSDgct_JJidd-cDPAxxTsoXR4Gp41fVixIDSyodXcuw'
@@ -81,82 +90,161 @@ const TasksOverview = () => {
       tags: ['planning', 'stakeholders'],
       comments: 1,
       attachments: 5,
-      subtasks: [
-        { id: 1, title: 'Prepare presentation materials', completed: true },
-        { id: 2, title: 'Schedule stakeholder meetings', completed: false },
-        { id: 3, title: 'Gather feedback and incorporate changes', completed: false }
-      ]
+      subtasks: []
     },
     {
       id: 3,
-      title: 'Draft final audit report for finance team',
-      description: 'Complete the comprehensive audit report for the finance team including all findings and recommendations.',
+      title: 'Draft final audit report',
+      description: 'Complete the comprehensive audit report for the finance team.',
       project: 'Internal Audit',
       status: 'completed',
       priority: 'low',
-      dueDate: 'Oct 15',
-      createdDate: 'Oct 1',
+      dueDate: todayStr,
+      createdDate: todayStr,
       assignee: {
         name: 'Marcus Chen',
         avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHcxQWgyR8hkLJuegUGBRfUhZz6sdGzu_IMbCbat-DgiYm0ih3AKbS4DDvXuAGRCeLdolvv-fXIA2YW2Z2f_tPtYN1s5qzzEkX3AUUKnEOt_3pjc9h-wOmFdwFNi6j_Q3KTmg8RqNs6Ma3stovjBzBamN7vfyKTZ7-Yk8fh_AUnVIID10_kCpMaD0JQn8QPh--FIxYGGG2ZGnVU0jgHYBu3hA--ETGaxjaq6SqPy8DRBr9ufq7icz3oEkpCqm9dcIPWIpAsRV54g'
       },
       progress: 100,
-      tags: ['audit', 'finance', 'completed'],
+      tags: ['audit', 'finance'],
       comments: 8,
       attachments: 12,
-      subtasks: [
-        { id: 1, title: 'Gather financial data', completed: true },
-        { id: 2, title: 'Conduct audit analysis', completed: true },
-        { id: 3, title: 'Write final report', completed: true }
-      ]
+      subtasks: []
     },
     {
       id: 4,
       title: 'Implement API rate limiting',
-      description: 'Add rate limiting functionality to prevent API abuse and ensure fair usage.',
+      description: 'Add rate limiting functionality to prevent API abuse.',
       project: 'API Infrastructure',
       status: 'in-progress',
       priority: 'high',
-      dueDate: 'Oct 20',
-      createdDate: 'Oct 14',
+      dueDate: todayStr,
+      createdDate: todayStr,
       assignee: {
         name: 'Jordan Smith',
         avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP3yozngkh8-L3vmfDBgpRlAngQFtk587Hv-DCpC6yrzUxMpU0xSsedFYPTpw-MpfijTS42wwGy2b2LNwf05vl42n0Ivr1ISVATaktzfUbGDf44ug-OK2JeNgOd4q_WZqTCma4WP8h7Z43UqguSXhueaGR3v9pciiWi5mzzX1vrUlIxcbwwaJ7XeZy2IVJB_GrgyV0bugC5mYLM-omQ7OMOXK0oll2up-4Y_7JtVzahPmjAac51rzQ2r5dhS0Go3S5-Dk9tsvo3w'
       },
       progress: 40,
-      tags: ['api', 'backend', 'security'],
+      tags: ['api', 'backend'],
       comments: 2,
       attachments: 1,
-      subtasks: [
-        { id: 1, title: 'Research rate limiting strategies', completed: true },
-        { id: 2, title: 'Implement middleware', completed: false },
-        { id: 3, title: 'Add monitoring and alerts', completed: false }
-      ]
+      subtasks: []
     },
     {
       id: 5,
       title: 'User testing for mobile app',
-      description: 'Conduct comprehensive user testing sessions for the mobile application and gather feedback.',
+      description: 'Conduct comprehensive user testing sessions.',
       project: 'Mobile Development',
       status: 'pending',
       priority: 'medium',
-      dueDate: 'Oct 25',
-      createdDate: 'Oct 13',
+      dueDate: todayStr,
+      createdDate: todayStr,
       assignee: {
         name: 'Emma Wilson',
         avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDP6LFPgIwefieI6OW3USyzEHwyJYZ1zrI5ff8xbqidBum64p8olX8bkHkCy2HsilLrwAo2h_cs0c6BniZ8k1x1glBdgS-Vysehy-cc05m3bZudCFj95FqCbYh283uM3IEyC0QkWD4XRwtXaBbnFkM8VqZyqoU6KsFr5kd-RcBN12vOucMsAdpFJbdVwM1_fVSuIcSUPDJXWvrpUI5G-RShKXV99ytBabv04XEDGJqVZG5F1B8IQpdmg6SlUoOjCFlLzH4mkVV9Q'
       },
       progress: 10,
-      tags: ['testing', 'mobile', 'ux'],
+      tags: ['testing', 'mobile'],
       comments: 0,
       attachments: 0,
-      subtasks: [
-        { id: 1, title: 'Recruit test participants', completed: false },
-        { id: 2, title: 'Prepare test scenarios', completed: false },
-        { id: 3, title: 'Conduct testing sessions', completed: false }
-      ]
+      subtasks: []
+    },
+    {
+      id: 6,
+      title: 'Database optimization',
+      description: 'Optimize slow queries and add missing indexes.',
+      project: 'Backend Infrastructure',
+      status: 'pending',
+      priority: 'high',
+      dueDate: todayStr,
+      assignee: { name: 'Jordan Smith', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP3yozngkh8-L3vmfDBgpRlAngQFtk587Hv-DCpC6yrzUxMpU0xSsedFYPTpw-MpfijTS42wwGy2b2LNwf05vl42n0Ivr1ISVATaktzfUbGDf44ug-OK2JeNgOd4q_WZqTCma4WP8h7Z43UqguSXhueaGR3v9pciiWi5mzzX1vrUlIxcbwwaJ7XeZy2IVJB_GrgyV0bugC5mYLM-omQ7OMOXK0oll2up-4Y_7JtVzahPmjAac51rzQ2r5dhS0Go3S5-Dk9tsvo3w' },
+      progress: 0,
+      tags: ['database', 'performance']
+    },
+    {
+      id: 7,
+      title: 'Landing page redesign',
+      description: 'New hero section and updated value propositions.',
+      project: 'Marketing Website',
+      status: 'in-progress',
+      priority: 'medium',
+      dueDate: todayStr,
+      assignee: { name: 'Alex Rivera', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDG_8wrdkSD7rqkRlMSM6-qbhl2Y7EaEV30ZAs-unmrc5-9gWr8p3Mkn64qp8Htx6nxVIQ4Jbsoptdf5QKD90nmUUBg1PC0N3DtKKLKHsrA-Lb9rQwTgAoKwBebiPyc1Layoiox4H2GS2bJhcqpzXpjv3L7oKBiN8TXabOK8vLpUpRGyyDIMsPi5yL3DPqgLIbPXNHDQbInSnyEO7EU0oYM9xN2zggmM0w4dTzM_PeIb5UvTdKAxUxjn3YBA0Rs3NS5NPYlwShhVQ' },
+      progress: 50,
+      tags: ['marketing', 'design']
+    },
+    {
+      id: 8,
+      title: 'Security patch deployment',
+      description: 'Deploy critical security fixes to all environments.',
+      project: 'DevOps',
+      status: 'completed',
+      priority: 'high',
+      dueDate: todayStr,
+      assignee: { name: 'Marcus Chen', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHcxQWgyR8hkLJuegUGBRfUhZz6sdGzu_IMbCbat-DgiYm0ih3AKbS4DDvXuAGRCeLdolvv-fXIA2YW2Z2f_tPtYN1s5qzzEkX3AUUKnEOt_3pjc9h-wOmFdwFNi6j_Q3KTmg8RqNs6Ma3stovjBzBamN7vfyKTZ7-Yk8fh_AUnVIID10_kCpMaD0JQn8QPh--FIxYGGG2ZGnVU0jgHYBu3hA--ETGaxjaq6SqPy8DRBr9ufq7icz3oEkpCqm9dcIPWIpAsRV54g' },
+      progress: 100,
+      tags: ['security', 'devops']
+    },
+    {
+      id: 9,
+      title: 'New feature brainstorming',
+      description: 'Team workshop to define the roadmap for next quarter.',
+      project: 'Product Strategy',
+      status: 'pending',
+      priority: 'low',
+      dueDate: todayStr,
+      assignee: { name: 'Sarah Jenkins', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAsr2ghT3lYftweZ1nXjYe-2wDmyuXpK9mexT6ZrswC41k6yossNmdGP6uDKxsJQPuW-XDbA70yKHryjFRrIpeC5f3sLItPYCyBTtO8H_bl9sqXyySj1AqBxW9c7NkZlhuTD9oqrOlT8p8kvq5j8pfnTWD-Fbmk_DtgEgQfw5enr7hHBImw0ge9tTDhKCfDUaCsRJsniNc4WT1nIts63tgJ42CimkkPRmYTSDgct_JJidd-cDPAxxTsoXR4Gp41fVixIDSyodXcuw' },
+      progress: 0,
+      tags: ['strategy', 'planning']
+    },
+    {
+      id: 10,
+      title: 'Customer support sync',
+      description: 'Weekly meeting to discuss top customer issues.',
+      project: 'Customer Success',
+      status: 'in-progress',
+      priority: 'medium',
+      dueDate: todayStr,
+      assignee: { name: 'Emma Wilson', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDP6LFPgIwefieI6OW3USyzEHwyJYZ1zrI5ff8xbqidBum64p8olX8bkHkCy2HsilLrwAo2h_cs0c6BniZ8k1x1glBdgS-Vysehy-cc05m3bZudCFj95FqCbYh283uM3IEyC0QkWD4XRwtXaBbnFkM8VqZyqoU6KsFr5kd-RcBN12vOucMsAdpFJbdVwM1_fVSuIcSUPDJXWvrpUI5G-RShKXV99ytBabv04XEDGJqVZG5F1B8IQpdmg6SlUoOjCFlLzH4mkVV9Q' },
+      progress: 30,
+      tags: ['support', 'sync']
     }
-  ]
+  ]);
+
+  const [newTask, setNewTask] = useState({
+    title: '',
+    description: '',
+    priority: 'medium',
+    dueDate: new Date().toISOString().split('T')[0],
+    project: '',
+    assignee: ''
+  });
+
+  const handleCreateTask = (e) => {
+    e.preventDefault();
+    const assigneeObj = teamMembers.find(m => m.id === newTask.assignee) || teamMembers[1];
+    const taskToAdd = {
+      ...newTask,
+      id: Date.now(),
+      status: 'pending',
+      progress: 0,
+      assignee: {
+        name: assigneeObj.name,
+        avatar: assigneeObj.avatar
+      },
+      dueDate: formatDate(new Date(newTask.dueDate))
+    };
+    setTasks([taskToAdd, ...tasks]);
+    setShowTaskForm(false);
+    setNewTask({
+      title: '',
+      description: '',
+      priority: 'medium',
+      dueDate: new Date().toISOString().split('T')[0],
+      project: '',
+      assignee: ''
+    });
+  };
 
   const container = {
     hidden: { opacity: 0 },
@@ -224,12 +312,19 @@ const TasksOverview = () => {
     triggerMilestoneConfetti()
   }
 
-  const filteredTasks = tasksData.filter(task => {
+  const parseDate = (dateStr) => {
+    if (!dateStr) return new Date(0)
+    // Handle "Oct 18" format by adding current year
+    const currentYear = new Date().getFullYear()
+    return new Date(`${dateStr}, ${currentYear}`)
+  }
+
+  const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                         task.description.toLowerCase().includes(searchQuery.toLowerCase());
+                         (task.description && task.description.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesStatus = filters.status === 'all' || task.status === filters.status;
     const matchesAssignee = filters.assignee === 'all' || 
-                           task.assignee.name.toLowerCase().replace(' ', '') === filters.assignee.toLowerCase();
+                           task.assignee.name.toLowerCase().includes(filters.assignee.toLowerCase());
     const matchesPriority = filters.priority === 'all' || task.priority === filters.priority;
     
     return matchesSearch && matchesStatus && matchesAssignee && matchesPriority;
@@ -284,7 +379,7 @@ const TasksOverview = () => {
   )
 
   const renderTimelineView = () => {
-    const sortedTasks = [...filteredTasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+    const sortedTasks = [...filteredTasks].sort((a, b) => parseDate(a.dueDate) - parseDate(b.dueDate))
     
     return (
       <div className="tasks-timeline-view">
@@ -575,6 +670,13 @@ const TasksOverview = () => {
               <FiLayout size={18} />
               Kanban View
             </button>
+            <button 
+              className={`view-btn ${viewMode === 'sticky' ? 'active' : ''}`}
+              onClick={() => setViewMode('sticky')}
+            >
+              <FiFileText size={18} />
+              Sticky View
+            </button>
           </div>
         </div>
         <div className="header-actions">
@@ -642,6 +744,14 @@ const TasksOverview = () => {
         {viewMode === 'list' && renderListView()}
         {viewMode === 'timeline' && renderTimelineView()}
         {viewMode === 'kanban' && renderKanbanView()}
+        {viewMode === 'sticky' && (
+          <StickyView 
+            tasks={tasks} 
+            onAddTask={() => setShowTaskForm(true)}
+            onDeleteTask={(id) => setTasks(prev => prev.filter(t => t.id !== id))}
+            onUpdateTask={(updatedTask) => setTasks(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t))}
+          />
+        )}
       </div>
 
       {/* Task Detail Modal */}
@@ -662,21 +772,35 @@ const TasksOverview = () => {
               </button>
             </div>
             
-            <form className="task-form">
+            <form className="task-form" onSubmit={handleCreateTask}>
               <div className="form-group">
                 <label>Task Title</label>
-                <input type="text" placeholder="Enter task title..." />
+                <input 
+                  type="text" 
+                  placeholder="Enter task title..." 
+                  value={newTask.title}
+                  onChange={(e) => setNewTask({...newTask, title: e.target.value})}
+                  required
+                />
               </div>
               
               <div className="form-group">
                 <label>Description</label>
-                <textarea placeholder="Enter task description..." rows={4}></textarea>
+                <textarea 
+                  placeholder="Enter task description..." 
+                  rows={4}
+                  value={newTask.description}
+                  onChange={(e) => setNewTask({...newTask, description: e.target.value})}
+                ></textarea>
               </div>
               
               <div className="form-row">
                 <div className="form-group">
                   <label>Priority</label>
-                  <select>
+                  <select 
+                    value={newTask.priority}
+                    onChange={(e) => setNewTask({...newTask, priority: e.target.value})}
+                  >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
@@ -685,25 +809,42 @@ const TasksOverview = () => {
                 
                 <div className="form-group">
                   <label>Due Date</label>
-                  <input type="date" />
+                  <input 
+                    type="date" 
+                    value={newTask.dueDate}
+                    onChange={(e) => setNewTask({...newTask, dueDate: e.target.value})}
+                  />
                 </div>
               </div>
               
               <div className="form-group">
                 <label>Project</label>
-                <select>
+                <select
+                  value={newTask.project}
+                  onChange={(e) => setNewTask({...newTask, project: e.target.value})}
+                  required
+                >
                   <option value="">Select Project</option>
-                  <option value="precision-design">Precision Design System</option>
-                  <option value="product-launch">Product Launch</option>
-                  <option value="internal-audit">Internal Audit</option>
-                  <option value="api-infrastructure">API Infrastructure</option>
-                  <option value="mobile-development">Mobile Development</option>
+                  <option value="Precision Design System">Precision Design System</option>
+                  <option value="Product Launch">Product Launch</option>
+                  <option value="Internal Audit">Internal Audit</option>
+                  <option value="API Infrastructure">API Infrastructure</option>
+                  <option value="Mobile Development">Mobile Development</option>
+                  <option value="Backend Infrastructure">Backend Infrastructure</option>
+                  <option value="Marketing Website">Marketing Website</option>
+                  <option value="DevOps">DevOps</option>
+                  <option value="Product Strategy">Product Strategy</option>
+                  <option value="Customer Success">Customer Success</option>
                 </select>
               </div>
               
               <div className="form-group">
                 <label>Assignee</label>
-                <select>
+                <select
+                  value={newTask.assignee}
+                  onChange={(e) => setNewTask({...newTask, assignee: e.target.value})}
+                  required
+                >
                   <option value="">Unassigned</option>
                   {teamMembers.filter(m => m.id !== 'all').map((member) => (
                     <option key={member.id} value={member.id}>

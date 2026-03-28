@@ -41,9 +41,9 @@ const WorkspaceProjects = () => {
   const dispatch = useDispatch()
   
   // Redux state
-  const { workspaces, selectedWorkspaceId } = useSelector(state => state.workspaces)
-  const { projects, selectedProjectId } = useSelector(state => state.projects)
-  const { tasks } = useSelector(state => state.tasks)
+  const { workspaces, selectedWorkspaceId, status: workspacesStatus } = useSelector(state => state.workspaces)
+  const { projects, selectedProjectId, status: projectsStatus } = useSelector(state => state.projects)
+  const { tasks, status: tasksStatus } = useSelector(state => state.tasks)
   
   // Local state
   const [view, setView] = useState('workspaces') // 'workspaces', 'projects', 'tasks'
@@ -234,12 +234,18 @@ const WorkspaceProjects = () => {
         </div>
       </section>
 
-      <motion.div 
-        className="content-grid"
-        layout
-      >
-        <AnimatePresence mode='popLayout'>
-          {filteredItems.map(item => (
+      {workspacesStatus === 'loading' || projectsStatus === 'loading' || tasksStatus === 'loading' ? (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Loading...</p>
+        </div>
+      ) : (
+        <motion.div 
+          className="content-grid"
+          layout
+        >
+          <AnimatePresence mode='popLayout'>
+            {filteredItems.map(item => (
             <motion.div
               key={item.id}
               layout
@@ -314,6 +320,7 @@ const WorkspaceProjects = () => {
           )}
         </AnimatePresence>
       </motion.div>
+      )}
 
       {/* Modal for CRUD */}
       <AnimatePresence>
