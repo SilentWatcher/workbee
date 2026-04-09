@@ -20,11 +20,9 @@ import {
   FiMessageSquare,
   FiPaperclip,
   FiTag,
-  FiFileText
 } from 'react-icons/fi'
 import { useParams, useNavigate } from 'react-router-dom'
 import { triggerTaskCompletionConfetti, triggerMilestoneConfetti } from '../../utils/confetti'
-import StickyView from './StickyView'
 import './TasksOverview.scss'
 
 const TasksOverview = () => {
@@ -141,7 +139,7 @@ const TasksOverview = () => {
       createdDate: todayStr,
       assignee: {
         name: 'Emma Wilson',
-        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDP6LFPgIwefieI6OW3USyzEHwyJYZ1zrI5ff8xbqidBum64p8olX8bkHkCy2HsilLrwAo2h_cs0c6BniZ8k1x1glBdgS-Vysehy-cc05m3bZudCFj95FqCbYh283uM3IEyC0QkWD4XRwtXaBbnFkM8VqZyqoU6KsFr5kd-RcBN12vOucMsAdpFJbdVwM1_fVSuIcSUPDJXWvrpUI5G-RShKXV99ytBabv04XEDGJqVZG5F1B8IQpdmg6SlUoOjCFlLzH4mkVV9Q'
+        avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP3yozngkh8-L3vmfDBgpRlAngQFtk587Hv-DCpC6yrzUxMpU0xSsedFYPTpw-MpfijTS42wwGy2b2LNwf05vl42n0Ivr1ISVATaktzfUbGDf44ug-OK2JeNgOd4q_WZqTCma4WP8h7Z43UqguSXhueaGR3v9pciiWi5mzzX1vrUlIxcbwwaJ7XeZy2IVJB_GrgyV0bugC5mYLM-omQ7OMOXK0oll2up-4Y_7JtVzahPmjAac51rzQ2r5dhS0Go3S5-Dk9tsvo3w'
       },
       progress: 10,
       tags: ['testing', 'mobile'],
@@ -205,7 +203,7 @@ const TasksOverview = () => {
       status: 'in-progress',
       priority: 'medium',
       dueDate: todayStr,
-      assignee: { name: 'Emma Wilson', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDP6LFPgIwefieI6OW3USyzEHwyJYZ1zrI5ff8xbqidBum64p8olX8bkHkCy2HsilLrwAo2h_cs0c6BniZ8k1x1glBdgS-Vysehy-cc05m3bZudCFj95FqCbYh283uM3IEyC0QkWD4XRwtXaBbnFkM8VqZyqoU6KsFr5kd-RcBN12vOucMsAdpFJbdVwM1_fVSuIcSUPDJXWvrpUI5G-RShKXV99ytBabv04XEDGJqVZG5F1B8IQpdmg6SlUoOjCFlLzH4mkVV9Q' },
+      assignee: { name: 'Emma Wilson', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP3yozngkh8-L3vmfDBgpRlAngQFtk587Hv-DCpC6yrzUxMpU0xSsedFYPTpw-MpfijTS42wwGy2b2LNwf05vl42n0Ivr1ISVATaktzfUbGDf44ug-OK2JeNgOd4q_WZqTCma4WP8h7Z43UqguSXhueaGR3v9pciiWi5mzzX1vrUlIxcbwwaJ7XeZy2IVJB_GrgyV0bugC5mYLM-omQ7OMOXK0oll2up-4Y_7JtVzahPmjAac51rzQ2r5dhS0Go3S5-Dk9tsvo3w' },
       progress: 30,
       tags: ['support', 'sync']
     }
@@ -267,7 +265,7 @@ const TasksOverview = () => {
     { id: 'sarah', name: 'Sarah Jenkins', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAsr2ghT3lYftweZ1nXjYe-2wDmyuXpK9mexT6ZrswC41k6yossNmdGP6uDKxsJQPuW-XDbA70yKHryjFRrIpeC5f3sLItPYCyBTtO8H_bl9sqXyySj1AqBxW9c7NkZlhuTD9oqrOlT8p8kvq5j8pfnTWD-Fbmk_DtgEgQfw5enr7hHBImw0ge9tTDhKCfDUaCsRJsniNc4WT1nIts63tgJ42CimkkPRmYTSDgct_JJidd-cDPAxxTsoXR4Gp41fVixIDSyodXcuw' },
     { id: 'marcus', name: 'Marcus Chen', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDHcxQWgyR8hkLJuegUGBRfUhZz6sdGzu_IMbCbat-DgiYm0ih3AKbS4DDvXuAGRCeLdolvv-fXIA2YW2Z2f_tPtYN1s5qzzEkX3AUUKnEOt_3pjc9h-wOmFdwFNi6j_Q3KTmg8RqNs6Ma3stovjBzBamN7vfyKTZ7-Yk8fh_AUnVIID10_kCpMaD0JQn8QPh--FIxYGGG2ZGnVU0jgHYBu3hA--ETGaxjaq6SqPy8DRBr9ufq7icz3oEkpCqm9dcIPWIpAsRV54g' },
     { id: 'jordan', name: 'Jordan Smith', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP3yozngkh8-L3vmfDBgpRlAngQFtk587Hv-DCpC6yrzUxMpU0xSsedFYPTpw-MpfijTS42wwGy2b2LNwf05vl42n0Ivr1ISVATaktzfUbGDf44ug-OK2JeNgOd4q_WZqTCma4WP8h7Z43UqguSXhueaGR3v9pciiWi5mzzX1vrUlIxcbwwaJ7XeZy2IVJB_GrgyV0bugC5mYLM-omQ7OMOXK0oll2up-4Y_7JtVzahPmjAac51rzQ2r5dhS0Go3S5-Dk9tsvo3w' },
-    { id: 'emma', name: 'Emma Wilson', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDP6LFPgIwefieI6OW3USyzEHwyJYZ1zrI5ff8xbqidBum64p8olX8bkHkCy2HsilLrwAo2h_cs0c6BniZ8k1x1glBdgS-Vysehy-cc05m3bZudCFj95FqCbYh283uM3IEyC0QkWD4XRwtXaBbnFkM8VqZyqoU6KsFr5kd-RcBN12vOucMsAdpFJbdVwM1_fVSuIcSUPDJXWvrpUI5G-RShKXV99ytBabv04XEDGJqVZG5F1B8IQpdmg6SlUoOjCFlLzH4mkVV9Q' }
+    { id: 'emma', name: 'Emma Wilson', avatar: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAP3yozngkh8-L3vmfDBgpRlAngQFtk587Hv-DCpC6yrzUxMpU0xSsedFYPTpw-MpfijTS42wwGy2b2LNwf05vl42n0Ivr1ISVATaktzfUbGDf44ug-OK2JeNgOd4q_WZqTCma4WP8h7Z43UqguSXhueaGR3v9pciiWi5mzzX1vrUlIxcbwwaJ7XeZy2IVJB_GrgyV0bugC5mYLM-omQ7OMOXK0oll2up-4Y_7JtVzahPmjAac51rzQ2r5dhS0Go3S5-Dk9tsvo3w' }
   ]
 
   const getStatusClass = (status) => {
@@ -670,13 +668,6 @@ const TasksOverview = () => {
               <FiLayout size={18} />
               Kanban View
             </button>
-            <button 
-              className={`view-btn ${viewMode === 'sticky' ? 'active' : ''}`}
-              onClick={() => setViewMode('sticky')}
-            >
-              <FiFileText size={18} />
-              Sticky View
-            </button>
           </div>
         </div>
         <div className="header-actions">
@@ -744,14 +735,6 @@ const TasksOverview = () => {
         {viewMode === 'list' && renderListView()}
         {viewMode === 'timeline' && renderTimelineView()}
         {viewMode === 'kanban' && renderKanbanView()}
-        {viewMode === 'sticky' && (
-          <StickyView 
-            tasks={tasks} 
-            onAddTask={() => setShowTaskForm(true)}
-            onDeleteTask={(id) => setTasks(prev => prev.filter(t => t.id !== id))}
-            onUpdateTask={(updatedTask) => setTasks(prev => prev.map(t => t.id === updatedTask.id ? updatedTask : t))}
-          />
-        )}
       </div>
 
       {/* Task Detail Modal */}
