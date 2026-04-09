@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { THEMES, THEME_CONFIG, generateThemeCSS } from '../config/themes';
+import { THEMES, THEME_CONFIG } from '../config/themes';
 
 const ThemeContext = createContext();
 
@@ -26,21 +26,23 @@ export const ThemeProvider = ({ children }) => {
     // Update data attribute on document
     document.documentElement.setAttribute('data-theme', theme);
     
-    // Apply theme colors as CSS custom properties
+    // Apply theme colors as CSS custom properties directly on :root
     const themeData = THEMES[theme];
     if (themeData) {
       const root = document.documentElement;
-      const cssVars = generateThemeCSS(themeData);
-      
-      // Create a style element to inject CSS variables
-      let styleElement = document.getElementById('theme-variables');
-      if (!styleElement) {
-        styleElement = document.createElement('style');
-        styleElement.id = 'theme-variables';
-        document.head.appendChild(styleElement);
-      }
-      
-      styleElement.textContent = `:root {\n  ${cssVars}\n}`;
+      Object.entries(themeData.colors).forEach(([key, value]) => {
+        const cssVar = `--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+        root.style.setProperty(cssVar, value);
+      });
+
+      // Keep initial boot inline styles in sync when toggling theme.
+      // Without this, some inherited text/background can remain from first paint.
+      const surface = themeData.colors.surface;
+      const onSurface = themeData.colors.onSurface;
+      root.style.backgroundColor = surface;
+      root.style.color = onSurface;
+      document.body.style.backgroundColor = surface;
+      document.body.style.color = onSurface;
     }
     
     // Save to localStorage

@@ -1,5 +1,5 @@
 // Work Bee Theme System
-// Theme switching functionality for yellow/black dark and yellow/white light themes
+// Keep CSS defaults aligned with runtime theme config to avoid flash on reload
 
 @use './variables.scss' as *;
 
@@ -7,141 +7,141 @@
 :root {
   --theme-mode: 'light';
   
-  // Default to light theme colors
-  --primary: #fbbf24;
-  --primary-container: #fef3c7;
-  --on-primary: #78350f;
-  --on-primary-container: #451a03;
+  // Default to light theme colors (same as src/config/themes.js)
+  --primary: #4f46e5;
+  --primary-container: #eef2ff;
+  --on-primary: #ffffff;
+  --on-primary-container: #3730a3;
   
-  --secondary: #e5e7eb;
-  --secondary-container: #f9fafb;
-  --on-secondary: #374151;
-  --on-secondary-container: #1f2937;
+  --secondary: #64748b;
+  --secondary-container: #f1f5f9;
+  --on-secondary: #1e293b;
+  --on-secondary-container: #0f172a;
   
-  --tertiary: #fde68a;
-  --tertiary-container: #fef9c3;
-  --on-tertiary: #854d0e;
-  --on-tertiary-container: #713f12;
+  --tertiary: #0891b2;
+  --tertiary-container: #ecfeff;
+  --on-tertiary: #ffffff;
+  --on-tertiary-container: #155e75;
   
   --surface: #ffffff;
-  --surface-container-low: #fafafa;
-  --surface-container: #f4f4f5;
-  --surface-container-high: #e4e4e7;
-  --surface-container-highest: #d4d4d8;
+  --surface-container-low: #f8fafc;
+  --surface-container: #f1f5f9;
+  --surface-container-high: #e2e8f0;
+  --surface-container-highest: #cbd5e1;
   --surface-container-lowest: #ffffff;
-  --surface-dim: #d1d5db;
+  --surface-dim: #f1f5f9;
   --surface-bright: #ffffff;
-  --surface-variant: #e5e7eb;
+  --surface-variant: #f1f5f9;
   
-  --error: #dc2626;
+  --error: #ef4444;
   --error-container: #fef2f2;
   --on-error: #ffffff;
   --on-error-container: #991b1b;
   
-  --outline: #d1d5db;
-  --outline-variant: #e5e7eb;
+  --outline: #e2e8f0;
+  --outline-variant: #cbd5e1;
   
-  --inverse-surface: #404040;
-  --inverse-on-surface: #fafafa;
-  --inverse-primary: #1c1917;
+  --inverse-surface: #0f172a;
+  --inverse-on-surface: #f8fafc;
+  --inverse-primary: #818cf8;
   
-  --on-surface: #1c1917;
-  --on-surface-variant: #404040;
-  --on-background: #1c1917;
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --on-background: #0f172a;
   
-  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.8);
 }
 
-// Light theme (yellow & white)
+// Light theme
 [data-theme="light"] {
-  --primary: #fbbf24;
-  --primary-container: #fef3c7;
-  --on-primary: #78350f;
-  --on-primary-container: #451a03;
+  --primary: #4f46e5;
+  --primary-container: #eef2ff;
+  --on-primary: #ffffff;
+  --on-primary-container: #3730a3;
 
-  --secondary: #e5e7eb;
-  --secondary-container: #f9fafb;
-  --on-secondary: #374151;
-  --on-secondary-container: #1f2937;
+  --secondary: #64748b;
+  --secondary-container: #f1f5f9;
+  --on-secondary: #1e293b;
+  --on-secondary-container: #0f172a;
 
-  --tertiary: #fde68a;
-  --tertiary-container: #fef9c3;
-  --on-tertiary: #854d0e;
-  --on-tertiary-container: #713f12;
+  --tertiary: #0891b2;
+  --tertiary-container: #ecfeff;
+  --on-tertiary: #ffffff;
+  --on-tertiary-container: #155e75;
 
   --surface: #ffffff;
-  --surface-container-low: #fafafa;
-  --surface-container: #f4f4f5;
-  --surface-container-high: #e4e4e7;
-  --surface-container-highest: #d4d4d8;
+  --surface-container-low: #f8fafc;
+  --surface-container: #f1f5f9;
+  --surface-container-high: #e2e8f0;
+  --surface-container-highest: #cbd5e1;
   --surface-container-lowest: #ffffff;
-  --surface-dim: #d1d5db;
+  --surface-dim: #f1f5f9;
   --surface-bright: #ffffff;
-  --surface-variant: #e5e7eb;
-
-  --error: #dc2626;
-  --error-container: #fef2f2;
-  --on-error: #ffffff;
-  --on-error-container: #991b1b;
-
-  --outline: #d1d5db;
-  --outline-variant: #e5e7eb;
-
-  --inverse-surface: #404040;
-  --inverse-on-surface: #fafafa;
-  --inverse-primary: #1c1917;
-
-  --on-surface: #1c1917;
-  --on-surface-variant: #404040;
-  --on-background: #1c1917;
-
-  --glass-bg: rgba(255, 255, 255, 0.7);
-}
-
-// Dark theme (yellow & black)
-[data-theme="dark"] {
-  --primary: #facc15;
-  --primary-container: #854d0e;
-  --on-primary: #1c1917;
-  --on-primary-container: #fef3c7;
-
-  --secondary: #d4d4d8;
-  --secondary-container: #262626;
-  --on-secondary: #1c1917;
-  --on-secondary-container: #a1a1aa;
-
-  --tertiary: #fde047;
-  --tertiary-container: #713f12;
-  --on-tertiary: #1c1917;
-  --on-tertiary-container: #fef9c3;
-
-  --surface: #000000;
-  --surface-container-low: #171717;
-  --surface-container: #262626;
-  --surface-container-high: #404040;
-  --surface-container-highest: #525252;
-  --surface-container-lowest: #0a0a0a;
-  --surface-dim: #000000;
-  --surface-bright: #171717;
-  --surface-variant: #262626;
+  --surface-variant: #f1f5f9;
 
   --error: #ef4444;
+  --error-container: #fef2f2;
+  --on-error: #ffffff;
+  --on-error-container: #991b1b;
+
+  --outline: #e2e8f0;
+  --outline-variant: #cbd5e1;
+
+  --inverse-surface: #0f172a;
+  --inverse-on-surface: #f8fafc;
+  --inverse-primary: #818cf8;
+
+  --on-surface: #0f172a;
+  --on-surface-variant: #475569;
+  --on-background: #0f172a;
+
+  --glass-bg: rgba(255, 255, 255, 0.8);
+}
+
+// Dark theme
+[data-theme="dark"] {
+  --primary: #818cf8;
+  --primary-container: #312e81;
+  --on-primary: #ffffff;
+  --on-primary-container: #eef2ff;
+
+  --secondary: #94a3b8;
+  --secondary-container: #1e293b;
+  --on-secondary: #f1f5f9;
+  --on-secondary-container: #cbd5e1;
+
+  --tertiary: #22d3ee;
+  --tertiary-container: #164e63;
+  --on-tertiary: #0891b2;
+  --on-tertiary-container: #ecfeff;
+
+  --surface: #0f172a;
+  --surface-container-low: #1e293b;
+  --surface-container: #1e293b;
+  --surface-container-high: #334155;
+  --surface-container-highest: #475569;
+  --surface-container-lowest: #020617;
+  --surface-dim: #0f172a;
+  --surface-bright: #1e293b;
+  --surface-variant: #1e293b;
+
+  --error: #f87171;
   --error-container: #7f1d1d;
   --on-error: #ffffff;
   --on-error-container: #fecaca;
 
-  --outline: #525252;
-  --outline-variant: #404040;
+  --outline: #334155;
+  --outline-variant: #475569;
 
-  --inverse-surface: #fafafa;
-  --inverse-on-surface: #1c1917;
-  --inverse-primary: #facc15;
+  --inverse-surface: #f8fafc;
+  --inverse-on-surface: #0f172a;
+  --inverse-primary: #4f46e5;
 
-  --on-surface: #fafafa;
-  --on-surface-variant: #d4d4d8;
-  --on-background: #fafafa;
+  --on-surface: #f1f5f9;
+  --on-surface-variant: #94a3b8;
+  --on-background: #f1f5f9;
 
-  --glass-bg: rgba(0, 0, 0, 0.7);
+  --glass-bg: rgba(15, 23, 42, 0.8);
 }
 
 // Theme transition
