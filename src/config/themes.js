@@ -121,6 +121,9 @@ export const THEMES = {
 export const THEME_CONFIG = {
   defaultTheme: 'light',
   localStorageKey: 'workbee-theme',
+  accentStorageKey: 'workbee-accent',
+  profileStorageKey: 'workbee-profile',
+  preferencesStorageKey: 'workbee-preferences',
   transitionDuration: '0.3s',
   transitionEasing: 'ease',
 };

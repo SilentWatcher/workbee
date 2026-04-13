@@ -12,11 +12,12 @@ const AppLayout = ({ children }) => {
   // Determine header title based on current path
   const getHeaderTitle = () => {
     const path = location.pathname
-    if (path === '/dashboard') return 'Project Overview'
+    if (path === '/' || path === '/dashboard') return 'Project Overview'
     if (path === '/projects') return 'Project Kanban Board'
     if (path === '/workspace') return 'Workspace Projects'
     if (path === '/tasks') return 'Tasks Overview'
     if (path.startsWith('/tasks/')) return 'Task Details'
+    if (path === '/settings') return 'Settings'
     return 'Work Bee'
   }
 
@@ -33,7 +34,7 @@ const AppLayout = ({ children }) => {
       <Sidebar className={sidebarOpen ? 'sidebar--open' : ''} />
       
       <div className="app__main">
-        <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+        <Header title={getHeaderTitle()} onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         {children}
       </div>
     </div>

@@ -11,6 +11,7 @@ import WorkspaceProjects from './components/workspace/WorkspaceProjects'
 import TasksOverview from './components/tasks/TasksOverview'
 import Team from './components/team/Team'
 import Activity from './components/activity/Activity'
+import SettingsPage from './components/settings/SettingsPage'
 import './App.scss'
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/tasks/:id" element={<TasksOverview />} />
             <Route path="/team" element={<Team />} />
             <Route path="/activity" element={<Activity />} />
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </AppLayout>
       </Router>
